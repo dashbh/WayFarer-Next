@@ -1,0 +1,1 @@
+# wayfarer-mfe-catalog

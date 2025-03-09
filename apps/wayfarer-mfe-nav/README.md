@@ -1,1 +1,0 @@
-# wayfarer-mfe-nav

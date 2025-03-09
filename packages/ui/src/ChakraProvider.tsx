@@ -1,7 +1,6 @@
 "use client";
 
 import { ChakraProvider as Provider, createSystem, defaultConfig } from "@chakra-ui/react";
-import { Button } from "@chakra-ui/react";
 
 export const system = createSystem(defaultConfig, {
   theme: {
@@ -15,5 +14,5 @@ export const system = createSystem(defaultConfig, {
 })
 
 export function WayfarerChakraProvider({ children }: { children: React.ReactNode }) {
-  return <Provider value={system}>{children}<Button></Button></Provider>;
+  return <Provider value={system}>{children}</Provider>;
 }

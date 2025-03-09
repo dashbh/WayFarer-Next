@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
-import { WayfarerChakraProvider } from "@wayfarer/ui";
+import { ClientLayout } from "./ClientLayout";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -24,7 +24,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        <WayfarerChakraProvider>{children}</WayfarerChakraProvider>
+        <ClientLayout>{children}</ClientLayout>
       </body>
     </html>
   );

@@ -1,7 +1,6 @@
-
 import type { Metadata } from "next";
 import localFont from "next/font/local";
-import {ClientLayout} from "./client-layout";
+import { ClientLayout } from "./ClientLayout";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -13,8 +12,8 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "WayFarer - Explore the World",
-  description: "Discover and book amazing travel destinations with WayFarer.",
+  title: "WayFarer",
+  description: "WayFarer ",
 };
 
 export default function RootLayout({
