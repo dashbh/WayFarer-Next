@@ -21,7 +21,6 @@ wayfarer-frontend/  # Root Monorepo
 │   ├── wayfarer-mfe-checkout/  # Checkout (`/checkout`)
 │   ├── wayfarer-mfe-blog/      # Blog (`/blog`)
 │   ├── wayfarer-mfe-search/    # Global Search (Available in all MFEs)
-│   ├── wayfarer-mfe-nav/       # Global Navigation (Used in all MFEs)
 │── packages/                   # Shared Code & Components
 │   ├── ui/                     # Shared UI Components
 │   ├── config/                 # Shared Configurations
@@ -42,7 +41,6 @@ wayfarer-frontend/  # Root Monorepo
 | **wayfarer-mfe-checkout** | `/checkout`                | Checkout Page                     | **SSR (real-time cart, secure transactions)** |
 | **wayfarer-mfe-blog**     | `/blog`, `/blog/:slug`     | Blog Listing & Articles           | **SSG + ISR**                                 |
 | **wayfarer-mfe-search**   | `/search`                  | Global Search                     | **CSR (dynamic updates)**                     |
-| **wayfarer-mfe-nav**      | N/A                        | Global Navigation                 | **Server Components + CSR**                   |
 
 ---
 
@@ -50,7 +48,6 @@ wayfarer-frontend/  # Root Monorepo
 
 ✅ **No Module Federation** → Using **Next.js multi-zone architecture**  
 ✅ **TurboRepo for Monorepo Management**  
-✅ **Global Navigation (`wayfarer-mfe-nav`) will be used across all MFEs**  
 ✅ **Global Search (`wayfarer-mfe-search`) will be available on all pages**  
 ✅ **Base Path (`/`) is handled by `wayfarer-mfe-home`**  
 ✅ **PDP & Catalog will be inside `wayfarer-mfe-catalog`**
@@ -79,25 +76,25 @@ yarn install
 To run all apps in parallel:
 
 ```bash
-yarn turbo run dev
+yarn dev
 ```
 
-To run a specific app (e.g., `wayfarer-shell`):
+To run a specific app (e.g., `wayfarer-mfe-home`):
 
 ```bash
-yarn turbo run dev --filter=wayfarer-shell
+yarn turbo run dev --filter=wayfarer-mfe-home
 ```
 
 ### 3️⃣ Build the Apps
 
 ```bash
-yarn turbo run build
+yarn build
 ```
 
 ### 4️⃣ Linting & Formatting
 
 ```bash
-yarn turbo run lint
+yarn lint
 ```
 
 ## 🛠️ Adding a New Micro Frontend
@@ -106,17 +103,6 @@ To add a new Next.js app (e.g., `wayfarer-profile`):
 
 ```bash
 yarn create next-app apps/wayfarer-profile --typescript
-```
-
-Then, add it to the `workspaces` in `package.json`:
-
-```json
-{
-  "workspaces": {
-    "packages": ["packages/*"],
-    "apps": ["apps/*"]
-  }
-}
 ```
 
 ---
