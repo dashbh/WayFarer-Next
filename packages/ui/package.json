@@ -1,0 +1,31 @@
+{
+  "name": "@wayfarer/ui",
+  "version": "0.0.0",
+  "private": true,
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "lint": "eslint . --max-warnings 0",
+    "generate:component": "turbo gen react-component",
+    "check-types": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@turbo/gen": "^2.4.4",
+    "@types/node": "^22.13.9",
+    "@types/react": "19.0.10",
+    "@types/react-dom": "19.0.4",
+    "@wayfarer/eslint-config": "*",
+    "@wayfarer/typescript-config": "*",
+    "eslint": "^9.21.0",
+    "typescript": "5.8.2"
+  },
+  "dependencies": {
+    "@chakra-ui/react": "^3.11.0",
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.0",
+    "framer-motion": "^12.4.10",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  }
+}
