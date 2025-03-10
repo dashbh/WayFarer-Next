@@ -17,18 +17,29 @@ const HeroSection = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Simulate an API call (Replace with actual API request)
-    setTimeout(() => {
-      setFeaturedPost({
-        title: "Mastering Micro-Frontends with React",
-        description: "Learn how to build scalable and modular web apps using Micro-Frontend architecture.",
-        image: "https://source.unsplash.com/1200x600/?technology,blog",
-        link: "/posts/micro-frontends",
-        author: "John Doe",
-        date: "March 11, 2025",
-      });
-      setLoading(false);
-    }, 1500);
+    const fetchFeaturedPost = async () => {
+      try {
+        const response = await fetch("https://dev.to/api/articles?per_page=1&top=1");
+        const data = await response.json();
+        
+        if (data.length > 0) {
+          setFeaturedPost({
+            title: data[0].title,
+            description: data[0].description,
+            image: data[0].cover_image || "https://source.unsplash.com/1200x600/?technology,blog",
+            link: data[0].url,
+            author: data[0].user.name,
+            date: new Date(data[0].published_at).toDateString(),
+          });
+        }
+      } catch (error) {
+        console.error("Error fetching featured post:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchFeaturedPost();
   }, []);
 
   return (
@@ -58,7 +69,7 @@ const HeroSection = () => {
           {loading ? (
             <Skeleton height="40px" width="30%" />
           ) : (
-            <Button colorScheme="blue" as="a" /*href={featuredPost?.link}*/ >
+            <Button colorScheme="blue" as="a" /*href={featuredPost?.link} target="_blank" */>
               Read More
             </Button>
           )}
