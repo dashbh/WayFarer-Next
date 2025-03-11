@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: "standalone",
-  assetPrefix: process.env.NEXT_PUBLIC_HOME_URL || "",
+  assetPrefix: "wayfarer_mfe_catalog",
 };
 
 export default nextConfig;
