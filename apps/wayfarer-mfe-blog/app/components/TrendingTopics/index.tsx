@@ -1,48 +1,19 @@
-import { Box, Heading, Wrap, WrapItem, Badge, Skeleton, VStack, Button } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
+import { Box, Wrap, WrapItem, Tag, Badge} from "@chakra-ui/react";
+import Link from "next/link";
+import { Topic } from "../../types/blog";
 
 interface TrendingTopicsProps {
-  onTagClick: (tagName: string) => void;
+  topics: Topic[];
 }
 
-const TrendingTopics = ({ onTagClick }: TrendingTopicsProps) => {
-  const [tags, setTags] = useState<{ name: string }[]>([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchTags = async () => {
-      try {
-        const response = await fetch("https://dev.to/api/tags");
-        const data = await response.json();
-        setTags(data.slice(0, 10)); // Show only top 10 trending topics
-      } catch (error) {
-        console.error("Error fetching trending topics:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchTags();
-  }, []);
-
+const TrendingTopics: React.FC<TrendingTopicsProps> = ({ topics }) => {
   return (
-    <Box w="100%" py={10} px={5}>
-      <VStack gap={4} textAlign="center">
-        <Heading size="lg">Trending Topics</Heading>
-
-        {loading ? (
-          <Wrap gap={3} justify="center">
-            {Array.from({ length: 10 }).map((_, index) => (
-              <WrapItem key={index}>
-                <Skeleton height="30px" width="80px" borderRadius="md" />
-              </WrapItem>
-            ))}
-          </Wrap>
-        ) : (
-          <Wrap gap={3} justify="center">
-            {tags.map((tag) => (
-              <WrapItem key={tag.name}>
-                <Badge
+    <Box w="100%" py={6} px={5}>
+      <Wrap gap={3}>
+        {topics.map((topic) => (
+          <WrapItem key={topic.slug}>
+            <Link href={`/tag/${topic.slug}`} passHref>
+            <Badge
                   colorScheme="blue"
                   px={3}
                   py={1}
@@ -50,15 +21,14 @@ const TrendingTopics = ({ onTagClick }: TrendingTopicsProps) => {
                   fontSize="sm"
                   cursor="pointer"
                   _hover={{ bg: "blue.500", color: "white" }}
-                  onClick={() => onTagClick(tag.name)}
+                  // onClick={() => onTagClick(topic.name)}
                 >
-                  #{tag?.name}
+                  #{topic.name}
                 </Badge>
-              </WrapItem>
-            ))}
-          </Wrap>
-        )}
-      </VStack>
+            </Link>
+          </WrapItem>
+        ))}
+      </Wrap>
     </Box>
   );
 };
