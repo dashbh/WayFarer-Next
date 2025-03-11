@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: "standalone",
-  assetPrefix: "wayfarer_mfe_home",
+  assetPrefix: "/wayfarer_mfe_home",
 
   // async rewrites() {
   //   return [

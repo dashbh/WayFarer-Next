@@ -1,14 +1,12 @@
-'use client';
-
-import { Box, Heading, Wrap, WrapItem, Badge, Skeleton, VStack } from "@chakra-ui/react";
+import { Box, Heading, Wrap, WrapItem, Badge, Skeleton, VStack, Button } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 
-const TrendingTopics = () => {
-  interface Tag {
-    name: string;
-  }
-  
-  const [tags, setTags] = useState<Tag[]>([]);
+interface TrendingTopicsProps {
+  onTagClick: (tagName: string) => void;
+}
+
+const TrendingTopics = ({ onTagClick }: TrendingTopicsProps) => {
+  const [tags, setTags] = useState<{ name: string }[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -52,8 +50,9 @@ const TrendingTopics = () => {
                   fontSize="sm"
                   cursor="pointer"
                   _hover={{ bg: "blue.500", color: "white" }}
+                  onClick={() => onTagClick(tag.name)}
                 >
-                  #{tag.name}
+                  #{tag?.name}
                 </Badge>
               </WrapItem>
             ))}

@@ -3,26 +3,31 @@
 import { Box, Heading, Text, Button, Image, VStack, Grid, GridItem, Skeleton, HStack } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 
-const RecentPosts = () => {
-  interface Post {
-    id: number;
-    title: string;
-    description: string;
-    cover_image: string;
-    user: {
-      name: string;
-    };
-    published_at: string;
-    url: string;
-  }
-  
+interface Post {
+  id: number;
+  cover_image: string;
+  title: string;
+  description: string;
+  user: {
+    name: string;
+  };
+  published_at: string;
+  url: string;
+}
+
+const RecentPosts = ({ selectedTag, clearFilter }: { selectedTag: string; clearFilter: () => void }) => {
   const [posts, setPosts] = useState<Post[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchRecentPosts = async () => {
+      setLoading(true);
       try {
-        const response = await fetch("https://dev.to/api/articles?per_page=4&latest=1");
+        const url = selectedTag
+          ? `https://dev.to/api/articles?tag=${selectedTag}&per_page=4`
+          : "https://dev.to/api/articles?per_page=4&latest=1";
+
+        const response = await fetch(url);
         const data = await response.json();
         setPosts(data);
       } catch (error) {
@@ -33,13 +38,19 @@ const RecentPosts = () => {
     };
 
     fetchRecentPosts();
-  }, []);
+  }, [selectedTag]);
 
   return (
     <Box w="100%" py={10} px={5}>
       <Heading size="lg" textAlign="center" mb={6}>
-        Recent Posts
+        {selectedTag ? `Posts About #${selectedTag}` : "Recent Posts"}
       </Heading>
+
+      {selectedTag && (
+        <Button colorScheme="red" mb={4} onClick={clearFilter}>
+          Clear Filter
+        </Button>
+      )}
 
       <Grid templateColumns={{ base: "1fr", md: "repeat(2, 1fr)" }} gap={6} maxW="1000px" mx="auto">
         {loading
@@ -66,7 +77,7 @@ const RecentPosts = () => {
                     <Text>•</Text>
                     <Text>{new Date(post.published_at).toDateString()}</Text>
                   </HStack>
-                  <Button colorScheme="blue" as="a" /* href={post.url} target="_blank"*/ >
+                  <Button colorScheme="blue" as="a" /*href={post.url} target="_blank"*/ >
                     Read More
                   </Button>
                 </VStack>

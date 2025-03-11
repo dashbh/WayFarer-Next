@@ -1,13 +1,9 @@
-import HeroSection from "./components/HeroSection";
-import RecentPosts from "./components/RecentPosts";
-import TrendingTopics from "./components/TrendingTopics";
+import BlogPage from "./components/Blogs";
 
 export default function Home() {
   return (
     <div>
-      <HeroSection />
-      <TrendingTopics />
-      <RecentPosts />
+      <BlogPage />
     </div>
   );
 }
