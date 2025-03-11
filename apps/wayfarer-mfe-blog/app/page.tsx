@@ -4,12 +4,6 @@ import TrendingTopics from "./components/TrendingTopics";
 import { FeaturedPost, Post, Topic } from "./types/blog";
 import { mapResponseToPost } from "./utils/mapper";
 
-interface BlogPageProps {
-  featuredPost: FeaturedPost;
-  trendingTopics: Topic[];
-  recentPosts: Post[];
-}
-
 const fetchFeaturedPost = async () => {
   // Fetch Featured Post
   const featuredRes = await fetch(
@@ -48,7 +42,7 @@ const fetchRecentPosts = async () => {
   return recentPosts;
 };
 
-const BlogPage: React.FC<BlogPageProps> = async () => {
+export default async function BlogLandingPage() {
   const featuredPost = await fetchFeaturedPost();
   const trendingTopics = await fetchTrendingTopics();
   const recentPosts = await fetchRecentPosts();
@@ -59,6 +53,4 @@ const BlogPage: React.FC<BlogPageProps> = async () => {
       <RecentPosts posts={recentPosts} />
     </>
   );
-};
-
-export default BlogPage;
+}
