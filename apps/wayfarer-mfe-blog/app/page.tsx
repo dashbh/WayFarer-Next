@@ -6,10 +6,8 @@ export default function Home() {
   return (
     <div>
       <HeroSection />
-
-      <RecentPosts />
-
       <TrendingTopics />
+      <RecentPosts />
     </div>
   );
 }
