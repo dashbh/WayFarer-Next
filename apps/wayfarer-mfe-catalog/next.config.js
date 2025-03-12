@@ -1,7 +1,10 @@
 /** @type {import('next').NextConfig} */
+
+const { NEXT_MFE_CATALOG } = process.env;
+
 const nextConfig = {
   output: "standalone",
-  assetPrefix: "/wayfarer_mfe_catalog",
+  assetPrefix: NEXT_MFE_CATALOG,
 };
 
 export default nextConfig;

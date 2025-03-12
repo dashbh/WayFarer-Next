@@ -3,7 +3,7 @@
 import { Box, Flex, HStack, Link, Button } from "@chakra-ui/react";
 import NextLink from "next/link";
 import { useRouter } from "next/navigation";
-import { MFE_BASE_URLS, NAV_LINKS } from "../../config/navigation";
+import { NAV_LINKS } from "../../config/navigation";
 
 interface NavbarProps {
   internalRoutes?: string[]; // Internal routes for soft navigation
@@ -27,7 +27,6 @@ export const Navbar = ({ internalRoutes = [] }: NavbarProps) => {
           <HStack as="nav" gap={4}>
             {NAV_LINKS.map(({ label, path, mfe }) => {
               const isInternal = internalRoutes.includes(path);
-              const href = isInternal ? path : `${MFE_BASE_URLS[mfe]}${path}`;
 
               return isInternal ? (
                 <Link

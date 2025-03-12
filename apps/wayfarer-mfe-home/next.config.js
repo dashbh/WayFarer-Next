@@ -1,25 +1,34 @@
 /** @type {import('next').NextConfig} */
+
+const {
+  NEXT_PUBLIC_CATALOG_URL,
+  NEXT_PUBLIC_BLOG_URL,
+  NEXT_MFE_CATALOG,
+  NEXT_MFE_HOME,
+  NEXT_MFE_BLOG,
+} = process.env;
+
 const nextConfig = {
   output: "standalone",
-  assetPrefix: "/wayfarer_mfe_home",
+  assetPrefix: NEXT_MFE_HOME,
 
   async rewrites() {
     return [
       {
         source: "/explore/:path*",
-        destination: `${process.env.NEXT_PUBLIC_CATALOG_URL}/:path*`,
+        destination: `${NEXT_PUBLIC_CATALOG_URL}/:path*`,
       },
       {
-        source: "/wayfarer_mfe_catalog/_next/:path+",
-        destination: `${process.env.NEXT_PUBLIC_CATALOG_URL}/wayfarer_mfe_catalog/_next/:path+`,
+        source: `${NEXT_MFE_CATALOG}/_next/:path+`,
+        destination: `${NEXT_PUBLIC_CATALOG_URL}${NEXT_MFE_CATALOG}/_next/:path+`,
       },
       {
         source: "/blog/:path*",
-        destination: `${process.env.NEXT_PUBLIC_BLOG_URL}/:path*`,
+        destination: `${NEXT_PUBLIC_BLOG_URL}/:path*`,
       },
       {
-        source: "/wayfarer_mfe_blog/_next/:path+",
-        destination: `${process.env.NEXT_PUBLIC_BLOG_URL}/wayfarer_mfe_blog/_next/:path+`,
+        source: `${NEXT_MFE_BLOG}/_next/:path+`,
+        destination: `${NEXT_PUBLIC_BLOG_URL}${NEXT_MFE_BLOG}/_next/:path+`,
       },
     ];
   },

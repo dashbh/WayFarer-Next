@@ -30,7 +30,7 @@ const fetchTrendingTopics = async () => {
 
 const fetchRecentPosts = async () => {
   // Fetch Recent Posts
-  const recentRes = await fetch("https://dev.to/api/articles?per_page=5", {
+  const recentRes = await fetch("https://dev.to/api/articles?per_page=15", {
     next: { revalidate: 86400 }, // Regenerates every 24 hours
   });
   const recentData = await recentRes.json();
