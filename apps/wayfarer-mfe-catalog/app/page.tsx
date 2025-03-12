@@ -1,7 +1,9 @@
-export default function Home() {
+import CatalogPage from "./components/CatalogPage";
+
+export default function Catalog() {
   return (
     <div>
-      Listing
+      <CatalogPage />
     </div>
   );
 }
