@@ -1,16 +1,15 @@
-'use client'; // This ensures it's a Client Component
+"use client"; // This ensures it's a Client Component
 
 import { Box, Flex, HStack, Link, Button } from "@chakra-ui/react";
 import NextLink from "next/link";
 import { useRouter } from "next/navigation";
+import { MFE_BASE_URLS, NAV_LINKS } from "../../config/navigation";
 
-const navLinks = [
-  { name: "Home", path: "/" },
-  { name: "Explore", path: "/explore" },
-  { name: "Blog", path: "/blog" }
-];
+interface NavbarProps {
+  internalRoutes?: string[]; // Internal routes for soft navigation
+}
 
-export const Navbar = () => {
+export const Navbar = ({ internalRoutes = [] }: NavbarProps) => {
   const router = useRouter();
 
   return (
@@ -26,19 +25,35 @@ export const Navbar = () => {
             WayFarer
           </Box>
           <HStack as="nav" gap={4}>
-            {navLinks.map((link) => (
-              <Link
-                key={link.name}
-                as={NextLink}
-                href={link.path}
-                px={2}
-                py={1}
-                rounded="md"
-                _hover={{ bg: "gray.200" }}
-              >
-                {link.name}
-              </Link>
-            ))}
+            {NAV_LINKS.map(({ label, path, mfe }) => {
+              const isInternal = internalRoutes.includes(path);
+              const href = isInternal ? path : `${MFE_BASE_URLS[mfe]}${path}`;
+
+              return isInternal ? (
+                <Link
+                  key={label}
+                  as={NextLink}
+                  href={path}
+                  px={2}
+                  py={1}
+                  rounded="md"
+                  _hover={{ bg: "gray.200" }}
+                >
+                  {label}
+                </Link>
+              ) : (
+                <Link
+                  key={label}
+                  href={path}
+                  px={2}
+                  py={1}
+                  rounded="md"
+                  _hover={{ bg: "gray.200" }}
+                >
+                  {label}
+                </Link>
+              );
+            })}
           </HStack>
         </HStack>
         <Flex alignItems="center">
