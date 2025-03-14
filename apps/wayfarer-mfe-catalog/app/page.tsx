@@ -1,9 +1,10 @@
+import { Suspense } from "react";
 import CatalogPage from "./components/CatalogPage";
 
 export default function Catalog() {
   return (
-    <div>
+    <Suspense fallback={<div>Loading catalog...</div>}>
       <CatalogPage />
-    </div>
+    </Suspense>
   );
 }

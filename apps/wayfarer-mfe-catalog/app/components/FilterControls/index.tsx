@@ -2,6 +2,7 @@
 
 import { Input, HStack, VStack, Box, Text } from "@chakra-ui/react";
 import { WayFarerSelect, WayFarerSlider } from "@wayfarer/ui";
+
 import { FilterControlsProps } from "../../type";
 
 const filterOptions = {
@@ -51,7 +52,7 @@ const FilterControls = ({ categories, updateParams }: FilterControlsProps) => {
           <WayFarerSelect
             options={categoryOptions}
             id="filter-category"
-            onChange={(event) => updateParams("category", event?.value)}
+            onChange={(event: any) => updateParams("category", event?.value)}
           />
         </Box>
 
@@ -63,7 +64,7 @@ const FilterControls = ({ categories, updateParams }: FilterControlsProps) => {
           <WayFarerSelect
             options={filterOptions.ratings}
             id="filter-cratings"
-            onChange={(event) => updateParams("ratings", event?.value)}
+            onChange={(event: any) => updateParams("ratings", event?.value)}
           />
         </Box>
 
@@ -75,7 +76,7 @@ const FilterControls = ({ categories, updateParams }: FilterControlsProps) => {
           <WayFarerSelect
             id="filter-sortby"
             options={filterOptions.sort}
-            onChange={(event) => updateParams("sort", event?.value)}
+            onChange={(event: any) => updateParams("sort", event?.value)}
           />
         </Box>
       </HStack>
