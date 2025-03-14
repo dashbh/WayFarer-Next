@@ -1,8 +1,9 @@
 "use client";
 
-import { Input, HStack, VStack, Box, Text } from "@chakra-ui/react";
-import { WayFarerSelect, WayFarerSlider } from "@wayfarer/ui";
-
+import { Input, HStack, VStack, Box, Text, Spacer, RadioGroup } from "@chakra-ui/react";
+import { WayFarerSelect, WayFarerSlider, Button } from "@wayfarer/ui";
+import { VscClearAll } from "react-icons/vsc";
+import { useUpdateParams } from "./UpdateParamsProvider";
 import { FilterControlsProps } from "../../type";
 
 const filterOptions = {
@@ -19,7 +20,9 @@ const filterOptions = {
   ],
 };
 
-const FilterControls = ({ categories, updateParams }: FilterControlsProps) => {
+const FilterControls = ({ categories }: FilterControlsProps) => {
+  const { updateParams, resetFilters } = useUpdateParams();
+
   const categoryOptions = categories.map((category) => ({
     value: category,
     label: category.toUpperCase(),
@@ -29,7 +32,8 @@ const FilterControls = ({ categories, updateParams }: FilterControlsProps) => {
     <VStack align="stretch" gap={4}>
       {/* Price Filter */}
       <WayFarerSlider
-        defaultValue={[10, 100]}
+        defaultValue={[0, 1000]}
+        label="Price"
         onChange={(value) => {
           updateParams("minPrice", value.min);
           updateParams("maxPrice", value.max);
@@ -42,10 +46,10 @@ const FilterControls = ({ categories, updateParams }: FilterControlsProps) => {
         onChange={(e) => updateParams("search", e.target.value)}
       />
 
-      <HStack gap={4} height={100}>
+      <HStack gap={4} my={10} align="end">
         {/* Catagory Filter */}
 
-        <Box>
+        <Box width={200}>
           <Text fontWeight="bold" mb={2}>
             Category
           </Text>
@@ -57,7 +61,7 @@ const FilterControls = ({ categories, updateParams }: FilterControlsProps) => {
         </Box>
 
         {/* Rating Filter */}
-        <Box>
+        <Box width={200}>
           <Text fontWeight="bold" mb={2}>
             Rating
           </Text>
@@ -69,7 +73,7 @@ const FilterControls = ({ categories, updateParams }: FilterControlsProps) => {
         </Box>
 
         {/* Sort Filter */}
-        <Box>
+        <Box width={200}>
           <Text fontWeight="bold" mb={2}>
             Sort By
           </Text>
@@ -78,6 +82,21 @@ const FilterControls = ({ categories, updateParams }: FilterControlsProps) => {
             options={filterOptions.sort}
             onChange={(event: any) => updateParams("sort", event?.value)}
           />
+        </Box>
+
+        <Spacer />
+
+        <Box>
+          <Button
+            aria-label="Search database"
+            variant="solid"
+            // size={"md"}
+            onClick={resetFilters}
+            colorPalette="teal"
+          >
+            Clear Filters
+            <VscClearAll />
+          </Button>
         </Box>
       </HStack>
     </VStack>

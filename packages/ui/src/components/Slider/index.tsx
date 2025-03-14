@@ -13,7 +13,7 @@ interface WayFarerSliderProps {
 
 export const WayFarerSlider = ({
   maxValue = 1000,
-  defaultValue = [100],
+  defaultValue = [1000],
   step = 10,
   onChange,
 }: WayFarerSliderProps) => {
@@ -21,8 +21,8 @@ export const WayFarerSlider = ({
     <Slider.Root
       defaultValue={[...defaultValue]}
       min={0}
-      size="lg"
-      width="500px"
+      size="md"
+      maxWidth={400}
       max={maxValue}
       step={step}
       onValueChange={(e: any) => {
@@ -31,7 +31,7 @@ export const WayFarerSlider = ({
       minStepsBetweenThumbs={10}
     >
       <HStack justify="space-between">
-        <Slider.Label>Max Price</Slider.Label>
+        <Slider.Label>Price</Slider.Label>
         <Slider.ValueText />
       </HStack>
       <Slider.Control>

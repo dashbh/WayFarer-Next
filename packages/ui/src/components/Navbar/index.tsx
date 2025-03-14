@@ -55,11 +55,11 @@ export const Navbar = ({ internalRoutes = [] }: NavbarProps) => {
             })}
           </HStack>
         </HStack>
-        <Flex alignItems="center">
+        {/* <Flex alignItems="center">
           <Button colorScheme="blue" onClick={() => router.push("/login")}>
             Login
           </Button>
-        </Flex>
+        </Flex> */}
       </Flex>
     </Box>
   );
