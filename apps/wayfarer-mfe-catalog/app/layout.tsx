@@ -16,11 +16,13 @@ export const metadata: Metadata = {
   description: "WayFarer ",
 };
 
+interface RootLayoutProps {
+  children: React.ReactNode;
+};
+
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: Readonly<RootLayoutProps>) {
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>

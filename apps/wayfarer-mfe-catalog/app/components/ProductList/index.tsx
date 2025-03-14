@@ -6,7 +6,11 @@ import {
 import { Product } from "../../type";
 import ProductPreview from "../Product/ProductPreview";
 
-const ProductList = ({ products }: { products: Product[] }) => {
+interface ProductListProps {
+  products: Product[]
+};
+
+const ProductList = ({ products }: ProductListProps) => {
   return (
     <SimpleGrid columns={{ base: 1, md: 2, lg: 2 }} gap={5}>
       {products.map((product) => (

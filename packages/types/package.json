@@ -1,0 +1,23 @@
+{
+  "name": "@wayfarer/types",
+  "version": "0.0.0",
+  "private": true,
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "lint": "eslint . --max-warnings 0",
+    "check-types": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.9",
+    "@types/react": "19.0.10",
+    "@types/react-dom": "19.0.4",
+    "@wayfarer/eslint-config": "*",
+    "@wayfarer/typescript-config": "*",
+    "eslint": "^9.21.0",
+    "typescript": "5.8.2"
+  },
+  "dependencies": {
+  }
+}

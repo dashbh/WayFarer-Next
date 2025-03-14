@@ -4,6 +4,10 @@ import UpdateParamsProvider from "./components/FilterControls/UpdateParamsProvid
 import ProductListServer from "./components/ProductList/ProductListServer";
 import ProductListSkeleton from "./components/ProductList/ProductListSkeleton";
 
+interface CatalogPageProps {
+  searchParams: Promise<Record<string, string>>;
+}
+
 const API_URL = "https://fakestoreapi.com/products";
 
 // Fetch categories on the server
@@ -12,8 +16,8 @@ const getCategories = async () => {
   return res.json();
 };
 
-export default async function Catalog({ searchParams }: { searchParams: Record<string, string> }) {
-  const filters = (await searchParams);
+export default async function Catalog({ searchParams }: CatalogPageProps) {
+  const filters = await searchParams;
   const categories = await getCategories(); // Fetch categories on the server
 
   return (
