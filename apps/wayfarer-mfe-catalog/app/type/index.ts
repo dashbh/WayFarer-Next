@@ -25,5 +25,5 @@ export interface Product {
 
 export interface FilterControlsProps {
   categories: string[];
-  updateParams: (key: string, value: string | number) => void;
+  // updateParams: (key: string, value: string | number) => void;
 };
