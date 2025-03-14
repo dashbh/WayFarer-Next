@@ -7,8 +7,8 @@ interface HeroSectionProps {
 
 const HeroSection: React.FC<HeroSectionProps> = ({ featuredPost }) => {
   return (
-    <Box w="100%" bg="gray.100" py={10} px={5}>
-      <VStack gap={5} textAlign="center" maxW="800px" mx="auto">
+    <Box w="100%" bg="gray.100" py={3} px={3} borderRadius="lg">
+      <VStack gap={5} textAlign="center" mx="auto">
         <Image src={featuredPost.image} alt={featuredPost.title} borderRadius="lg" />
         <VStack gap={3}>
           <Heading size="lg">{featuredPost.title}</Heading>
