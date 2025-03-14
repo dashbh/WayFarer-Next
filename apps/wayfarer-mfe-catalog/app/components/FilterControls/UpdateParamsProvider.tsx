@@ -7,10 +7,12 @@ import { createContext, useContext } from "react";
 type UpdateParamsContextType = {
   updateParams: (key: string, value: string | number) => void;
   resetFilters: () => void;
+  searchParams: URLSearchParams;
 };
 
 // Create Context with default values
-const UpdateParamsContext = createContext<UpdateParamsContextType>({
+export const UpdateParamsContext = createContext<UpdateParamsContextType>({
+  searchParams: new URLSearchParams(""),
   updateParams: () => {},
   resetFilters: () => {},
 });
@@ -40,7 +42,7 @@ const UpdateParamsProvider = ({ children }: { children: React.ReactNode }) => {
   }
 
   return (
-    <UpdateParamsContext.Provider value={{ updateParams, resetFilters }}>
+    <UpdateParamsContext.Provider value={{ updateParams, resetFilters, searchParams }}>
       {children}
     </UpdateParamsContext.Provider>
   );

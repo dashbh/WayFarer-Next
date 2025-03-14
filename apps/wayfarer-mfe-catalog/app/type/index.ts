@@ -25,5 +25,10 @@ export interface Product {
 
 export interface FilterControlsProps {
   categories: string[];
-  // updateParams: (key: string, value: string | number) => void;
 };
+
+export interface FilterTypes {
+  category: string;
+  sort: string;
+  ratings: string;
+}

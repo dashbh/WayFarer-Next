@@ -5,33 +5,34 @@ import { MdGraphicEq } from "react-icons/md";
 
 interface WayFarerSliderProps {
   maxValue?: number;
-  defaultValue?: number[];
-  onChange: (value: { min: number; max: number }) => void;
+  value?: number[];
+  onValueChange: (e: any) => void;
   label?: string;
   step?: number;
 }
 
 export const WayFarerSlider = ({
   maxValue = 1000,
-  defaultValue = [1000],
   step = 10,
-  onChange,
+  onValueChange,
+  label,
+  value,
 }: WayFarerSliderProps) => {
   return (
     <Slider.Root
-      defaultValue={[...defaultValue]}
+      value={value}
       min={0}
       size="md"
       maxWidth={400}
       max={maxValue}
       step={step}
       onValueChange={(e: any) => {
-        onChange({ min: e.value[0], max: e.value[1] });
+        onValueChange(e);
       }}
       minStepsBetweenThumbs={10}
     >
       <HStack justify="space-between">
-        <Slider.Label>Price</Slider.Label>
+        <Slider.Label>{label}</Slider.Label>
         <Slider.ValueText />
       </HStack>
       <Slider.Control>
