@@ -1,7 +1,18 @@
 "use client";
 
-import { Input, HStack, VStack, Box, Text, Spacer, RadioGroup } from "@chakra-ui/react";
-import { WayFarerSelect, WayFarerSlider, Button } from "@wayfarer/ui";
+import {
+  Input,
+  HStack,
+  VStack,
+  Box,
+  Text,
+  Spacer,
+} from "@chakra-ui/react";
+import {
+  WayFarerSelect,
+  WayFarerSlider,
+  Button,
+} from "@wayfarer/ui";
 import { VscClearAll } from "react-icons/vsc";
 import { useUpdateParams } from "./UpdateParamsProvider";
 import { FilterControlsProps } from "../../type";
@@ -56,7 +67,7 @@ const FilterControls = ({ categories }: FilterControlsProps) => {
           <WayFarerSelect
             options={categoryOptions}
             id="filter-category"
-            onChange={(event: any) => updateParams("category", event?.value)}
+            onChange={(event: any) => updateParams("category", event?.value || "")}
           />
         </Box>
 
@@ -68,7 +79,7 @@ const FilterControls = ({ categories }: FilterControlsProps) => {
           <WayFarerSelect
             options={filterOptions.ratings}
             id="filter-cratings"
-            onChange={(event: any) => updateParams("ratings", event?.value)}
+            onChange={(event: any) => updateParams("ratings", event?.value || "")}
           />
         </Box>
 
@@ -80,7 +91,7 @@ const FilterControls = ({ categories }: FilterControlsProps) => {
           <WayFarerSelect
             id="filter-sortby"
             options={filterOptions.sort}
-            onChange={(event: any) => updateParams("sort", event?.value)}
+            onChange={(event: any) => updateParams("sort", event?.value || "")}
           />
         </Box>
 

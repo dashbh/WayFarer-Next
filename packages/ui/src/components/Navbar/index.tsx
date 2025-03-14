@@ -1,6 +1,6 @@
 "use client";
 
-import { Box, Flex, HStack, Link, Button } from "@chakra-ui/react";
+import { Box, Flex, HStack, Link } from "@chakra-ui/react";
 import NextLink from "next/link";
 import { useRouter } from "next/navigation";
 import { NAV_LINKS } from "../../config/navigation";
@@ -25,7 +25,7 @@ export const Navbar = ({ internalRoutes = [] }: NavbarProps) => {
             WayFarer
           </Box>
           <HStack as="nav" gap={4}>
-            {NAV_LINKS.map(({ label, path, mfe }) => {
+            {NAV_LINKS.map(({ label, path }) => {
               const isInternal = internalRoutes.includes(path);
 
               return isInternal ? (

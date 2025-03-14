@@ -20,6 +20,7 @@
   "devDependencies": {
     "@wayfarer/eslint-config": "*",
     "@wayfarer/typescript-config": "*",
+    "@wayfarer/types": "*",
     "@types/node": "^22.13.9",
     "@types/react": "19.0.10",
     "@types/react-dom": "19.0.4",

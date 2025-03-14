@@ -1,0 +1,12 @@
+{
+  "extends": "@wayfarer/typescript-config/react-library.json",
+  "compilerOptions": {
+    "outDir": "dist",
+    "declaration": true,
+    "declarationMap": true,
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+  },
+  "include": ["src"],
+  "exclude": ["node_modules", "dist"]
+}
