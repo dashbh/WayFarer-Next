@@ -1,23 +1,14 @@
 "use client";
 
-import {
-  Input,
-  HStack,
-  VStack,
-  Box,
-  Text,
-  Spacer,
-} from "@chakra-ui/react";
-import {
-  WayFarerSelect,
-  WayFarerSlider,
-  Button,
-} from "@wayfarer/ui";
+import { Input, HStack, VStack, Box, Text, Spacer } from "@chakra-ui/react";
+import { WayFarerSelect, WayFarerSlider, Button } from "@wayfarer/ui";
 import { VscClearAll } from "react-icons/vsc";
 import { useUpdateParams } from "./UpdateParamsProvider";
 import { FilterControlsProps } from "../../type";
+import { useEffect, useState } from "react";
 
 const filterOptions = {
+  category: [],
   ratings: [
     { value: "", label: "All Stars" },
     { value: "5", label: "5 Stars" },
@@ -32,7 +23,22 @@ const filterOptions = {
 };
 
 const FilterControls = ({ categories }: FilterControlsProps) => {
-  const { updateParams, resetFilters } = useUpdateParams();
+  const { updateParams, resetFilters, searchParams } = useUpdateParams();
+
+  const [currentFilters, setCurrentFilters] = useState<any>({});
+  const [searchText, setSearchText] = useState("");
+  const [priceRange, setPriceRange] = useState([
+    Number(searchParams.get("maxPrice")) || 1000,
+  ]);
+
+  // **Sync selected value from searchParams**
+  useEffect(() => {
+    const filters = Object.fromEntries(searchParams.entries());
+    setCurrentFilters({ ...filters });
+    setSearchText(searchParams.get("search") || "");
+
+    setPriceRange([Number(searchParams.get("maxPrice")) || 1000]);
+  }, [searchParams]);
 
   const categoryOptions = categories.map((category) => ({
     value: category,
@@ -43,18 +49,23 @@ const FilterControls = ({ categories }: FilterControlsProps) => {
     <VStack align="stretch" gap={4}>
       {/* Price Filter */}
       <WayFarerSlider
-        defaultValue={[0, 1000]}
         label="Price"
-        onChange={(value) => {
-          updateParams("minPrice", value.min);
-          updateParams("maxPrice", value.max);
+        step={10}
+        value={priceRange}
+        onValueChange={(e: any) => {
+          setPriceRange(e.value);
+          updateParams("maxPrice", e.value[0].toString());
         }}
       />
 
       {/* Search Filter */}
       <Input
         placeholder="Search products..."
-        onChange={(e) => updateParams("search", e.target.value)}
+        value={searchText}
+        onChange={(e) => {
+          setSearchText(e.target.value);
+          updateParams("search", e.target.value);
+        }}
       />
 
       <HStack gap={4} my={10} align="end">
@@ -65,9 +76,16 @@ const FilterControls = ({ categories }: FilterControlsProps) => {
             Category
           </Text>
           <WayFarerSelect
+            value={
+              categoryOptions.find(
+                (opt) => opt.value === currentFilters.category
+              ) || null
+            }
             options={categoryOptions}
             id="filter-category"
-            onChange={(event: any) => updateParams("category", event?.value || "")}
+            onChange={(event: any) =>
+              updateParams("category", event?.value || "")
+            }
           />
         </Box>
 
@@ -77,9 +95,16 @@ const FilterControls = ({ categories }: FilterControlsProps) => {
             Rating
           </Text>
           <WayFarerSelect
+            value={
+              filterOptions.ratings.find(
+                (opt) => opt.value === currentFilters.ratings
+              ) || null
+            }
             options={filterOptions.ratings}
             id="filter-cratings"
-            onChange={(event: any) => updateParams("ratings", event?.value || "")}
+            onChange={(event: any) =>
+              updateParams("ratings", event?.value || "")
+            }
           />
         </Box>
 
@@ -90,6 +115,11 @@ const FilterControls = ({ categories }: FilterControlsProps) => {
           </Text>
           <WayFarerSelect
             id="filter-sortby"
+            value={
+              filterOptions.sort.find(
+                (opt) => opt.value === currentFilters.sort
+              ) || null
+            }
             options={filterOptions.sort}
             onChange={(event: any) => updateParams("sort", event?.value || "")}
           />
@@ -101,8 +131,9 @@ const FilterControls = ({ categories }: FilterControlsProps) => {
           <Button
             aria-label="Search database"
             variant="solid"
-            // size={"md"}
-            onClick={resetFilters}
+            onClick={() => {
+              resetFilters();
+            }}
             colorPalette="teal"
           >
             Clear Filters
