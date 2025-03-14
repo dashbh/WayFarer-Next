@@ -1,4 +1,4 @@
-"use client"; // This ensures it's a Client Component
+"use client";
 
 import { Box, Flex, HStack, Link, Button } from "@chakra-ui/react";
 import NextLink from "next/link";
