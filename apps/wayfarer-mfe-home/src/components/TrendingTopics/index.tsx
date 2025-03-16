@@ -4,13 +4,10 @@ import {
   Wrap,
   WrapItem,
   Badge,
-  Skeleton,
   VStack,
-  Button,
 } from "@chakra-ui/react";
 
 interface TrendingTopicsProps {
-  onTagClick: (tagName: string) => void;
 }
 
 const fetchTrendingTopics = async () => {
@@ -24,27 +21,26 @@ const fetchTrendingTopics = async () => {
     .map((topic: any) => ({ name: topic.name, slug: topic.name }));
 };
 
-export default async function TrendingTopics({ onTagClick }: TrendingTopicsProps) {
+export default async function TrendingTopics({ }: TrendingTopicsProps) {
   const trendingTopics = await fetchTrendingTopics();
 
   return (
-    <Box w="100%" py={10} px={5}>
+    <Box w="100%" my={20} py={5} px={5} bg="gray.50" shadow={"md"}>
       <VStack gap={4} textAlign="center">
-        <Heading size="lg">Trending Topics</Heading>
+        <Heading my={3} color="green.400" size="3xl">Trending Topics</Heading>
           <Wrap gap={3} justify="center">
             {trendingTopics.map((tag: any) => (
               <WrapItem key={tag.name}>
                 <Badge
-                  colorScheme="blue"
+                  colorPalette="gray"
                   px={3}
                   py={1}
                   borderRadius="md"
                   fontSize="sm"
                   cursor="pointer"
                   _hover={{ bg: "blue.500", color: "white" }}
-                  // onClick={() => onTagClick(tag.name)}
                 >
-                  #{tag?.name}
+                  {tag?.name.toUpperCase()}
                 </Badge>
               </WrapItem>
             ))}

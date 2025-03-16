@@ -17,7 +17,6 @@ export default function HeroSection() {
           as={Box}
           textAlign={"center"}
           gap={{ base: 8, md: 14 }}
-          py={{ base: 20, md: 36 }}
         >
           <Heading
             fontWeight={600}
@@ -56,9 +55,6 @@ export default function HeroSection() {
               }}
             >
               Get Started
-            </Button>
-            <Button variant="ghost" colorScheme={"blue"} size={"sm"}>
-              Learn more
             </Button>
           </Stack>
         </Stack>

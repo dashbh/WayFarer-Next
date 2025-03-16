@@ -1,6 +1,18 @@
-'use client';
+"use client";
 
-import { Box, Heading, Text, Button, Image, VStack, Grid, GridItem, Skeleton, HStack } from "@chakra-ui/react";
+import {
+  Box,
+  Heading,
+  Text,
+  Button,
+  Image,
+  VStack,
+  Grid,
+  GridItem,
+  Skeleton,
+  HStack,
+  Spacer,
+} from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 
 interface Post {
@@ -15,7 +27,13 @@ interface Post {
   url: string;
 }
 
-const RecentPosts = ({ selectedTag, clearFilter }: { selectedTag: string; clearFilter: () => void }) => {
+const RecentPosts = ({
+  selectedTag,
+  clearFilter,
+}: {
+  selectedTag?: string;
+  clearFilter?: () => void;
+}) => {
   const [posts, setPosts] = useState<Post[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -24,8 +42,8 @@ const RecentPosts = ({ selectedTag, clearFilter }: { selectedTag: string; clearF
       setLoading(true);
       try {
         const url = selectedTag
-          ? `https://dev.to/api/articles?tag=${selectedTag}&per_page=5`
-          : "https://dev.to/api/articles?per_page=5&latest=1";
+          ? `https://dev.to/api/articles?tag=${selectedTag}&per_page=3`
+          : "https://dev.to/api/articles?per_page=3&latest=1";
 
         const response = await fetch(url);
         const data = await response.json();
@@ -41,8 +59,8 @@ const RecentPosts = ({ selectedTag, clearFilter }: { selectedTag: string; clearF
   }, [selectedTag]);
 
   return (
-    <Box w="100%" py={10} px={5}>
-      <Heading size="lg" textAlign="center" mb={6}>
+    <Box w="100%" py={10} px={5} bg="white">
+      <Heading size="3xl" color="green.400" textAlign="center" mb={6}>
         {selectedTag ? `Posts About #${selectedTag}` : "Recent Posts"}
       </Heading>
 
@@ -52,32 +70,48 @@ const RecentPosts = ({ selectedTag, clearFilter }: { selectedTag: string; clearF
         </Button>
       )}
 
-      <Grid templateColumns={{ base: "1fr", md: "repeat(2, 1fr)" }} gap={6} maxW="1000px" mx="auto">
+      <Grid
+        templateColumns={{ base: "1fr", md: "repeat(3, 1fr)" }}
+        gap={6}
+        maxW="1000px"
+        mx="auto"
+      >
         {loading
-          ? Array.from({ length: 4 }).map((_, index) => (
+          ? Array.from({ length: 3 }).map((_, index) => (
               <GridItem key={index}>
                 <Skeleton height="250px" width="100%" borderRadius="md" />
               </GridItem>
             ))
           : posts.map((post) => (
-              <GridItem key={post.id} bg="gray.100" p={4} borderRadius="md">
+              <GridItem
+                key={post.id}
+                bg="gray.100"
+                p={4}
+                borderRadius="md"
+                display="flex"
+                flexDirection="column"
+              >
                 <Image
-                  src={post.cover_image || "https://source.unsplash.com/500x300/?technology,blog"}
+                  src={post.cover_image || "https://placehold.co/500x300?text=No+Image"}
+                  aspectRatio={5 / 3}
+                  width="500px"
                   alt={post.title}
                   borderRadius="md"
                   mb={4}
                 />
-                <VStack align="start" gap={3}>
+                <VStack align="start" gap={3} flex="1" display="flex">
                   <Heading size="md">{post.title}</Heading>
-                  <Text fontSize="sm" color="gray.600">
-                    {post.description}
-                  </Text>
                   <HStack fontSize="sm" color="gray.500">
                     <Text>By {post.user.name}</Text>
                     <Text>•</Text>
                     <Text>{new Date(post.published_at).toDateString()}</Text>
                   </HStack>
-                  <Button colorScheme="blue" as="a" /*href={post.url} target="_blank"*/ >
+                  <Spacer /> {/* Pushes button down */}
+                  <Button
+                    variant="ghost"
+                    colorPalette="teal"
+                    alignSelf="flex-start"
+                  >
                     Read More
                   </Button>
                 </VStack>
