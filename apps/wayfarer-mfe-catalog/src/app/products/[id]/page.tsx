@@ -1,39 +1,49 @@
-import { Metadata } from "next";
+import { Suspense } from "react";
 import type { NextPage } from "next/types";
 import ProductDetails from "@/components/Product/ProductDetails";
 import { Product } from "@/type";
-
-interface ProductPageParams {
-  id: string;
-}
+import ProductReviews from "@/components/Product/ProductReviews";
 
 interface ProductPageProps {
-  params: Promise<ProductPageParams>;
+  params: Promise<{ id: string }>;
 }
 
-// export async function generateMetadata({
-//   params,
-// }: {
-//   params: ProductPageProps;
-// }): Promise<Metadata> {
-//     const { id } = await params;
-//   return {
-//     title: `Product ${id}`,
-//     description: "Product details page",
-//   };
-// }
+// Fetch product details (SSR)
+const fetchProduct = async (id: string) => {
+  const res = await fetch(`https://fakestoreapi.com/products/${id}`, {
+    cache: "no-store",
+  });
 
-const ProductPage: NextPage<ProductPageProps> = async ({ params }: ProductPageProps) => {
-  const { id } = await params;
-
-  const res = await fetch(`https://fakestoreapi.com/products/${id}`);
   if (!res.ok) {
     throw new Error("Product not found");
   }
 
-  const product: Product = await res.json();
+  return res.json();
+};
 
-  return <ProductDetails product={product} />;
+// Fetch mock product reviews (Streaming)
+const fetchReviews = async (id: string) => {
+  const res = await fetch(`https://jsonplaceholder.typicode.com/comments?postId=${id}`);
+  return res.json();
+};
+
+const ProductPage: NextPage<ProductPageProps> = async ({ params }) => {
+  const { id } = await params;
+  const product: Product = await fetchProduct(id);
+  return (
+    <>
+      <ProductDetails product={product} />
+      <Suspense fallback={<p>Loading reviews...</p>}>
+        <ProductReviewsWrapper id={id} />
+      </Suspense>
+    </>
+  );
+};
+
+// Streaming Reviews
+const ProductReviewsWrapper = async ({ id }: { id: string }) => {
+  const reviews = await fetchReviews(id);
+  return <ProductReviews reviews={reviews} />;
 };
 
 export default ProductPage;

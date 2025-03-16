@@ -1,9 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import TrendingTopics from "@/components/TrendingTopics";
+// import TrendingTopics from "@/components/TrendingTopics";
 import RecentPosts from "@/components/RecentPosts";
-import HeroSection from "@/components/HeroSection";
 
 const HomePage = () => {
   const [selectedTag, setSelectedTag] = useState<string>("");
@@ -18,8 +17,7 @@ const HomePage = () => {
 
   return (
     <div>
-      <HeroSection />
-      <TrendingTopics onTagClick={handleTagClick} />
+      {/* <TrendingTopics onTagClick={handleTagClick} /> */}
       <RecentPosts selectedTag={selectedTag} clearFilter={clearFilter} />
     </div>
   );

@@ -12,7 +12,7 @@ const API_URL = "https://fakestoreapi.com/products";
 
 // Fetch categories on the server
 const getCategories = async () => {
-  const res = await fetch(`${API_URL}/categories`, { cache: "no-store" });
+  const res = await fetch(`${API_URL}/categories`, { next: { revalidate: 60 } });
   return res.json();
 };
 

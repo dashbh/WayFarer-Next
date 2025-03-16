@@ -3,7 +3,7 @@ import ProductList from ".";
 const API_URL = "https://fakestoreapi.com/products";
 
 const getProducts = async () => {
-  const res = await fetch(API_URL, { cache: "no-store" });
+  const res = await fetch(API_URL, { next: { revalidate: 60 } });
   return res.json();
 };
 

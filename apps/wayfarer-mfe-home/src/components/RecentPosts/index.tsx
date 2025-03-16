@@ -24,8 +24,8 @@ const RecentPosts = ({ selectedTag, clearFilter }: { selectedTag: string; clearF
       setLoading(true);
       try {
         const url = selectedTag
-          ? `https://dev.to/api/articles?tag=${selectedTag}&per_page=15`
-          : "https://dev.to/api/articles?per_page=15&latest=1";
+          ? `https://dev.to/api/articles?tag=${selectedTag}&per_page=5`
+          : "https://dev.to/api/articles?per_page=5&latest=1";
 
         const response = await fetch(url);
         const data = await response.json();
