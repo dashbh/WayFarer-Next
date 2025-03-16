@@ -7,6 +7,7 @@ import {
   Text,
   Button,
   Stack,
+  Link,
 } from "@chakra-ui/react";
 
 export default function HeroSection() {
@@ -47,6 +48,7 @@ export default function HeroSection() {
           >
             <Button
               colorScheme={"green"}
+              asChild
               bg={"green.400"}
               rounded={"full"}
               px={6}
@@ -54,7 +56,7 @@ export default function HeroSection() {
                 bg: "green.500",
               }}
             >
-              Get Started
+              <Link href="/explore">Get Started</Link>
             </Button>
           </Stack>
         </Stack>
