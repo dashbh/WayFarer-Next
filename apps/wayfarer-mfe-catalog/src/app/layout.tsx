@@ -1,34 +1,31 @@
-import type { Metadata } from "next";
-import localFont from "next/font/local";
-import { ClientLayout } from "./ClientLayout";
 
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-});
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-});
+import type { Metadata } from "next";
+// import localFont from "next/font/local";
+import {ClientLayout} from "./client-layout";
+
+// const geistSans = localFont({
+//   src: "./fonts/GeistVF.woff",
+//   variable: "--font-geist-sans",
+// });
+// const geistMono = localFont({
+//   src: "./fonts/GeistMonoVF.woff",
+//   variable: "--font-geist-mono",
+// });
 
 export const metadata: Metadata = {
-  title: "WayFarer",
-  description: "WayFarer ",
-};
-
-interface RootLayoutProps {
-  children: React.ReactNode;
+  title: "WayFarer - Explore the World",
+  description: "Discover and book amazing travel destinations with WayFarer.",
 };
 
 export default function RootLayout({
   children,
-}: Readonly<RootLayoutProps>) {
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        <div>
-          <ClientLayout>{children}</ClientLayout>
-        </div>
+      <body /*className={`${geistSans.variable} ${geistMono.variable}`}*/ >
+        <ClientLayout>{children}</ClientLayout>
       </body>
     </html>
   );

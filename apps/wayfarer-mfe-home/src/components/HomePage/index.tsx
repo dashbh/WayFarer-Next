@@ -5,7 +5,7 @@ import TrendingTopics from "@/components/TrendingTopics";
 import RecentPosts from "@/components/RecentPosts";
 import HeroSection from "@/components/HeroSection";
 
-const BlogPage = () => {
+const HomePage = () => {
   const [selectedTag, setSelectedTag] = useState<string>("");
 
   const handleTagClick = (tag: string) => {
@@ -25,4 +25,4 @@ const BlogPage = () => {
   );
 };
 
-export default BlogPage;
+export default HomePage;

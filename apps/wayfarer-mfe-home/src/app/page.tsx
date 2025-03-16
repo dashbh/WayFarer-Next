@@ -1,10 +1,9 @@
-import BlogPage from "@/components/Blogs";
+import HomePage from "@/components/HomePage";
 
 export default function Home() {
   return (
     <main>
-      Home Page
-      <BlogPage />
+      <HomePage />
     </main>
   );
 }

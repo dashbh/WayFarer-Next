@@ -2,9 +2,21 @@
 
 import { Navbar, WayfarerChakraProvider } from "@wayfarer/ui";
 import { Box } from "@chakra-ui/react";
-import { ReactNode } from "react";
+import { ReactNode, useEffect, useState } from "react";
 
-export function ClientLayout({ children }: { children: ReactNode }) {
+interface ClientLayoutProps {
+  children: ReactNode;
+}
+
+export function ClientLayout({ children }: ClientLayoutProps) {
+  const [hydrated, setHydrated] = useState(false);
+
+  useEffect(() => {
+    setHydrated(true);
+  }, []);
+
+  if (!hydrated) return null;
+
   return (
     <WayfarerChakraProvider>
       <Navbar />
@@ -14,4 +26,3 @@ export function ClientLayout({ children }: { children: ReactNode }) {
     </WayfarerChakraProvider>
   );
 };
-

@@ -1,4 +1,4 @@
-import ProductList from "../ProductList";
+import ProductList from ".";
 
 const API_URL = "https://fakestoreapi.com/products";
 
