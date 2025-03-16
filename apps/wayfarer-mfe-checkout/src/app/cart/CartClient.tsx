@@ -63,7 +63,7 @@ const CartClient = () => {
           <Flex justify="flex-end">
             <Button colorPalette="green" mt={4} asChild>
               <Link as={NextLink} href={`order-summary?ids=${productIds}`}>
-                Checkout
+                Place Order
               </Link>
             </Button>
           </Flex>

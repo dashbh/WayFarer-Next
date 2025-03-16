@@ -13,7 +13,7 @@ import {
 } from '@chakra-ui/react'
 import { IoAnalyticsSharp, IoLogoBitcoin, IoSearchSharp } from 'react-icons/io5'
 import { ReactElement } from 'react'
-import { WayFarerRatings } from '@wayfarer/ui'
+// import { WayFarerRatings } from '@wayfarer/ui'
 
 interface FeatureProps {
   text: string

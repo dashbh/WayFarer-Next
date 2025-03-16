@@ -47,14 +47,15 @@ const OrderSummaryClient = () => {
 
   return (
     <Box p={4}>
-      <Text fontSize="2xl" mb={4}>
-        Order Summary
-      </Text>
       {products.length === 0 ? (
         <Text>No items in order</Text>
       ) : (
         <>
           <OrderSuccess />
+
+          <Text fontSize="2xl" mb={4}>
+            Order Summary
+          </Text>
           {products.map((product) => (
             <Box key={product.id} p={2} border="1px solid #ddd" mb={2}>
               <Text>{product.title}</Text>
