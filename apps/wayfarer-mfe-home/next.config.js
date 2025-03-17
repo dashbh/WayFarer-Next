@@ -4,10 +4,12 @@ const {
   NEXT_PUBLIC_CATALOG_URL,
   NEXT_PUBLIC_BLOG_URL,
   NEXT_PUBLIC_CHECKOUT_URL,
+  NEXT_PUBLIC_AUTH_URL,
   NEXT_MFE_CATALOG,
   NEXT_MFE_HOME,
   NEXT_MFE_BLOG,
-  NEXT_MFE_CHECKOUT
+  NEXT_MFE_CHECKOUT,
+  NEXT_MFE_AUTH
 } = process.env;
 
 const nextConfig = {
@@ -39,6 +41,14 @@ const nextConfig = {
       {
         source: `${NEXT_MFE_CHECKOUT}/_next/:path+`,
         destination: `${NEXT_PUBLIC_CHECKOUT_URL}${NEXT_MFE_CHECKOUT}/_next/:path+`,
+      },
+      {
+        source: "/user/:path*",
+        destination: `${NEXT_PUBLIC_AUTH_URL}/:path*`,
+      },
+      {
+        source: `${NEXT_MFE_AUTH}/_next/:path+`,
+        destination: `${NEXT_PUBLIC_AUTH_URL}${NEXT_MFE_AUTH}/_next/:path+`,
       },
     ];
   },

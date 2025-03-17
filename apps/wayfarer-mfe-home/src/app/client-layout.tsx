@@ -6,12 +6,13 @@ import { ReactNode } from "react";
 
 interface ClientLayoutProps {
   children: ReactNode;
+  user: any,
 }
 
-export function ClientLayout({ children }: ClientLayoutProps) {
+export function ClientLayout({ children, user }: ClientLayoutProps) {
   return (
     <WayfarerChakraProvider>
-      <Navbar />
+      <Navbar user={user} />
       <Box maxW="1200px" mx="auto" px={4} py={6}>
         {children}
       </Box>

@@ -11,6 +11,7 @@ import {
   useDisclosure,
   Stack,
   Portal,
+  Link,
 } from "@chakra-ui/react";
 import {
   AiOutlineMenu as HamburgerIcon,
@@ -23,9 +24,10 @@ import { NavLink } from "./NavLink";
 
 interface NavbarProps {
   internalRoutes?: string[]; // Internal routes for soft navigation
+  user?: any;
 }
 
-export const Navbar = ({ internalRoutes = [] }: NavbarProps) => {
+export const Navbar = ({ internalRoutes = [], user = {} }: NavbarProps) => {
   const { open: isMainNavOpen, onOpen, onClose } = useDisclosure();
   const router = useRouter();
   const pathname = usePathname();
@@ -80,27 +82,81 @@ export const Navbar = ({ internalRoutes = [] }: NavbarProps) => {
             {renderMainNavLinks()}
           </HStack>
         </HStack>
-        <Flex alignItems={"center"}>
-          <Menu.Root>
-            <Menu.Trigger asChild>
-              <Button variant="ghost" size="sm">
-                <Avatar.Root>
-                  <Avatar.Fallback name="John Doe" />
-                  <Avatar.Image src="https://images.unsplash.com/photo-1493666438817-866a91353ca9?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=b616b2c5b373a80ffc9636ba24f7a4a9" />
-                </Avatar.Root>
-              </Button>
-            </Menu.Trigger>
-            <Portal>
-              <Menu.Positioner>
-                <Menu.Content>
-                  <Menu.Item value="new-txt">Profile</Menu.Item>
-                  <Menu.Item value="new-file">Settings</Menu.Item>
-                  <Menu.Item value="new-win">Logout</Menu.Item>
-                </Menu.Content>
-              </Menu.Positioner>
-            </Portal>
-          </Menu.Root>
-        </Flex>
+
+        {user ? (
+          <Flex alignItems={"center"}>
+            <Menu.Root>
+              <Menu.Trigger asChild>
+                <Button variant="ghost" size="sm">
+                  <Avatar.Root>
+                    <Avatar.Fallback name="John Doe" />
+                    <Avatar.Image src="https://images.unsplash.com/photo-1493666438817-866a91353ca9?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=b616b2c5b373a80ffc9636ba24f7a4a9" />
+                  </Avatar.Root>
+                </Button>
+              </Menu.Trigger>
+              <Portal>
+                <Menu.Positioner>
+                  <Menu.Content>
+                    <Menu.Item value="new-txt" asChild>
+                      <Link
+                        _focus={{ outline: "none", boxShadow: "none" }}
+                        _focusVisible={{ outline: "none", boxShadow: "none" }}
+                        _active={{ outline: "none", boxShadow: "none" }}
+                        href="/user/profile"
+                      >
+                        Profile
+                      </Link>
+                    </Menu.Item>
+                    <Menu.Item value="new-file" asChild>
+                      <Link
+                        _focus={{ outline: "none", boxShadow: "none" }}
+                        _focusVisible={{ outline: "none", boxShadow: "none" }}
+                        _active={{ outline: "none", boxShadow: "none" }}
+                        href="/user/profile"
+                      >
+                        Settings
+                      </Link>
+                    </Menu.Item>
+                    <Menu.Item value="new-win" asChild>
+                      <Link
+                        _focus={{ outline: "none", boxShadow: "none" }}
+                        _focusVisible={{ outline: "none", boxShadow: "none" }}
+                        _active={{ outline: "none", boxShadow: "none" }}
+                        href="/user/logout"
+                      >
+                        Logout
+                      </Link>
+                    </Menu.Item>
+                  </Menu.Content>
+                </Menu.Positioner>
+              </Portal>
+            </Menu.Root>
+          </Flex>
+        ) : (
+          <Stack
+            flex={{ base: 1, md: 0 }}
+            justify={"flex-end"}
+            direction={"row"}
+            gap={6}
+          >
+            <Button asChild fontSize={"sm"} fontWeight={400} variant={"ghost"}>
+              <Link href={"/user/login"}>Login</Link>
+            </Button>
+            <Button
+              asChild
+              display={{ base: "none", md: "inline-flex" }}
+              fontSize={"sm"}
+              fontWeight={600}
+              color={"white"}
+              bg={"pink.400"}
+              _hover={{
+                bg: "pink.300",
+              }}
+            >
+              <Link href={"/user/signup"}>Sign Up</Link>
+            </Button>
+          </Stack>
+        )}
       </Flex>
 
       {isMainNavOpen ? (

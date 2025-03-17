@@ -2,6 +2,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import {ClientLayout} from "./client-layout";
+import { getLoggedInUser } from "@/lib/session";
 
 // const geistSans = localFont({
 //   src: "./fonts/GeistVF.woff",
@@ -17,15 +18,16 @@ export const metadata: Metadata = {
   description: "Discover and book amazing travel destinations with WayFarer.",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const user = await getLoggedInUser();
   return (
     <html lang="en">
       <body>
-        <ClientLayout>{children}</ClientLayout>
+        <ClientLayout user={user}>{children}</ClientLayout>
       </body>
     </html>
   );
