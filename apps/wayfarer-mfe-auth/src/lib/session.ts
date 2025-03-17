@@ -31,7 +31,7 @@ export async function setAuthCookie(token: string) {
     expires: expiresAt,
     sameSite: 'lax',
     path: '/',
-    domain: process.env.WAYFARER_DOMAIN, // Allows sharing across MFEs
+    // domain: process.env.WAYFARER_DOMAIN, // Allows sharing across MFEs
   });
 }
 
