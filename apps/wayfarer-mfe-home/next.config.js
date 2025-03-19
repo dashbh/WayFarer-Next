@@ -43,14 +43,14 @@ const nextConfig = {
         source: `${NEXT_MFE_CHECKOUT}/_next/:path+`,
         destination: `${NEXT_PUBLIC_CHECKOUT_URL}${NEXT_MFE_CHECKOUT}/_next/:path+`,
       },
-      {
-        source: "/user/:path*",
-        destination: `${NEXT_PUBLIC_AUTH_URL}/:path*`,
-      },
-      {
-        source: `${NEXT_MFE_AUTH}/_next/:path+`,
-        destination: `${NEXT_PUBLIC_AUTH_URL}${NEXT_MFE_AUTH}/_next/:path+`,
-      },
+      // {
+      //   source: "/user/:path*",
+      //   destination: `${NEXT_PUBLIC_AUTH_URL}/:path*`,
+      // },
+      // {
+      //   source: `${NEXT_MFE_AUTH}/_next/:path+`,
+      //   destination: `${NEXT_PUBLIC_AUTH_URL}${NEXT_MFE_AUTH}/_next/:path+`,
+      // },
     ];
   },
 };

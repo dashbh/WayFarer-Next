@@ -2,7 +2,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import {ClientLayout} from "./client-layout";
-import { getLoggedInUser } from "@/lib/session";
+import { getCurrentUser } from "@/lib/session";
 
 // const geistSans = localFont({
 //   src: "./fonts/GeistVF.woff",
@@ -23,7 +23,7 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const user = await getLoggedInUser();
+  const user = await getCurrentUser();
   return (
     <html lang="en">
       <body>
