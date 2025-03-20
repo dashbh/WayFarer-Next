@@ -9,11 +9,6 @@ import { Product } from "@/type";
 import ProductReviews from "@/components/Product/ProductReviews";
 import {JsonLdWrapper} from "@wayfarer/utils";
 
-export async function generateMetadata({ params }: { params: { id: string } }) {
-  const product = await fetchProduct(params.id);
-  return generateProductMetadata(product, params.id);
-}
-
 interface ProductPageProps {
   params: Promise<{ id: string }>;
 }
@@ -38,6 +33,12 @@ const fetchReviews = async (id: string) => {
   );
   return res.json();
 };
+
+export async function generateMetadata({ params }: ProductPageProps) {
+  const { id } = await params;
+  const product = await fetchProduct(id);
+  return generateProductMetadata(product, id);
+}
 
 const ProductPage: NextPage<ProductPageProps> = async ({ params }) => {
   const { id } = await params;
