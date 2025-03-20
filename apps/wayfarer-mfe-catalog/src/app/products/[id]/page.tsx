@@ -1,10 +1,13 @@
 import { Suspense } from "react";
 import type { NextPage } from "next/types";
-import { generateProductMetadata } from "@wayfarer/utils";
+import {
+  generateProductJsonLD,
+  generateProductMetadata,
+} from "@wayfarer/utils";
 import ProductDetails from "@/components/Product/ProductDetails";
 import { Product } from "@/type";
 import ProductReviews from "@/components/Product/ProductReviews";
-
+import {JsonLdWrapper} from "@wayfarer/utils";
 
 export async function generateMetadata({ params }: { params: { id: string } }) {
   const product = await fetchProduct(params.id);
@@ -30,7 +33,9 @@ const fetchProduct = async (id: string) => {
 
 // Fetch mock product reviews (Streaming)
 const fetchReviews = async (id: string) => {
-  const res = await fetch(`https://jsonplaceholder.typicode.com/comments?postId=${id}`);
+  const res = await fetch(
+    `https://jsonplaceholder.typicode.com/comments?postId=${id}`
+  );
   return res.json();
 };
 
@@ -39,6 +44,8 @@ const ProductPage: NextPage<ProductPageProps> = async ({ params }) => {
   const product: Product = await fetchProduct(id);
   return (
     <>
+      <JsonLdWrapper data={generateProductJsonLD(product)} />
+
       <ProductDetails product={product} />
       <Suspense fallback={<p>Loading reviews...</p>}>
         <ProductReviewsWrapper id={id} />

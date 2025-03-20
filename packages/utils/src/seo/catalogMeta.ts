@@ -7,7 +7,7 @@ export const generateCatalogMetadata = (): Metadata => ({
   openGraph: {
     title: "Shop All Categories - Best Deals | WayFarer",
     description: "Explore a wide range of products across multiple categories at the best prices.",
-    url: `${process.env.NEXT_PUBLIC_SITE_URL}/explore`,
+    url: `${process.env.NEXT_PUBLIC_HOME_URL}/explore`,
     images: [
       {
         url: "/catalog-default.jpg",
@@ -24,6 +24,6 @@ export const generateCatalogMetadata = (): Metadata => ({
     images: ["/catalog-default.jpg"],
   },
   alternates: {
-    canonical: `${process.env.NEXT_PUBLIC_SITE_URL}/explore`,
+    canonical: `${process.env.NEXT_PUBLIC_HOME_URL}/explore`,
   },
 });

@@ -7,7 +7,7 @@ export const generateBlogMetadata = (blog: any, blogId: string): Metadata => ({
   openGraph: {
     title: blog.title,
     description: blog.excerpt,
-    url:`${process.env.NEXT_PUBLIC_SITE_URL}/blog/${blogId}`,
+    url:`${process.env.NEXT_PUBLIC_HOME_URL}/blog/${blogId}`,
     type: "article",
     images: [{ url: blog.image, alt: blog.title }],
   },

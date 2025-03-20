@@ -8,7 +8,7 @@ export const generateContactMetadata = (): Metadata => ({
   openGraph: {
     title: "Contact WayFarer",
     description: "Reach out to us for any assistance or inquiries.",
-    url: `${process.env.NEXT_PUBLIC_SITE_URL}/contact`,
+    url: `${process.env.NEXT_PUBLIC_HOME_URL}/contact`,
     type: "website",
   },
 });

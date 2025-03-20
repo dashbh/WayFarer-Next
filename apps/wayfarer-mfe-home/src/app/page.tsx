@@ -6,10 +6,14 @@ import TestimonialsSection from "@/components/Testimonials";
 import TrendingTopics from "@/components/TrendingTopics";
 import TrendingTravelGuides from "@/components/TrendingTravelGuides";
 import UpcomingEvents from "@/components/UpcomingEvents";
+import { generateHomeJsonLD } from "@wayfarer/utils";
+import {JsonLdWrapper} from "@wayfarer/utils";
 
 export default function Home() {
   return (
     <main>
+      <JsonLdWrapper data={generateHomeJsonLD()} />
+
       <HeroSection />
       
 

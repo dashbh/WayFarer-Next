@@ -7,7 +7,7 @@ export const generateGlobalMetadata = (): Metadata => ({
   openGraph: {
     title: "WayFarer - The Best Shopping Experience",
     description: "Shop the latest products with exclusive discounts. Fast shipping worldwide.",
-    url: `${process.env.NEXT_PUBLIC_SITE_URL}`,
+    url: `${process.env.NEXT_PUBLIC_HOME_URL}`,
     images: [{ url: "/default-og-image.jpg", width: 1200, height: 630, alt: "WayFarer Store" }],
   },
   twitter: {
@@ -17,6 +17,6 @@ export const generateGlobalMetadata = (): Metadata => ({
     images: ["/default-twitter-image.jpg"],
   },
   alternates: {
-    canonical: `${process.env.NEXT_PUBLIC_SITE_URL}`,
+    canonical: `${process.env.NEXT_PUBLIC_HOME_URL}`,
   },
 });

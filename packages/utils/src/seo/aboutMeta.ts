@@ -7,7 +7,7 @@ export const generateAboutMetadata = (): Metadata => ({
     openGraph: {
       title: "About WayFarer",
       description: "Discover the journey of WayFarer and our vision for the future.",
-      url: `${process.env.NEXT_PUBLIC_SITE_URL}/about`,
+      url: `${process.env.NEXT_PUBLIC_HOME_URL}/about`,
       type: "website",
     },
 });

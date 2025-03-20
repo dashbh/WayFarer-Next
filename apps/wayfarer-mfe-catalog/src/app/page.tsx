@@ -1,10 +1,11 @@
 import { Suspense } from "react";
-import { generateCatalogMetadata } from "@wayfarer/utils";
+import { generateCatalogJsonLD, generateCatalogMetadata } from "@wayfarer/utils";
 import FilterControls from "@/components/FilterControls";
 import UpdateParamsProvider from "@/components/FilterControls/UpdateParamsProvider";
 import ProductListServer from "@/components/ProductList/ProductListServer";
 import ProductListSkeleton from "@/components/ProductList/ProductListSkeleton";
 import { Metadata } from "next";
+// import JsonLdWrapper from "@wayfarer/utils";
 
 interface CatalogPageProps {
   searchParams: Promise<Record<string, string>>;
@@ -26,6 +27,8 @@ export default async function Catalog({ searchParams }: CatalogPageProps) {
 
   return (
     <>
+    {/* <JsonLdWrapper data={generateCatalogJsonLD()} />  Need to check */} 
+
       <UpdateParamsProvider>
         <Suspense fallback={<div>Loading Filters...</div>}>
           <FilterControls categories={categories} />

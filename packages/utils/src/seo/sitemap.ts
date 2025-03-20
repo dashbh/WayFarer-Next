@@ -1,5 +1,5 @@
 export async function generateSitemap() {
-    const baseUrl = `${process.env.NEXT_PUBLIC_SITE_URL}`;
+    const baseUrl = `${process.env.NEXT_PUBLIC_HOME_URL}`;
   
     // Fetch dynamic product and category URLs (if needed)
     const products = await fetch("https://fakestoreapi.com/products").then((res) => res.json());

@@ -15,7 +15,7 @@ export const generateProductMetadata = (
     openGraph: {
       title: `${product.title} | WayFarer`,
       description: product.description,
-      url: `${process.env.NEXT_PUBLIC_SITE_URL}/explore/products/${productId}`,
+      url: `${process.env.NEXT_PUBLIC_HOME_URL}/explore/products/${productId}`,
       images: [
         { url: product.image, width: 800, height: 600, alt: product.title },
       ],
@@ -27,7 +27,7 @@ export const generateProductMetadata = (
       images: [product.image],
     },
     alternates: {
-      canonical: `${process.env.NEXT_PUBLIC_SITE_URL}/explore/products/${productId}`,
+      canonical: `${process.env.NEXT_PUBLIC_HOME_URL}/explore/products/${productId}`,
     },
   };
 };

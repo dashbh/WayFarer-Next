@@ -8,7 +8,7 @@ export const generateBlogListMetadata = (): Metadata => ({
     title: "Latest Blogs & Articles - WayFarer",
     description:
       "Stay updated with the latest insights and stories from WayFarer.",
-    url: `${process.env.NEXT_PUBLIC_SITE_URL}/blog`,
+    url: `${process.env.NEXT_PUBLIC_HOME_URL}/blog`,
     type: "website",
   },
 });
