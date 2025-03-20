@@ -1,22 +1,9 @@
-
 import type { Metadata } from "next";
-import localFont from "next/font/local";
-import {ClientLayout} from "./client-layout";
+import { ClientLayout } from "./client-layout";
 import { getCurrentUser } from "@/lib/session";
+import { generateGlobalMetadata } from "@wayfarer/utils";
 
-// const geistSans = localFont({
-//   src: "./fonts/GeistVF.woff",
-//   variable: "--font-geist-sans",
-// });
-// const geistMono = localFont({
-//   src: "./fonts/GeistMonoVF.woff",
-//   variable: "--font-geist-mono",
-// });
-
-export const metadata: Metadata = {
-  title: "WayFarer - Explore the World",
-  description: "Discover and book amazing travel destinations with WayFarer.",
-};
+export const metadata: Metadata = generateGlobalMetadata();
 
 export default async function RootLayout({
   children,

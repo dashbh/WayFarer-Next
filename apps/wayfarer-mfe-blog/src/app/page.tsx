@@ -1,8 +1,10 @@
 import HeroSection from "@/components/HeroSection";
 import RecentPosts from "@/components/RecentPosts";
 import TrendingTopics from "@/components/TrendingTopics";
-import { FeaturedPost, Post, Topic } from "@/types/blog";
+import { Post } from "@/types/blog";
 import { mapResponseToPost } from "@/utils/mapper";
+import { generateBlogListJsonLD } from "@wayfarer/utils";
+import {JsonLdWrapper} from "@wayfarer/utils";
 
 const fetchFeaturedPost = async () => {
   // Fetch Featured Post
@@ -48,6 +50,7 @@ export default async function BlogLandingPage() {
   const recentPosts = await fetchRecentPosts();
   return (
     <>
+      <JsonLdWrapper data={generateBlogListJsonLD(recentPosts)} />
       <HeroSection featuredPost={featuredPost} />
       <TrendingTopics topics={trendingTopics} />
       <RecentPosts posts={recentPosts} />

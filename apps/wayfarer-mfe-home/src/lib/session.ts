@@ -1,5 +1,5 @@
 import { cookies } from "next/headers";
-import { SignJWT, jwtVerify } from "jose";
+import { JWTPayload, SignJWT, jwtVerify } from "jose";
 import bcrypt from "bcryptjs";
 
 const JWT_SECRET = new TextEncoder().encode(process.env.JWT_SECRET!);
@@ -7,7 +7,7 @@ const JWT_EXPIRATION = "2h"; // Token expires in 1 hour
 
 // Mock user database (Replace with real DB)
 const users = [
-  { email: "user@example.com", password: bcrypt.hashSync("123456", 10) },
+  { email: "user@example.com", password: bcrypt.hashSync("password123", 10) },
 ];
 
 // Generate JWT token using `jose`
