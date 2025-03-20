@@ -1,4 +1,8 @@
 import { Box, Container, Heading, Text, Image, VStack } from "@chakra-ui/react";
+import { generateAboutMetadata } from "@wayfarer/utils";
+import { Metadata } from "next";
+
+export const metadata: Metadata = generateAboutMetadata();
 
 export default function AboutPage() {
   return (

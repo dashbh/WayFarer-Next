@@ -1,21 +1,9 @@
 
 import type { Metadata } from "next";
-import localFont from "next/font/local";
 import {ClientLayout} from "./client-layout";
+import { generateBlogListMetadata } from "@wayfarer/utils";
 
-// const geistSans = localFont({
-//   src: "./fonts/GeistVF.woff",
-//   variable: "--font-geist-sans",
-// });
-// const geistMono = localFont({
-//   src: "./fonts/GeistMonoVF.woff",
-//   variable: "--font-geist-mono",
-// });
-
-export const metadata: Metadata = {
-  title: "WayFarer - Explore the World",
-  description: "Discover and book amazing travel destinations with WayFarer.",
-};
+export const metadata: Metadata = generateBlogListMetadata();
 
 export default function RootLayout({
   children,
@@ -24,7 +12,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body /*className={`${geistSans.variable} ${geistMono.variable}`}*/ >
+      <body>
         <ClientLayout>{children}</ClientLayout>
       </body>
     </html>

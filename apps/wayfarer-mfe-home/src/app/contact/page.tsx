@@ -1,7 +1,10 @@
-import { Box, Heading, Text, Image, Input, Textarea, Button, VStack, HStack, Icon, Spacer } from "@chakra-ui/react";
-// import { FormControl, FormLabel } from "@chakra-ui/form-control";
+import type { Metadata } from "next";
+import { Box, Heading, Text, Image, VStack, HStack, Spacer } from "@chakra-ui/react";
 import { FaPhone, FaEnvelope, FaMapMarkerAlt, FaBuilding } from "react-icons/fa";
 import ContactForm from "@/components/ContactForm";
+import { generateContactMetadata } from "@wayfarer/utils";
+
+export const metadata: Metadata = generateContactMetadata();
 
 export default function ContactUs() {
   return (

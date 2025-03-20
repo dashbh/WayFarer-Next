@@ -1,14 +1,18 @@
 import { Suspense } from "react";
+import { generateCatalogMetadata } from "@wayfarer/utils";
 import FilterControls from "@/components/FilterControls";
 import UpdateParamsProvider from "@/components/FilterControls/UpdateParamsProvider";
 import ProductListServer from "@/components/ProductList/ProductListServer";
 import ProductListSkeleton from "@/components/ProductList/ProductListSkeleton";
+import { Metadata } from "next";
 
 interface CatalogPageProps {
   searchParams: Promise<Record<string, string>>;
 }
 
 const API_URL = "https://fakestoreapi.com/products";
+
+export const metadata: Metadata = generateCatalogMetadata();
 
 // Fetch categories on the server
 const getCategories = async () => {

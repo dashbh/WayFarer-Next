@@ -1,8 +1,15 @@
 import { Suspense } from "react";
 import type { NextPage } from "next/types";
+import { generateProductMetadata } from "@wayfarer/utils";
 import ProductDetails from "@/components/Product/ProductDetails";
 import { Product } from "@/type";
 import ProductReviews from "@/components/Product/ProductReviews";
+
+
+export async function generateMetadata({ params }: { params: { id: string } }) {
+  const product = await fetchProduct(params.id);
+  return generateProductMetadata(product, params.id);
+}
 
 interface ProductPageProps {
   params: Promise<{ id: string }>;

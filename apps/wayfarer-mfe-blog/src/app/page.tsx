@@ -1,7 +1,7 @@
 import HeroSection from "@/components/HeroSection";
 import RecentPosts from "@/components/RecentPosts";
 import TrendingTopics from "@/components/TrendingTopics";
-import { FeaturedPost, Post, Topic } from "@/types/blog";
+import { Post } from "@/types/blog";
 import { mapResponseToPost } from "@/utils/mapper";
 
 const fetchFeaturedPost = async () => {
