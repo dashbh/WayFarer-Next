@@ -11,7 +11,7 @@
                 "https://wayfarer-mfe-home.vercel.app/checkout/order-summary?ids=1",
                 "https://wayfarer-mfe-home.vercel.app/blog"
             ],
-            "numberOfRuns": 3,
+            "numberOfRuns": 1,
             "settings": {
                 "chromeFlags": "--no-sandbox"
             }
