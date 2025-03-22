@@ -6,7 +6,13 @@ import { LoginFormSchema, LoginFormState } from "@/lib/definitions";
 
 // Mock user database (Replace with real DB)
 const users = [
-  { email: "user@example.com", password: bcrypt.hashSync("password123", 10) },
+  {
+    id: '123456',
+    email: "user@example.com",
+    name: "Bhabani Prasad",
+    password: bcrypt.hashSync("password123", 10),
+    image: 'https://gravatar.com/images/homepage/avatar-01.png',
+  },
 ];
 
 // Server Action: Login
@@ -27,7 +33,7 @@ export async function loginAction(
     return { error: "Invalid credentials" };
   }
 
-  const token = await generateToken(email);
+  const token = await generateToken({ id: user.id, email, name: user.name, image: user.image });
   await setAuthCookie(token);
 
   return { success: true };

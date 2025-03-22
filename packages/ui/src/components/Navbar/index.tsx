@@ -18,19 +18,20 @@ import {
   AiOutlineClose as CloseIcon,
 } from "react-icons/ai";
 import { usePathname, useRouter } from "next/navigation";
+import { UserType } from "@wayfarer/types";
 
 import { NAV_LINKS } from "../../config/navigation";
 import { NavLink } from "./NavLink";
 
 interface NavbarProps {
   internalRoutes?: string[]; // Internal routes for soft navigation
-  user?: any;
+  user?: UserType | null;
 }
 
-export const Navbar = ({ internalRoutes = [], user = {} }: NavbarProps) => {
+export const Navbar = ({ internalRoutes = [], user }: NavbarProps) => {
   const { open: isMainNavOpen, onOpen, onClose } = useDisclosure();
   const router = useRouter();
-  const pathname = usePathname();
+  const pathname: string = usePathname();
 
   const renderMainNavLinks = () => {
     const mainNavLinks = NAV_LINKS.map(({ label, path }) => {
@@ -89,8 +90,8 @@ export const Navbar = ({ internalRoutes = [], user = {} }: NavbarProps) => {
               <Menu.Trigger asChild>
                 <Button variant="ghost" size="sm">
                   <Avatar.Root>
-                    <Avatar.Fallback name="John Doe" />
-                    <Avatar.Image src="https://images.unsplash.com/photo-1493666438817-866a91353ca9?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=b616b2c5b373a80ffc9636ba24f7a4a9" />
+                    <Avatar.Fallback name={user.name} />
+                    <Avatar.Image src={user.avatar} />
                   </Avatar.Root>
                 </Button>
               </Menu.Trigger>

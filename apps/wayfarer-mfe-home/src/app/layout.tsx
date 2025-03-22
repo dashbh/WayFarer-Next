@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { ClientLayout } from "./client-layout";
 import { getCurrentUser } from "@/lib/session";
 import { generateGlobalMetadata } from "@wayfarer/utils";
+import { UserType } from "@wayfarer/types";
 
 export const metadata: Metadata = generateGlobalMetadata();
 
@@ -10,7 +11,7 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const user = await getCurrentUser();
+  const user: UserType = await getCurrentUser();
   return (
     <html lang="en">
       <body>

@@ -8,7 +8,7 @@ interface NavLinkProps {
   isInternal: boolean;
   label: string;
   href: string;
-  pathname: any;
+  pathname: string;
 }
 
 export const NavLink = (props: NavLinkProps) => {
@@ -20,7 +20,7 @@ export const NavLink = (props: NavLinkProps) => {
     setIsActive(
       pathname === href || (pathname?.startsWith(href) && href !== "/")
     );
-  }, [pathname]);
+  }, [pathname, href]);
 
   return isInternal ? (
     <Link
