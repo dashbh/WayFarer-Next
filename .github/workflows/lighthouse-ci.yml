@@ -29,9 +29,7 @@ jobs:
         run: |
           mkdir -p lhci_reports
           lhci collect --json > lhci_reports/lighthouse-results.json
-
-      - name: Print Lighthouse Web Vitals for All Pages
-        run: cat lhci_reports/lighthouse-results.json | jq '.[] | {url: .finalUrl, FCP: .audits["first-contentful-paint"].displayValue, LCP: .audits["largest-contentful-paint"].displayValue, CLS: .audits["cumulative-layout-shift"].displayValue, TTI: .audits["interactive"].displayValue}'
+          cat lhci_reports/lighthouse-results.json | jq '.[] | {url: .finalUrl, FCP: .audits["first-contentful-paint"].displayValue, LCP: .audits["largest-contentful-paint"].displayValue, CLS: .audits["cumulative-layout-shift"].displayValue, TTI: .audits["interactive"].displayValue}'
 
       - name: Upload Lighthouse Reports as Artifact
         uses: actions/upload-artifact@v4
