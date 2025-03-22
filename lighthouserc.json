@@ -9,8 +9,7 @@
                 "https://wayfarer-mfe-home.vercel.app/explore/products/1",
                 "https://wayfarer-mfe-home.vercel.app/checkout/cart?ids=1",
                 "https://wayfarer-mfe-home.vercel.app/checkout/order-summary?ids=1",
-                "https://wayfarer-mfe-home.vercel.app/blog",
-                "https://wayfarer-mfe-home.vercel.app/blog/post/2301458"
+                "https://wayfarer-mfe-home.vercel.app/blog"
             ],
             "numberOfRuns": 3,
             "settings": {
