@@ -32,7 +32,7 @@ jobs:
           cat lhci_reports/lighthouse-results.json # Print to logs
 
       - name: Upload Lighthouse Reports as Artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: lighthouse-reports
           path: lhci_reports/
