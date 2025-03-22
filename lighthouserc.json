@@ -1,0 +1,27 @@
+{
+    "ci": {
+        "collect": {
+            "url": [
+                "https://wayfarer-mfe-home.vercel.app",
+                "https://wayfarer-mfe-home.vercel.app/about",
+                "https://wayfarer-mfe-home.vercel.app/contact",
+                "https://wayfarer-mfe-home.vercel.app/explore",
+                "https://wayfarer-mfe-home.vercel.app/explore/products/1",
+                "https://wayfarer-mfe-home.vercel.app/checkout/cart?ids=1",
+                "https://wayfarer-mfe-home.vercel.app/checkout/order-summary?ids=1",
+                "https://wayfarer-mfe-home.vercel.app/blog",
+                "https://wayfarer-mfe-home.vercel.app/blog/post/2301458"
+            ],
+            "numberOfRuns": 3,
+            "settings": {
+                "chromeFlags": "--no-sandbox"
+            }
+        },
+        "assert": {
+            "preset": "lighthouse:recommended"
+        },
+        "upload": {
+            "target": "temporary-public-storage"
+        }
+    }
+}
