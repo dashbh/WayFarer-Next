@@ -22,6 +22,10 @@
     "packages/*"
   ],
   "dependencies": {
-    "@sentry/nextjs": "^9.6.1"
+    "@grafana/faro-web-sdk": "^1.14.1",
+    "@grafana/faro-web-tracing": "^1.14.1",
+    "@sentry/nextjs": "^9.6.1",
+    "prom-client": "^15.1.3",
+    "web-vitals": "^4.2.4"
   }
 }
