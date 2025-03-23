@@ -1,0 +1,43 @@
+name: Lighthouse CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main # Runs on every pull request to main
+  # schedule:
+  # - cron: '0 0 * * 0' # Runs weekly
+
+jobs:
+  lighthouse:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Install Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Install Lighthouse CI
+        run: npm install -g @lhci/cli
+
+      - name: Run Lighthouse Tests
+        run: |
+          mkdir -p lhci_reports
+          lhci collect --output-dir=lhci_reports
+          cp .lighthouseci/lhr-*.json lhci_reports/
+
+      - name: Print Lighthouse Scores in Logs
+        run: |
+          cat lhci_reports/lhr-*.json | jq '.categories | {Performance: .performance.score, Accessibility: .accessibility.score, BestPractices: .["best-practices"].score, SEO: .seo.score}'
+
+      - name: Upload Lighthouse Reports as Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: lighthouse-reports
+          path: lhci_reports/
+
