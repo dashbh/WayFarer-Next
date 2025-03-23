@@ -1,7 +1,11 @@
 
 import type { Metadata } from "next";
 import {ClientLayout} from "./client-layout";
-import { generateGlobalMetadata } from "@wayfarer/utils";
+import { generateGlobalMetadata, reportWebVitals } from "@wayfarer/utils";
+
+export function reportWebVitalsHandler(metric: any) {
+  reportWebVitals(metric);
+}
 
 export const metadata: Metadata = generateGlobalMetadata();
 
@@ -18,3 +22,5 @@ export default function RootLayout({
     </html>
   );
 }
+
+export { reportWebVitalsHandler as reportWebVitals };

@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
 import { ClientLayout } from "./client-layout";
 import { getCurrentUser } from "@/lib/session";
-import { generateGlobalMetadata } from "@wayfarer/utils";
+import { generateGlobalMetadata, reportWebVitals } from "@wayfarer/utils";
 import { UserType } from "@wayfarer/types";
-import { reportWebVitals } from "./web-vitals";
 
 export const metadata: Metadata = generateGlobalMetadata();
 
