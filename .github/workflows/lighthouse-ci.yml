@@ -28,13 +28,16 @@ jobs:
       - name: Run Lighthouse Tests
         run: |
           mkdir -p lhci_reports
-          lhci collect --json > lhci_reports/lighthouse-results.json
-          run: cat lhci_reports/lighthouse-results.json | jq '.results | map({url: .finalUrl, FCP: .audits["first-contentful-paint"].displayValue, LCP: .audits["largest-contentful-paint"].displayValue, CLS: .audits["cumulative-layout-shift"].displayValue, TTI: .audits["interactive"].displayValue})'
+          lhci collect --output-dir=lhci_reports
+          cp .lighthouseci/lhr-*.json lhci_reports/
+
+      - name: Print Lighthouse Scores in Logs
+        run: |
+          cat lhci_reports/lhr-*.json | jq '.categories | {Performance: .performance.score, Accessibility: .accessibility.score, BestPractices: .["best-practices"].score, SEO: .seo.score}'
 
       - name: Upload Lighthouse Reports as Artifact
         uses: actions/upload-artifact@v4
         with:
           name: lighthouse-reports
           path: lhci_reports/
-          retention-days: 30 # Keep reports for 30 days
 
