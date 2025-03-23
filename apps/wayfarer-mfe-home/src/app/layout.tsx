@@ -1,10 +1,14 @@
 import type { Metadata } from "next";
 import { ClientLayout } from "./client-layout";
 import { getCurrentUser } from "@/lib/session";
-import { generateGlobalMetadata } from "@wayfarer/utils";
+import { generateGlobalMetadata, reportWebVitals } from "@wayfarer/utils";
 import { UserType } from "@wayfarer/types";
 
 export const metadata: Metadata = generateGlobalMetadata();
+
+export function reportWebVitalsHandler(metric: any) {
+  reportWebVitals(metric);
+}
 
 export default async function RootLayout({
   children,
@@ -20,3 +24,5 @@ export default async function RootLayout({
     </html>
   );
 }
+
+export { reportWebVitalsHandler as reportWebVitals };

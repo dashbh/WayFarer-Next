@@ -1,9 +1,13 @@
 
 import type { Metadata } from "next";
 import {ClientLayout} from "./client-layout";
-import { generateBlogListMetadata } from "@wayfarer/utils";
+import { generateBlogListMetadata, reportWebVitals } from "@wayfarer/utils";
 
 export const metadata: Metadata = generateBlogListMetadata();
+
+export function reportWebVitalsHandler(metric: any) {
+  reportWebVitals(metric);
+}
 
 export default function RootLayout({
   children,
@@ -18,3 +22,5 @@ export default function RootLayout({
     </html>
   );
 }
+
+export { reportWebVitalsHandler as reportWebVitals };
