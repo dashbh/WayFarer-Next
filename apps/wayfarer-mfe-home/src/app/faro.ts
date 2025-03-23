@@ -4,7 +4,7 @@ import { getWebInstrumentations, initializeFaro } from '@grafana/faro-web-sdk';
 import { TracingInstrumentation } from '@grafana/faro-web-tracing';
 
 export const faro = initializeFaro({
-  url: `${process.env.GRAFANA_FARO_URL}`,
+  url: `${process.env.NEXT_PUBLIC_GRAFANA_FARO_URL}`,
   app: {
     name: 'Wayfarer',
     version: '1.0.0',
