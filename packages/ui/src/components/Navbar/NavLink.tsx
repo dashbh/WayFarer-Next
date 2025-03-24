@@ -32,9 +32,9 @@ export const NavLink = (props: NavLinkProps) => {
       rounded="md"
       variant="plain"
       fontWeight={isActive ? "bold" : "normal"}
-      color={isActive ? "teal.500" : "gray.600"}
+      color={isActive ? "green.500" : "gray.600"}
       _hover={{
-        color: "teal.500",
+        color: "green.500",
         bg: "none",
         fontWeight: "bold",
         textDecoration: "none",
@@ -54,9 +54,9 @@ export const NavLink = (props: NavLinkProps) => {
       rounded="md"
       variant="plain"
       fontWeight={isActive ? "bold" : "normal"}
-      color={isActive ? "teal.500" : "gray.600"}
+      color={isActive ? "green.500" : "gray.600"}
       _hover={{
-        color: "teal.500",
+        color: "green.500",
         bg: "none",
         fontWeight: "bold",
         textDecoration: "none",

@@ -94,10 +94,11 @@ const RecentPosts = ({
                 <Image
                   src={post.cover_image || "https://placehold.co/500x300?text=No+Image"}
                   aspectRatio={5 / 3}
-                  width="500px"
+                  width={500}
                   alt={post.title}
                   borderRadius="md"
                   mb={4}
+                  loading="lazy"
                 />
                 <VStack align="start" gap={3} flex="1" display="flex">
                   <Heading size="md">{post.title}</Heading>

@@ -39,7 +39,7 @@ export default function TestimonialsSection() {
               <Card.Body>
                 <Avatar.Root>
                   <Avatar.Fallback name={testimonial.name} />
-                  <Avatar.Image src="https://images.unsplash.com/photo-1493666438817-866a91353ca9?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=b616b2c5b373a80ffc9636ba24f7a4a9" />
+                  <Avatar.Image width="40px" height="40px" loading="lazy" alt={testimonial.name} src="https://images.unsplash.com/photo-1493666438817-866a91353ca9?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=b616b2c5b373a80ffc9636ba24f7a4a9" />
                 </Avatar.Root>
                 <Text fontWeight="bold">{testimonial.name}</Text>
                 <Text lineClamp="6" color="gray.600" mt={2}>"{testimonial.body}"</Text>

@@ -31,14 +31,19 @@ export default function FeaturedDestinations() {
 
       <SimpleGrid columns={{ base: 1, md: 3 }} gap={6}>
         {loading
-          ? [...Array(3)].map((_, i) => <Skeleton key={i} height="200px" />)
+          ? [...Array(3)].map((_, i) => <Skeleton key={i} height="376px" />)
           : destinations.map((dest) => (
               <Box key={dest.id} p={4} borderWidth={1} borderRadius="md" shadow="md">
                 <Image
-                  src={`https://placehold.co/600x400?text=No+Image`}
+                  src={`https://placehold.co/200x150?text=No+Image`}
                   alt={dest.title}
                   borderRadius="md"
                   mb={3}
+                  height={150}
+                  width={200}
+                  style={{ width: "100%", height: "auto" }}
+                  sizes="(max-width: 600px) 100px, (max-width: 1200px) 300px, 200px"
+                  objectFit="cover"
                 />
                 <Text fontWeight="bold">{dest.title}</Text>
                 <Text fontSize="sm" color="gray.600" lineClamp={4}>

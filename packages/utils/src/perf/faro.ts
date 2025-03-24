@@ -8,7 +8,7 @@ export const faro = initializeFaro({
   app: {
     name: 'Wayfarer',
     version: '1.0.0',
-    environment: 'production'
+    environment: process.env.NODE_ENV || "production"
   },
   
   instrumentations: [

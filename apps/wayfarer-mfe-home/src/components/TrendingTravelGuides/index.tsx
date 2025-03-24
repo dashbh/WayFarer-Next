@@ -1,6 +1,3 @@
-"use client";
-
-import { useEffect, useState } from "react";
 import { Box, Heading, VStack, Text, Link, Spinner } from "@chakra-ui/react";
 
 interface Guide {
@@ -8,19 +5,17 @@ interface Guide {
   title: string;
 }
 
-export default function TrendingTravelGuides() {
-  const [guides, setGuides] = useState<Guide[]>([]);
-  const [loading, setLoading] = useState(true);
+const fetchTrendingTravelGuides = async () => {
+  const res = await fetch("https://jsonplaceholder.typicode.com/posts?_limit=5", {
+    next: { revalidate: 86400 }, // Regenerates every 24 hours
+  });
+  const json = await res.json();
 
-  useEffect(() => {
-    fetch("https://jsonplaceholder.typicode.com/posts?_limit=5")
-      .then((res) => res.json())
-      .then((data) => {
-        setGuides(data);
-        setLoading(false);
-      })
-      .catch(() => setLoading(false));
-  }, []);
+  return json;
+};
+
+export default async function TrendingTravelGuides() {
+  const guides: Guide[] = await fetchTrendingTravelGuides();
 
   return (
     <Box py={10} px={5} textAlign="center">
@@ -28,9 +23,6 @@ export default function TrendingTravelGuides() {
         Trending Travel Guides 🧳
       </Heading>
 
-      {loading ? (
-        <Spinner size="lg" />
-      ) : (
         <VStack gap={4} align="start">
           {guides.map((guide) => (
             <Link key={guide.id} href={`#`} color="blue.500" fontWeight="bold">
@@ -38,7 +30,6 @@ export default function TrendingTravelGuides() {
             </Link>
           ))}
         </VStack>
-      )}
     </Box>
   );
 }

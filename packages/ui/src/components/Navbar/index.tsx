@@ -91,7 +91,7 @@ export const Navbar = ({ internalRoutes = [], user }: NavbarProps) => {
                 <Button variant="ghost" size="sm">
                   <Avatar.Root>
                     <Avatar.Fallback name={user.name} />
-                    <Avatar.Image src={user.avatar} />
+                    <Avatar.Image src={user.avatar} alt={user.name} />
                   </Avatar.Root>
                 </Button>
               </Menu.Trigger>
