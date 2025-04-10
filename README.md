@@ -114,3 +114,60 @@ This project is licensed under the **MIT License**.
 ---
 
 🚀 **Happy Coding!**
+
+
+
+### DB Creation
+-- users
+CREATE TABLE IF NOT EXISTS users (
+  id SERIAL PRIMARY KEY,
+  name VARCHAR(100) NOT NULL,
+  email VARCHAR(100) NOT NULL UNIQUE
+);
+
+-- catalog
+CREATE TABLE IF NOT EXISTS catalog (
+  id SERIAL PRIMARY KEY,
+  title VARCHAR(255) NOT NULL,
+  description TEXT,
+  price NUMERIC(10, 2) NOT NULL
+);
+
+-- cart
+CREATE TABLE IF NOT EXISTS cart (
+  id SERIAL PRIMARY KEY,
+  user_id INTEGER REFERENCES users(id),
+  product_id INTEGER REFERENCES catalog(id),
+  quantity INTEGER NOT NULL
+);
+
+-- blog
+CREATE TABLE IF NOT EXISTS blog (
+  id SERIAL PRIMARY KEY,
+  title VARCHAR(255) NOT NULL,
+  content TEXT NOT NULL,
+  author_id INTEGER REFERENCES users(id),
+  published_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+## DB INsert
+-- Insert users
+INSERT INTO users (name, email) VALUES
+  ('Alice', 'alice@example.com'),
+  ('Bob', 'bob@example.com');
+
+-- Insert catalog items
+INSERT INTO catalog (title, description, price) VALUES
+  ('Wayfarer Backpack', 'Durable and spacious backpack.', 59.99),
+  ('Explorer Jacket', 'Waterproof and windproof jacket.', 89.99);
+
+-- Insert cart items
+INSERT INTO cart (user_id, product_id, quantity) VALUES
+  (1, 1, 2),
+  (2, 2, 1);
+
+-- Insert blogs
+INSERT INTO blog (title, content, author_id) VALUES
+  ('Welcome to Wayfarer', 'Wayfarer is your new favorite travel companion.', 1),
+  ('Packing Tips', 'Here are 5 things every traveler should carry.', 2);
+
