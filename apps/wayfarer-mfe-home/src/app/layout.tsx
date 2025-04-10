@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { ClientLayout } from "./client-layout";
+import { ClientLayout, Providers } from "./client-layout";
 import { getCurrentUser } from "@/lib/session";
 import { generateGlobalMetadata, reportWebVitals } from "@wayfarer/utils";
 import { UserType } from "@wayfarer/types";
@@ -19,7 +19,9 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body>
-        <ClientLayout user={user}>{children}</ClientLayout>
+        <Providers>
+          <ClientLayout user={user}>{children}</ClientLayout>
+        </Providers>
       </body>
     </html>
   );

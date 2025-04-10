@@ -9,12 +9,13 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint --max-warnings 0",
-    "check-types": "tsc --noEmit"
+    "check-types": "tsc --noEmit",
+    "codegen": "graphql-codegen --config codegen.ts"
   },
   "dependencies": {
+    "@wayfarer/types": "*",
     "@wayfarer/ui": "*",
     "@wayfarer/utils": "*",
-    "@wayfarer/types": "*",
     "bcryptjs": "^3.0.2",
     "jose": "^6.0.10",
     "next": "^15.2.1",
@@ -23,6 +24,9 @@
     "zod": "^3.24.2"
   },
   "devDependencies": {
+    "@graphql-codegen/cli": "5.0.5",
+    "@graphql-codegen/client-preset": "^4.8.0",
+    "@graphql-codegen/introspection": "4.0.3",
     "@types/node": "^22.13.9",
     "@types/react": "19.0.10",
     "@types/react-dom": "19.0.4",

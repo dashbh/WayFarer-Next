@@ -3,10 +3,12 @@
 import { Navbar, WayfarerChakraProvider, WayFarerFooter } from "@wayfarer/ui";
 import { Box } from "@chakra-ui/react";
 import { ReactNode } from "react";
+import { ApolloProvider } from "@apollo/client";
+import { client } from "@/lib/apolloClient";
 
 interface ClientLayoutProps {
   children: ReactNode;
-  user: any,
+  user: any;
 }
 
 export function ClientLayout({ children, user }: ClientLayoutProps) {
@@ -19,4 +21,8 @@ export function ClientLayout({ children, user }: ClientLayoutProps) {
       <WayFarerFooter />
     </WayfarerChakraProvider>
   );
-};
+}
+
+export function Providers({ children }: { children: React.ReactNode }) {
+  return <ApolloProvider client={client}>{children}</ApolloProvider>;
+}
