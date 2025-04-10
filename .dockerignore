@@ -1,0 +1,24 @@
+# Node
+node_modules
+*.log
+npm-debug.log*
+
+# Turborepo
+.turbo
+
+# Next.js
+.next
+out
+.cache
+
+# Prisma
+*.db
+*.sqlite
+
+# Docker
+Dockerfile
+.dockerignore
+
+# Git
+.git
+.gitignore

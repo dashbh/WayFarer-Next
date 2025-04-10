@@ -1,14 +1,14 @@
 import { cookies } from "next/headers";
 import { JWTPayload, SignJWT, jwtVerify } from "jose";
-import bcrypt from "bcryptjs";
 import { UserType } from "@wayfarer/types";
+import { logger } from "@wayfarer/utils";
 
 const JWT_SECRET = new TextEncoder().encode(process.env.JWT_SECRET!);
 const JWT_EXPIRATION = "2h"; // Token expires in 1 hour
 
 // Generate JWT token using `jose`
 export async function generateToken(payload: UserType) {
-  return await new SignJWT({ ...payload})
+  return await new SignJWT({ ...payload })
     .setProtectedHeader({ alg: "HS256" })
     .setIssuedAt()
     .setExpirationTime(JWT_EXPIRATION)
@@ -85,8 +85,12 @@ export function mapJwtToUser(payload: JWTPayload | null): UserType | null {
     id: String(payload.sub || "no-id"),
     email: String(payload.email || "no-email@example.com"),
     name: String(payload.name || "WayFarer User"),
-    image: String(payload.image || "https://gravatar.com/images/homepage/avatar-01.png"),
-    avatar: String(payload.avatar || "https://gravatar.com/images/homepage/avatar-01.png"),
+    image: String(
+      payload.image || "https://gravatar.com/images/homepage/avatar-01.png"
+    ),
+    avatar: String(
+      payload.avatar || "https://gravatar.com/images/homepage/avatar-01.png"
+    ),
   };
   return userObj;
 }
@@ -94,5 +98,7 @@ export function mapJwtToUser(payload: JWTPayload | null): UserType | null {
 // Clear authentication cookie
 export async function clearAuthCookie() {
   const cookieStore = await cookies();
+  const user = await getCurrentUser();
+  logger.info("User Logged out", { email: user?.email || "" });
   cookieStore.delete("auth_token");
 }

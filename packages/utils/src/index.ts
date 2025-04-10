@@ -17,4 +17,5 @@ export * from "./jsonLD/blogPost";
 
 export { default as JsonLdWrapper } from "./components/JsonLdWrapper";
 
-export * from "./perf/web-vitals";
+export * from "./observability";
+export * from "./observability/logger";

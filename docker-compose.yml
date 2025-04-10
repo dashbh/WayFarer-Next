@@ -1,0 +1,47 @@
+services:
+  # wayfarer-backend:
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile
+  #   container_name: wayfarer-next
+  #   ports:
+  #     - "3000:3000"  # home
+  #     - "3001:3001"  # catalog
+  #     - "3002:3002"  # blog
+  #     - "3003:3003"  # checkout
+  #   volumes:
+  #     - .:/app
+  #     - /app/node_modules
+  #   env_file:
+  #     - .env.local
+  #   depends_on:
+  #     - db
+  #   command: npx turbo run dev --parallel
+
+  db:
+    image: postgres:15-alpine
+    container_name: wayfarer-postgress
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: wayfarerdb
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: wayfarer-pgadmin
+    restart: always
+    ports:
+      - "5050:80"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@wayfarer.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    depends_on:
+      - db
+
+volumes:
+  pgdata:
