@@ -8,7 +8,7 @@ import TrendingTravelGuides from "@/components/TrendingTravelGuides";
 import UpcomingEvents from "@/components/UpcomingEvents";
 import { generateHomeJsonLD } from "@wayfarer/utils";
 import {JsonLdWrapper} from "@wayfarer/utils";
-
+debugger;
 export default function Home() {
   return (
     <main>

@@ -1,7 +1,8 @@
-
 import type { Metadata } from "next";
-import {ClientLayout} from "./client-layout";
+import { ClientLayout } from "./client-layout";
 import { generateGlobalMetadata, reportWebVitals } from "@wayfarer/utils";
+
+import "./globals.css";
 
 export function reportWebVitalsHandler(metric: any) {
   reportWebVitals(metric);

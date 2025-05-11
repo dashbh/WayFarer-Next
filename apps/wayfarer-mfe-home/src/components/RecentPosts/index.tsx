@@ -57,7 +57,6 @@ const RecentPosts = ({
 
     fetchRecentPosts();
   }, [selectedTag]);
-
   return (
     <Box w="100%" py={10} px={5} bg="white">
       <Heading size="3xl" color="green.400" textAlign="center" mb={6}>

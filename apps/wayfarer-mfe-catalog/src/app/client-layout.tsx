@@ -1,7 +1,7 @@
 "use client"; // Ensure it runs on the client side
 
-import { Navbar, WayfarerChakraProvider } from "@wayfarer/ui";
-import { Box } from "@chakra-ui/react";
+// import { Navbar, WayfarerChakraProvider } from "@wayfarer/ui";
+// import { Box } from "@chakra-ui/react";
 import { ReactNode } from "react";
 
 interface ClientLayoutProps {
@@ -10,11 +10,13 @@ interface ClientLayoutProps {
 
 export function ClientLayout({ children }: ClientLayoutProps) {
   return (
-    <WayfarerChakraProvider>
-      <Navbar />
-      <Box maxW="1200px" mx="auto" px={4} py={6}>
+    // <WayfarerChakraProvider>
+    <>
+      {/* <Navbar /> */}
+      <div className="max-w-[1200px] mx-auto px-4 py-6">
         {children}
-      </Box>
-    </WayfarerChakraProvider>
+      </div>
+      </>
+    // </WayfarerChakraProvider>
   );
 };

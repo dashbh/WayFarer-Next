@@ -18,13 +18,17 @@
     "react-dom": "^19.0.0"
   },
   "devDependencies": {
-    "@wayfarer/eslint-config": "*",
-    "@wayfarer/typescript-config": "*",
-    "@wayfarer/types": "*",
+    "@tailwindcss/postcss": "^4.1.6",
     "@types/node": "^22.13.9",
     "@types/react": "19.0.10",
     "@types/react-dom": "19.0.4",
+    "@wayfarer/eslint-config": "*",
+    "@wayfarer/types": "*",
+    "@wayfarer/typescript-config": "*",
+    "autoprefixer": "^10.4.21",
     "eslint": "^9.21.0",
+    "postcss": "^8.5.3",
+    "tailwindcss": "^4.1.6",
     "typescript": "5.8.2"
   }
 }

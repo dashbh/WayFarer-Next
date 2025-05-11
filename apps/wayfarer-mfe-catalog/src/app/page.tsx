@@ -17,7 +17,7 @@ export const metadata: Metadata = generateCatalogMetadata();
 
 // Fetch categories on the server
 const getCategories = async () => {
-  const res = await fetch(`${API_URL}/categories`, { next: { revalidate: 60 } });
+  const res = await fetch(`${API_URL}/categories`, { next: { revalidate: 60 }, credentials: 'include' },);
   return res.json();
 };
 
