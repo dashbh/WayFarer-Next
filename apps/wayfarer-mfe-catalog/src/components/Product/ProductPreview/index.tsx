@@ -1,59 +1,42 @@
 "use client";
 
-import {
-  Box,
-  Image,
-  Text,
-  Button,
-  VStack,
-  HStack,
-  Badge,
-} from "@chakra-ui/react";
-import { WayFarerRatings } from "@wayfarer/ui";
 import Link from "next/link";
+import Image from "next/image";
 import { Product } from "../../../type";
+import { WayFarerRatings } from "@wayfarer/ui";
 
 const ProductPreview = ({ product }: { product: Product }) => {
   return (
-    <Box
-      borderWidth="1px"
-      borderRadius="lg"
-      overflow="hidden"
-      p={4}
-      _hover={{ shadow: "lg" }}
-      transition="0.2s ease-in-out"
-    >
+    <div className="border border-gray-300 rounded-lg overflow-hidden p-4 hover:shadow-lg transition-shadow duration-200 ease-in-out">
       <Link href={`/explore/products/${product.id}`}>
         <Image
           src={product.imageUrl}
           alt={product.title}
-          boxSize="150px"
-          objectFit="contain"
-          mx="auto"
+          width={144} // Equivalent to w-36 (36 * 4 = 144px)
+          height={144} // Equivalent to h-36 (36 * 4 = 144px)
+          className="object-contain mx-auto"
         />
       </Link>
 
-      <VStack align="start" gap={2} mt={3}>
-        <Text fontWeight="bold" fontSize="lg">
-          {product.title}
-        </Text>
-        <Badge colorScheme="blue">{product.category}</Badge>
-        <Text fontSize="xl" color="green.500" fontWeight="bold">
-          ${product.price}
-        </Text>
+      <div className="flex flex-col items-start gap-2 mt-3">
+        <p className="font-bold text-lg">{product.title}</p>
+        <span className="bg-blue-100 text-blue-800 text-xs font-medium px-2 py-1 rounded">
+          {product.category}
+        </span>
+        <p className="text-xl text-green-500 font-bold">${product.price}</p>
 
         {/* Ratings */}
         <WayFarerRatings rating={product.rating} />
 
-        <HStack>
+        <div>
           <Link href={`/explore/products/${product.id}`}>
-            <Button colorScheme="blue" size="sm">
+            <button className="bg-blue-500 text-white text-sm px-4 py-2 rounded hover:bg-blue-600 transition-colors">
               View Details
-            </Button>
+            </button>
           </Link>
-        </HStack>
-      </VStack>
-    </Box>
+        </div>
+      </div>
+    </div>
   );
 };
 

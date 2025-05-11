@@ -1,7 +1,5 @@
 "use client";
 
-import { Input, HStack, VStack, Box, Text, Spacer } from "@chakra-ui/react";
-import { WayFarerSelect, WayFarerSlider, Button } from "@wayfarer/ui";
 import { VscClearAll } from "react-icons/vsc";
 import { useUpdateParams } from "./UpdateParamsProvider";
 import { FilterControlsProps } from "../../type";
@@ -46,102 +44,99 @@ const FilterControls = ({ categories }: FilterControlsProps) => {
   }));
 
   return (
-    <VStack align="stretch" gap={4}>
+    <div className="flex flex-col gap-4">
       {/* Price Filter */}
-      <WayFarerSlider
-        label="Price"
-        step={10}
-        value={priceRange}
-        onValueChange={(e: any) => {
-          setPriceRange(e.value);
-          updateParams("maxPrice", e.value[0].toString());
-        }}
-      />
+      <div>
+        <label className="block font-bold mb-2">Price</label>
+        <input
+          type="range"
+          min="0"
+          max="1000"
+          step="10"
+          value={priceRange[0]}
+          onChange={(e) => {
+            const value = Number(e.target.value);
+            setPriceRange([value]);
+            updateParams("maxPrice", value.toString());
+          }}
+          className="w-full"
+        />
+      </div>
 
       {/* Search Filter */}
-      <Input
+      <input
+        type="text"
         placeholder="Search products..."
         value={searchText}
         onChange={(e) => {
           setSearchText(e.target.value);
           updateParams("search", e.target.value);
         }}
+        className="border border-gray-300 rounded-md p-2 w-full"
       />
 
-      <HStack gap={4} my={10} align="end">
-        {/* Catagory Filter */}
-
-        <Box width={200}>
-          <Text fontWeight="bold" mb={2}>
-            Category
-          </Text>
-          <WayFarerSelect
-            value={
-              categoryOptions.find(
-                (opt) => opt.value === currentFilters.category
-              ) || null
-            }
-            options={categoryOptions}
-            id="filter-category"
-            onChange={(event: any) =>
-              updateParams("category", event?.value || "")
-            }
-          />
-        </Box>
+      <div className="flex flex-wrap gap-4 items-end mt-10">
+        {/* Category Filter */}
+        <div className="w-48">
+          <label className="block font-bold mb-2">Category</label>
+          <select
+            value={currentFilters.category || ""}
+            onChange={(e) => updateParams("category", e.target.value)}
+            className="border border-gray-300 rounded-md p-2 w-full"
+          >
+            <option value="">All Categories</option>
+            {categoryOptions.map((option) => (
+              <option key={option.value} value={option.value}>
+                {option.label}
+              </option>
+            ))}
+          </select>
+        </div>
 
         {/* Rating Filter */}
-        <Box width={200}>
-          <Text fontWeight="bold" mb={2}>
-            Rating
-          </Text>
-          <WayFarerSelect
-            value={
-              filterOptions.ratings.find(
-                (opt) => opt.value === currentFilters.ratings
-              ) || null
-            }
-            options={filterOptions.ratings}
-            id="filter-cratings"
-            onChange={(event: any) =>
-              updateParams("ratings", event?.value || "")
-            }
-          />
-        </Box>
+        <div className="w-48">
+          <label className="block font-bold mb-2">Rating</label>
+          <select
+            value={currentFilters.ratings || ""}
+            onChange={(e) => updateParams("ratings", e.target.value)}
+            className="border border-gray-300 rounded-md p-2 w-full"
+          >
+            {filterOptions.ratings.map((option) => (
+              <option key={option.value} value={option.value}>
+                {option.label}
+              </option>
+            ))}
+          </select>
+        </div>
 
         {/* Sort Filter */}
-        <Box width={200}>
-          <Text fontWeight="bold" mb={2}>
-            Sort By
-          </Text>
-          <WayFarerSelect
-            id="filter-sortby"
-            value={
-              filterOptions.sort.find(
-                (opt) => opt.value === currentFilters.sort
-              ) || null
-            }
-            options={filterOptions.sort}
-            onChange={(event: any) => updateParams("sort", event?.value || "")}
-          />
-        </Box>
+        <div className="w-48">
+          <label className="block font-bold mb-2">Sort By</label>
+          <select
+            value={currentFilters.sort || ""}
+            onChange={(e) => updateParams("sort", e.target.value)}
+            className="border border-gray-300 rounded-md p-2 w-full"
+          >
+            {filterOptions.sort.map((option) => (
+              <option key={option.value} value={option.value}>
+                {option.label}
+              </option>
+            ))}
+          </select>
+        </div>
 
-        <Spacer />
-
-        <Box>
-          <Button
+        <div className="ml-auto">
+          <button
             aria-label="Search database"
-            variant="solid"
-            onClick={() => {
-              resetFilters();
-            }}
-            colorPalette="teal"
+            onClick={resetFilters}
+            className="bg-teal-500 text-white px-4 py-2 rounded-md flex items-center gap-2 hover:bg-teal-600 transition"
           >
             Clear Filters
             <VscClearAll />
-          </Button>
-        </Box>
-      </HStack>
-    </VStack>
+          </button>
+        </div>
+      </div>
+    </div>
   );
 };
 

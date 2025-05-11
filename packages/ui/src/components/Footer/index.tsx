@@ -1,31 +1,24 @@
 "use client";
 
-import { Box, Container, Link, Stack, Text } from "@chakra-ui/react";
-import NextLink from "next/link";
+import Link from "next/link";
 
 export function WayFarerFooter() {
   return (
-    <Box bg="gray.100">
-      <Container
-        as={Stack}
-        maxW={"6xl"}
-        py={4}
-        direction={{ base: "column", md: "row" }}
-        gap={4}
-      >
-        <Stack direction={"row"} gap={6}>
-          <Link as={NextLink} href={"/"}>
+    <div className="bg-gray-100">
+      <div className="max-w-6xl mx-auto py-4 flex flex-col md:flex-row gap-4">
+        <div className="flex gap-6">
+          <Link href="/" className="text-blue-600 hover:underline">
             Home
           </Link>
-          <Link as={NextLink} href={"/about"}>
+          <Link href="/about" className="text-blue-600 hover:underline">
             About
           </Link>
-          <Link as={NextLink} href={"/contact"}>
+          <Link href="/contact" className="text-blue-600 hover:underline">
             Contact
           </Link>
-        </Stack>
-        <Text>© 2025 WayFarer. All rights reserved</Text>
-      </Container>
-    </Box>
+        </div>
+        <p className="text-gray-600">© 2025 WayFarer. All rights reserved</p>
+      </div>
+    </div>
   );
 }

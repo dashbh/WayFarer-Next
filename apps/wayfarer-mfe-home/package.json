@@ -13,14 +13,17 @@
     "codegen": "graphql-codegen --config codegen.ts"
   },
   "dependencies": {
+    "@tailwindcss/postcss": "^4.1.6",
     "@wayfarer/types": "*",
     "@wayfarer/ui": "*",
     "@wayfarer/utils": "*",
     "bcryptjs": "^3.0.2",
     "jose": "^6.0.10",
     "next": "^15.2.1",
+    "postcss": "^8.5.3",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "tailwindcss": "^4.1.6",
     "zod": "^3.24.2"
   },
   "devDependencies": {

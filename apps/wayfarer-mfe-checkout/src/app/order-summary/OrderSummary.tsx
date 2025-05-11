@@ -2,10 +2,8 @@
 
 import { useSearchParams } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
-import { Box, Button, Spinner, Text } from "@chakra-ui/react";
-import OrderSuccess from "./OrderSuccess";
 
-const OrderSummaryClient = () => {
+const OrderSummary = () => {
   const searchParams = useSearchParams();
   const [products, setProducts] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
@@ -41,37 +39,13 @@ const OrderSummaryClient = () => {
     fetchProducts();
   }, [productIds]);
 
-  if (loading) return <Spinner />;
+  if (loading) return '<Spinner />';
 
   const total = products.reduce((sum, product) => sum + product.price, 0);
 
   return (
-    <Box p={4}>
-      {products.length === 0 ? (
-        <Text>No items in order</Text>
-      ) : (
-        <>
-          <OrderSuccess />
-
-          <Text fontSize="2xl" mb={4}>
-            Order Summary
-          </Text>
-          {products.map((product) => (
-            <Box key={product.id} p={2} border="1px solid #ddd" mb={2}>
-              <Text>{product.title}</Text>
-              <Text>${product.price}</Text>
-            </Box>
-          ))}
-          <Text fontSize="xl" mt={4}>
-            Total: ${total.toFixed(2)}
-          </Text>
-          {/* <Button colorScheme="green" mt={4}>
-            Place Order
-          </Button> */}
-        </>
-      )}
-    </Box>
+   'hello'
   );
 };
 
-export default OrderSummaryClient;
+export default OrderSummary;

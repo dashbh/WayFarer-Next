@@ -1,5 +1,3 @@
-import { Box, Text, VStack, Separator } from "@chakra-ui/react";
-
 interface Review {
   id: number;
   name: string;
@@ -9,22 +7,21 @@ interface Review {
 
 export default function ProductReviews({ reviews }: { reviews: Review[] }) {
   return (
-    <Box mt={8} p={5} borderWidth={1} borderRadius="md">
-      <Text fontSize="xl" fontWeight="bold" mb={3}>
-        Customer Reviews
-      </Text>
-      <VStack align="stretch" gap={4}>
+    <div className="mt-8 p-5 border border-gray-300 rounded-md">
+      <h2 className="text-xl font-bold mb-3">Customer Reviews</h2>
+      <div className="flex flex-col gap-4">
         {reviews.map((review) => (
-          <Box key={review.id} p={3} borderWidth={1} borderRadius="md">
-            <Text fontWeight="bold">{review.name}</Text>
-            <Text fontSize="sm" color="gray.500">
-              {review.email}
-            </Text>
-            <Text mt={2}>{review.body}</Text>
-            <Separator mt={3} />
-          </Box>
+          <div
+            key={review.id}
+            className="p-3 border border-gray-300 rounded-md"
+          >
+            <p className="font-bold">{review.name}</p>
+            <p className="text-sm text-gray-500">{review.email}</p>
+            <p className="mt-2">{review.body}</p>
+            <hr className="mt-3 border-t border-gray-200" />
+          </div>
         ))}
-      </VStack>
-    </Box>
+      </div>
+    </div>
   );
 }

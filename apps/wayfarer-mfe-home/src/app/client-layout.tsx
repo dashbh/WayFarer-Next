@@ -1,10 +1,12 @@
 "use client"; // Ensure it runs on the client side
 
-import { Navbar, WayfarerChakraProvider, WayFarerFooter } from "@wayfarer/ui";
-import { Box } from "@chakra-ui/react";
+import { Navbar, WayFarerFooter } from "@wayfarer/ui";
+// import { Box } from "@chakra-ui/react";
 import { ReactNode } from "react";
 import { ApolloProvider } from "@apollo/client";
 import { client } from "@/lib/apolloClient";
+import "@wayfarer/ui/globals.css";
+import "./globals.css";
 
 interface ClientLayoutProps {
   children: ReactNode;
@@ -13,13 +15,11 @@ interface ClientLayoutProps {
 
 export function ClientLayout({ children, user }: ClientLayoutProps) {
   return (
-    <WayfarerChakraProvider>
+    <>
       <Navbar user={user} />
-      <Box maxW="1200px" mx="auto" px={4} py={6}>
-        {children}
-      </Box>
+      {children}
       <WayFarerFooter />
-    </WayfarerChakraProvider>
+    </>
   );
 }
 

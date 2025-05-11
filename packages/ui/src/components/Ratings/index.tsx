@@ -1,6 +1,5 @@
 "use client";
 
-import { Box, RatingGroup } from "@chakra-ui/react";
 import { Rating } from "../../type";
 
 interface WayFarerRatingProps {
@@ -17,23 +16,36 @@ export const WayFarerRatings = ({ rating }: WayFarerRatingProps) => {
     rating.count >= 0;
 
   return (
-    <Box py="4">
+    <div className="py-4">
       {isValidRating ? (
-        <RatingGroup.Root
-          allowHalf
-          count={5}
-          value={rating.rate}
-          colorPalette="orange"
-        >
-          <RatingGroup.HiddenInput />
-          <RatingGroup.Label>{rating.rate} &nbsp;</RatingGroup.Label>
-          <RatingGroup.Control />
-        </RatingGroup.Root>
+        <div className="flex items-center gap-2">
+          <div className="flex">
+            {Array.from({ length: 5 }).map((_, index) => {
+              const isHalf = rating.rate - index === 0.5;
+              const isFull = index < Math.floor(rating.rate);
+              return (
+                <span
+                  key={index}
+                  className={`w-5 h-5 ${
+                    isFull
+                      ? "bg-orange-500"
+                      : isHalf
+                      ? "bg-orange-300"
+                      : "bg-gray-300"
+                  } rounded-full`}
+                ></span>
+              );
+            })}
+          </div>
+          <span className="text-gray-700 font-medium">{rating.rate}</span>
+        </div>
       ) : (
-        <Box color="gray.500">Rating data is unavailable</Box>
+        <div className="text-gray-500">Rating data is unavailable</div>
       )}
       <br />
-      {isValidRating ? `${rating.count} Reviews` : "No reviews available"}
-    </Box>
+      <div className="text-gray-600">
+        {isValidRating ? `${rating.count} Reviews` : "No reviews available"}
+      </div>
+    </div>
   );
 };

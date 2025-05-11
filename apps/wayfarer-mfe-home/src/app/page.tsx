@@ -1,14 +1,14 @@
-import FeaturedDestinations from "@/components/FeaturedDestinations";
+// import FeaturedDestinations from "@/components/FeaturedDestinations";
 import HeroSection from "@/components/HeroSection";
-import Newsletter from "@/components/Newsletter";
-import RecentPosts from "@/components/RecentPosts";
-import TestimonialsSection from "@/components/Testimonials";
-import TrendingTopics from "@/components/TrendingTopics";
-import TrendingTravelGuides from "@/components/TrendingTravelGuides";
-import UpcomingEvents from "@/components/UpcomingEvents";
+// import Newsletter from "@/components/Newsletter";
+// import RecentPosts from "@/components/RecentPosts";
+// import TestimonialsSection from "@/components/Testimonials";
+// import TrendingTopics from "@/components/TrendingTopics";
+// import TrendingTravelGuides from "@/components/TrendingTravelGuides";
+// import UpcomingEvents from "@/components/UpcomingEvents";
 import { generateHomeJsonLD } from "@wayfarer/utils";
 import {JsonLdWrapper} from "@wayfarer/utils";
-debugger;
+
 export default function Home() {
   return (
     <main>
@@ -17,7 +17,7 @@ export default function Home() {
       <HeroSection />
       
 
-      <FeaturedDestinations />
+      {/* <FeaturedDestinations />
       <TrendingTravelGuides />
       <UpcomingEvents />
 
@@ -25,7 +25,7 @@ export default function Home() {
       <RecentPosts />
 
       <TestimonialsSection />
-      <Newsletter />
+      <Newsletter /> */}
     </main>
   );
 }

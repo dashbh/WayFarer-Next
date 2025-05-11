@@ -4,6 +4,9 @@ import { getCurrentUser } from "@/lib/session";
 import { generateGlobalMetadata, reportWebVitals } from "@wayfarer/utils";
 import { UserType } from "@wayfarer/types";
 
+import "@wayfarer/ui/globals.css";
+import "./globals.css";
+
 export const metadata: Metadata = generateGlobalMetadata();
 
 export function reportWebVitalsHandler(metric: any) {

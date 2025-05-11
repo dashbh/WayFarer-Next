@@ -1,14 +1,16 @@
 import type { Metadata } from "next";
-import { ClientLayout } from "./client-layout";
-import { generateGlobalMetadata, reportWebVitals } from "@wayfarer/utils";
+// import { ClientLayout } from "./client-layout";
+import { generateCheckoutMetadata, reportWebVitals } from "@wayfarer/utils";
+import { Navbar, WayFarerFooter } from "@wayfarer/ui";
 
+import "@wayfarer/ui/globals.css";
 import "./globals.css";
+
+export const metadata: Metadata = generateCheckoutMetadata();
 
 export function reportWebVitalsHandler(metric: any) {
   reportWebVitals(metric);
 }
-
-export const metadata: Metadata = generateGlobalMetadata();
 
 export default function RootLayout({
   children,
@@ -18,7 +20,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <ClientLayout>{children}</ClientLayout>
+        <Navbar />
+        <div>{children}</div>
+        <WayFarerFooter />
       </body>
     </html>
   );
