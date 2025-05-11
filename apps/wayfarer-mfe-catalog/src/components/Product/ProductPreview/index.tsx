@@ -25,7 +25,7 @@ const ProductPreview = ({ product }: { product: Product }) => {
     >
       <Link href={`/explore/products/${product.id}`}>
         <Image
-          src={product.image}
+          src={product.imageUrl}
           alt={product.title}
           boxSize="150px"
           objectFit="contain"

@@ -19,7 +19,9 @@ export interface Product {
   description: string;
   price: number;
   category: string;
-  image: string;
+  imageUrl: string;
+  imageUrls: string[];
+  tags: string[];
   rating: Rating;
 };
 

@@ -1,10 +1,36 @@
+import { cookies } from "next/headers";
 import ProductList from ".";
 
-const API_URL = "https://fakestoreapi.com/products";
+const API_URL = `${process.env.NEXT_PUBLIC_WAYFARER_API_URL}/catalog`;
 
 const getProducts = async () => {
-  const res = await fetch(API_URL, { next: { revalidate: 60 } });
-  return res.json();
+  try {
+    // const res = await fetch(API_URL, { next: { revalidate: 60 } });
+
+    const cookieStore = await cookies();
+    const cookieHeader = cookieStore.toString(); 
+
+    const res = await fetch(API_URL, {
+      method: 'GET',
+      headers: { Cookie: cookieHeader },
+      next: { revalidate: 60 },
+    });
+
+
+    if (!res.ok) {
+      throw new Error(`Failed to fetch products. Status: ${res.status}`);
+    }
+
+    const response = await res.json();
+    console.log(response);
+    return response.data;
+
+  } catch (error: any) {
+    console.error('Error fetching products:', error?.message);
+
+    // Return fallback data, e.g., an empty array or null
+    return [];
+  }
 };
 
 const ProductListServer = async ({ searchParams }: { searchParams: Record<string, string> }) => {
@@ -41,7 +67,7 @@ const ProductListServer = async ({ searchParams }: { searchParams: Record<string
     filtered.sort((a, b) => b.rating.rate - a.rating.rate);
   }
 
-  return <ProductList products={filtered} />;
+  return <ProductList products={products} />;
 };
 
 export default ProductListServer;
