@@ -1,17 +1,6 @@
 "use client";
 
 import { FormEvent, ChangeEvent, useState } from "react";
-import {
-  Stack,
-  Fieldset,
-  Input,
-  Button,
-  Heading,
-  Text,
-  Container,
-  Flex,
-  Box,
-} from "@chakra-ui/react";
 import { FaCheck } from "react-icons/fa6";
 
 export default function Newsletter() {
@@ -22,33 +11,20 @@ export default function Newsletter() {
   const [error, setError] = useState(false);
 
   return (
-    <Box w="100%" py={20} px={20} bg="gray.50">
-      <Flex align={"center"} justify={"center"} bg="gray.50">
-        <Container
-          maxW={"lg"}
-          bg={"gray.50"}
-          boxShadow={"xl"}
-          rounded={"lg"}
-          p={6}
-        >
-          <Heading
-            as={"h2"}
-            fontSize={{ base: "xl", sm: "2xl" }}
-            textAlign={"center"}
-            mb={5}
-          >
+    <div className="w-full py-20 px-5 bg-gray-50">
+      <div className="flex items-center justify-center">
+        <div className="max-w-lg bg-gray-50 shadow-xl rounded-lg p-6">
+          <h2 className="text-xl sm:text-2xl font-bold text-center mb-5">
             Subscribe to our Newsletter
-          </Heading>
-          <Stack
-            direction={{ base: "column", md: "row" }}
-            as={"form"}
-            gap={"12px"}
+          </h2>
+          <form
+            className="flex flex-col md:flex-row gap-3"
             onSubmit={(e: FormEvent) => {
               e.preventDefault();
               setError(false);
               setState("submitting");
 
-              // remove this code and implement your submit logic right here
+              // Simulate submit logic
               setTimeout(() => {
                 if (email === "fail@example.com") {
                   setError(true);
@@ -60,49 +36,42 @@ export default function Newsletter() {
               }, 1000);
             }}
           >
-            <Fieldset.Root>
-              <Input
-                //   variant={'solid'}
-                borderWidth={1}
-                color={"gray.800"}
-                _placeholder={{
-                  color: "gray.400",
-                }}
-                borderColor={"gray.300"}
-                id={"email"}
-                type={"email"}
-                required
-                placeholder={"Your Email"}
-                aria-label={"Your Email"}
-                value={email}
-                disabled={state !== "initial"}
-                onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                  setEmail(e.target.value)
-                }
-              />
-            </Fieldset.Root>
-            <Fieldset.Root w={{ base: "100%", md: "40%" }}>
-              <Button
-                colorScheme={state === "success" ? "green" : "blue"}
-                loading={state === "submitting"}
-                w="100%"
-                type={state === "success" ? "button" : "submit"}
-              >
-                {state === "success" ? <FaCheck /> : "Submit"}
-              </Button>
-            </Fieldset.Root>
-          </Stack>
-          <Text
-            mt={2}
-            textAlign={"center"}
-            color={error ? "red.500" : "gray.500"}
+            <input
+              type="email"
+              id="email"
+              required
+              placeholder="Your Email"
+              aria-label="Your Email"
+              value={email}
+              disabled={state !== "initial"}
+              onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                setEmail(e.target.value)
+              }
+              className="border border-gray-300 rounded-md p-2 w-full text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+            <button
+              type={state === "success" ? "button" : "submit"}
+              className={`w-full md:w-40 p-2 rounded-md text-white ${
+                state === "success"
+                  ? "bg-green-500 hover:bg-green-600"
+                  : "bg-blue-500 hover:bg-blue-600"
+              } transition`}
+              disabled={state === "submitting"}
+            >
+              {state === "success" ? <FaCheck /> : "Submit"}
+            </button>
+          </form>
+          <p
+            className={`mt-2 text-center ${
+              error ? "text-red-500" : "text-gray-500"
+            }`}
           >
             {error
-              ? "Oh no an error occured! 😢 Please try again later."
+              ? "Oh no an error occurred! 😢 Please try again later."
               : "You won't receive any spam! ✌️"}
-          </Text>
-        </Container>
-      </Flex>
-    </Box>
+          </p>
+        </div>
+      </div>
+    </div>
   );
 }

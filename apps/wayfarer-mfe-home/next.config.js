@@ -16,7 +16,12 @@ const {
 const nextConfig = {
   output: "standalone",
   assetPrefix: NEXT_MFE_HOME,
-
+  // images: {
+  //   domains: ["picsum.photos", "placehold.co"],
+  // },
+  images: {
+    unoptimized: true,
+  },
   async rewrites() {
     return [
       {

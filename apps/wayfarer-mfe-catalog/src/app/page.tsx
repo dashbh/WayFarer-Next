@@ -1,5 +1,8 @@
 import { Suspense } from "react";
-import { generateCatalogJsonLD, generateCatalogMetadata } from "@wayfarer/utils";
+import {
+  generateCatalogJsonLD,
+  generateCatalogMetadata,
+} from "@wayfarer/utils";
 import FilterControls from "@/components/FilterControls";
 import UpdateParamsProvider from "@/components/FilterControls/UpdateParamsProvider";
 import ProductListServer from "@/components/ProductList/ProductListServer";
@@ -17,7 +20,10 @@ export const metadata: Metadata = generateCatalogMetadata();
 
 // Fetch categories on the server
 const getCategories = async () => {
-  const res = await fetch(`${API_URL}/categories`, { next: { revalidate: 60 }, credentials: 'include' },);
+  const res = await fetch(`${API_URL}/categories`, {
+    next: { revalidate: 60 },
+    credentials: "include",
+  });
   return res.json();
 };
 
@@ -27,18 +33,24 @@ export default async function Catalog({ searchParams }: CatalogPageProps) {
 
   return (
     <>
-    {/* <JsonLdWrapper data={generateCatalogJsonLD()} />  Need to check */} 
+      {/* <JsonLdWrapper data={generateCatalogJsonLD()} />  Need to check */}
+      <div className="flex flex-col lg:flex-row gap-6 px-4 sm:px-6 lg:px-8 py-8">
+        {/* Sidebar for Filters */}
+        <aside className="w-full lg:w-1/4">
+          <UpdateParamsProvider>
+            <Suspense fallback={<div>Loading Filters...</div>}>
+              <FilterControls categories={categories} />
+            </Suspense>
+          </UpdateParamsProvider>
+        </aside>
 
-      <UpdateParamsProvider>
-        <Suspense fallback={<div>Loading Filters...</div>}>
-          <FilterControls categories={categories} />
-        </Suspense>
-      </UpdateParamsProvider>
-
-      {/* Products are streamed */}
-      <Suspense fallback={<ProductListSkeleton />}>
-        <ProductListServer searchParams={filters} />
-      </Suspense>
+        {/* Main Content for Product List */}
+        <main className="flex-1">
+          <Suspense fallback={<ProductListSkeleton />}>
+            <ProductListServer searchParams={filters} />
+          </Suspense>
+        </main>
+      </div>
     </>
   );
 }

@@ -1,14 +1,4 @@
-import {
-  Box,
-  Heading,
-  Wrap,
-  WrapItem,
-  Badge,
-  VStack,
-} from "@chakra-ui/react";
-
-interface TrendingTopicsProps {
-}
+interface TrendingTopicsProps {}
 
 const fetchTrendingTopics = async () => {
   const topicsData = await fetch("https://dev.to/api/tags", {
@@ -21,31 +11,26 @@ const fetchTrendingTopics = async () => {
     .map((topic: any) => ({ name: topic.name, slug: topic.name }));
 };
 
-export default async function TrendingTopics({ }: TrendingTopicsProps) {
+export default async function TrendingTopics({}: TrendingTopicsProps) {
   const trendingTopics = await fetchTrendingTopics();
 
   return (
-    <Box w="100%" my={20} py={5} px={5} bg="gray.50" shadow={"md"}>
-      <VStack gap={4} textAlign="center">
-        <Heading my={3} color="green.400" size="3xl">Trending Topics</Heading>
-          <Wrap gap={3} justify="center">
-            {trendingTopics.map((tag: any) => (
-              <WrapItem key={tag.name}>
-                <Badge
-                  colorPalette="gray"
-                  px={3}
-                  py={1}
-                  borderRadius="md"
-                  fontSize="sm"
-                  cursor="pointer"
-                  _hover={{ bg: "blue.500", color: "white" }}
-                >
-                  {tag?.name.toUpperCase()}
-                </Badge>
-              </WrapItem>
-            ))}
-          </Wrap>
-      </VStack>
-    </Box>
+    <div className="w-full my-20 py-5 px-5 bg-gray-50 shadow-md">
+      <div className="flex flex-col gap-4 text-center">
+        <h2 className="text-3xl font-bold text-green-400 my-3">
+          Trending Topics
+        </h2>
+        <div className="flex flex-wrap gap-3 justify-center">
+          {trendingTopics.map((tag: any) => (
+            <div
+              key={tag.name}
+              className="px-3 py-1 bg-gray-200 text-sm font-medium rounded-md cursor-pointer hover:bg-blue-500 hover:text-white transition"
+            >
+              {tag?.name.toUpperCase()}
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
   );
-};
+}

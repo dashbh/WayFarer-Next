@@ -8,32 +8,36 @@ import { WayFarerRatings } from "@wayfarer/ui";
 const ProductPreview = ({ product }: { product: Product }) => {
   return (
     <div className="border border-gray-300 rounded-lg overflow-hidden p-4 hover:shadow-lg transition-shadow duration-200 ease-in-out">
-      <Link href={`/explore/products/${product.id}`}>
-        <Image
-          src={product.imageUrl}
-          alt={product.title}
-          width={144} // Equivalent to w-36 (36 * 4 = 144px)
-          height={144} // Equivalent to h-36 (36 * 4 = 144px)
-          className="object-contain mx-auto"
-        />
-      </Link>
-
-      <div className="flex flex-col items-start gap-2 mt-3">
-        <p className="font-bold text-lg">{product.title}</p>
-        <span className="bg-blue-100 text-blue-800 text-xs font-medium px-2 py-1 rounded">
-          {product.category}
-        </span>
-        <p className="text-xl text-green-500 font-bold">${product.price}</p>
-
-        {/* Ratings */}
-        <WayFarerRatings rating={product.rating} />
-
-        <div>
+      <div className="grid grid-cols-5 gap-4 items-center">
+        <div className="col-span-2">
           <Link href={`/explore/products/${product.id}`}>
-            <button className="bg-blue-500 text-white text-sm px-4 py-2 rounded hover:bg-blue-600 transition-colors">
-              View Details
-            </button>
+            <Image
+              src={`${product.imageUrl}?random=${product.id}`}
+              alt={product.title}
+              width={180}
+              height={180}
+              className="object-cover w-full h-full rounded-md"
+              unoptimized
+            />
           </Link>
+        </div>
+        <div className="col-span-3 flex flex-col gap-2">
+          <p className="font-bold text-lg">{product.title}</p>
+          <span className="inline-block w-fit bg-blue-100 text-blue-800 text-xs font-medium px-2 py-1 rounded">
+            {product.category}
+          </span>
+          <p className="text-xl text-green-500 font-bold">${product.price}</p>
+
+          {/* Ratings */}
+          <WayFarerRatings rating={product.rating} />
+
+          <div>
+            <Link href={`/explore/products/${product.id}`}>
+              <button className="bg-blue-500 text-white text-sm px-4 py-2 rounded hover:bg-blue-600 cursor-pointer">
+                View Details
+              </button>
+            </Link>
+          </div>
         </div>
       </div>
     </div>

@@ -1,19 +1,7 @@
 "use client";
 
-import {
-  Box,
-  Heading,
-  Text,
-  Button,
-  Image,
-  VStack,
-  Grid,
-  GridItem,
-  Skeleton,
-  HStack,
-  Spacer,
-} from "@chakra-ui/react";
 import { useEffect, useState } from "react";
+import Image from "next/image";
 
 interface Post {
   id: number;
@@ -57,68 +45,66 @@ const RecentPosts = ({
 
     fetchRecentPosts();
   }, [selectedTag]);
+
   return (
-    <Box w="100%" py={10} px={5} bg="white">
-      <Heading size="3xl" color="green.400" textAlign="center" mb={6}>
+    <div className="w-full py-10 px-5 bg-white">
+      <h2 className="text-3xl font-bold text-green-400 text-center mb-6">
         {selectedTag ? `Posts About #${selectedTag}` : "Recent Posts"}
-      </Heading>
+      </h2>
 
       {selectedTag && (
-        <Button colorScheme="red" mb={4} onClick={clearFilter}>
+        <button
+          className="bg-red-500 text-white px-4 py-2 rounded-md mb-4 hover:bg-red-600 transition"
+          onClick={clearFilter}
+        >
           Clear Filter
-        </Button>
+        </button>
       )}
 
-      <Grid
-        templateColumns={{ base: "1fr", md: "repeat(3, 1fr)" }}
-        gap={6}
-        maxW="1000px"
-        mx="auto"
-      >
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
         {loading
           ? Array.from({ length: 3 }).map((_, index) => (
-              <GridItem key={index}>
-                <Skeleton height="250px" width="100%" borderRadius="md" />
-              </GridItem>
+              <div
+                key={index}
+                className="h-64 bg-gray-200 animate-pulse rounded-md"
+              ></div>
             ))
           : posts.map((post) => (
-              <GridItem
+              <div
                 key={post.id}
-                bg="gray.100"
-                p={4}
-                borderRadius="md"
-                display="flex"
-                flexDirection="column"
-              >
+                className="bg-gray-100 p-4 rounded-md flex flex-col">
                 <Image
-                  src={post.cover_image || "https://placehold.co/500x300?text=No+Image"}
-                  aspectRatio={5 / 3}
-                  width={500}
+                  src={
+                    post.cover_image ||
+                    "https://placehold.co/500x300?text=No+Image"
+                  }
                   alt={post.title}
-                  borderRadius="md"
-                  mb={4}
-                  loading="lazy"
+                  className="rounded-md mb-4 w-full h-auto object-cover"
+                  width={500}
+                  height={300}
                 />
-                <VStack align="start" gap={3} flex="1" display="flex">
-                  <Heading size="md">{post.title}</Heading>
-                  <HStack fontSize="sm" color="gray.500">
-                    <Text>By {post.user.name}</Text>
-                    <Text>•</Text>
-                    <Text>{new Date(post.published_at).toDateString()}</Text>
-                  </HStack>
-                  <Spacer /> {/* Pushes button down */}
-                  <Button
-                    variant="ghost"
-                    colorPalette="teal"
-                    alignSelf="flex-start"
-                  >
-                    Read More
-                  </Button>
-                </VStack>
-              </GridItem>
+                <div className="flex flex-col gap-3 flex-1">
+                  <h3 className="text-lg font-bold">{post.title}</h3>
+                  <div className="text-sm text-gray-500 flex items-center gap-2">
+                    <span>By {post.user.name}</span>
+                    <span>•</span>
+                    <span>{new Date(post.published_at).toDateString()}</span>
+                  </div>
+                  <div className="mt-auto">
+                    <a
+                      href={post.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-teal-500 hover:underline"
+                    >
+                      Read More
+                    </a>
+                  </div>
+                </div>
+              </div>
             ))}
-      </Grid>
-    </Box>
+      </div>
+    </div>
   );
 };
 

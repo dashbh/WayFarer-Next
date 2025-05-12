@@ -2,22 +2,20 @@
 
 import { Navbar, WayFarerFooter } from "@wayfarer/ui";
 import { ReactNode } from "react";
-import { ApolloProvider } from "@apollo/client";
-import { client } from "@/lib/apolloClient";
+
 import "@wayfarer/ui/globals.css";
 import "./globals.css";
 
 interface ClientLayoutProps {
   children: ReactNode;
-  user: any;
 }
 
-export function ClientLayout({ children, user }: ClientLayoutProps) {
+export function ClientLayout({ children }: ClientLayoutProps) {
   return (
     <div className="flex flex-col min-h-screen">
       {/* Navbar */}
       <header className="z-50">
-        <Navbar user={user} />
+        <Navbar />
       </header>
 
       {/* Main Content */}
@@ -33,6 +31,3 @@ export function ClientLayout({ children, user }: ClientLayoutProps) {
   );
 }
 
-export function Providers({ children }: { children: React.ReactNode }) {
-  return <ApolloProvider client={client}>{children}</ApolloProvider>;
-}

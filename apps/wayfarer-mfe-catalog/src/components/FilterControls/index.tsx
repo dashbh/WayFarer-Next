@@ -44,7 +44,7 @@ const FilterControls = ({ categories }: FilterControlsProps) => {
   }));
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-4 border border-gray-300 rounded-md p-4">
       {/* Price Filter */}
       <div>
         <label className="block font-bold mb-2">Price</label>
@@ -64,20 +64,23 @@ const FilterControls = ({ categories }: FilterControlsProps) => {
       </div>
 
       {/* Search Filter */}
-      <input
-        type="text"
-        placeholder="Search products..."
-        value={searchText}
-        onChange={(e) => {
-          setSearchText(e.target.value);
-          updateParams("search", e.target.value);
-        }}
-        className="border border-gray-300 rounded-md p-2 w-full"
-      />
+      <div>
+        <label className="block font-bold mb-2">Search</label>
+        <input
+          type="text"
+          placeholder="Search products..."
+          value={searchText}
+          onChange={(e) => {
+            setSearchText(e.target.value);
+            updateParams("search", e.target.value);
+          }}
+          className="border border-gray-300 rounded-md p-2 w-full"
+        />
+      </div>
 
-      <div className="flex flex-wrap gap-4 items-end mt-10">
+      <div>
         {/* Category Filter */}
-        <div className="w-48">
+        <div className="w-48 my-2">
           <label className="block font-bold mb-2">Category</label>
           <select
             value={currentFilters.category || ""}
@@ -94,7 +97,7 @@ const FilterControls = ({ categories }: FilterControlsProps) => {
         </div>
 
         {/* Rating Filter */}
-        <div className="w-48">
+        <div className="w-48 my-2">
           <label className="block font-bold mb-2">Rating</label>
           <select
             value={currentFilters.ratings || ""}
@@ -110,7 +113,7 @@ const FilterControls = ({ categories }: FilterControlsProps) => {
         </div>
 
         {/* Sort Filter */}
-        <div className="w-48">
+        <div className="w-48 my-2">
           <label className="block font-bold mb-2">Sort By</label>
           <select
             value={currentFilters.sort || ""}
@@ -125,9 +128,9 @@ const FilterControls = ({ categories }: FilterControlsProps) => {
           </select>
         </div>
 
-        <div className="ml-auto">
+        <div className="w-48 my-2 mt-4">
           <button
-            aria-label="Search database"
+            aria-label="Clear Filters"
             onClick={resetFilters}
             className="bg-teal-500 text-white px-4 py-2 rounded-md flex items-center gap-2 hover:bg-teal-600 transition"
           >

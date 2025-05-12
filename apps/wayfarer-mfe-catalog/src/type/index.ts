@@ -14,6 +14,15 @@ export interface Rating {
 };
 
 export interface Product {
+  sku: string;
+  brand: string;
+  currency: string;
+  discountPrice: number;
+  length: string;
+  width: string;
+  height: string;
+  weight: string;
+  supplier: string;
   id: number;
   title: string;
   description: string;

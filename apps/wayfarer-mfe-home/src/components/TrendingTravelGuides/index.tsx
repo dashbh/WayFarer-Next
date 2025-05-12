@@ -1,5 +1,3 @@
-import { Box, Heading, VStack, Text, Link, Spinner } from "@chakra-ui/react";
-
 interface Guide {
   id: number;
   title: string;
@@ -18,18 +16,20 @@ export default async function TrendingTravelGuides() {
   const guides: Guide[] = await fetchTrendingTravelGuides();
 
   return (
-    <Box py={10} px={5} textAlign="center">
-      <Heading size="lg" mb={6}>
-        Trending Travel Guides 🧳
-      </Heading>
+    <div className="py-10 px-5 text-center">
+      <h2 className="text-2xl font-bold mb-6">Trending Travel Guides 🧳</h2>
 
-        <VStack gap={4} align="start">
-          {guides.map((guide) => (
-            <Link key={guide.id} href={`#`} color="blue.500" fontWeight="bold">
-              {guide.title}
-            </Link>
-          ))}
-        </VStack>
-    </Box>
+      <div className="flex flex-col gap-4 items-center">
+        {guides.map((guide) => (
+          <a
+            key={guide.id}
+            href="#"
+            className="text-blue-500 font-bold hover:underline"
+          >
+            {guide.title}
+          </a>
+        ))}
+      </div>
+    </div>
   );
 }

@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Box, Heading, SimpleGrid, Image, Text, Skeleton } from "@chakra-ui/react";
+import Image from "next/image";
 
 interface Destination {
   id: number;
@@ -24,34 +24,34 @@ export default function FeaturedDestinations() {
   }, []);
 
   return (
-    <Box py={10} px={5} textAlign="center">
-      <Heading size="lg" mb={6}>
-        Featured Destinations 🌍
-      </Heading>
+    <div className="py-10 px-5 text-center">
+      <h2 className="text-2xl font-bold mb-6">Featured Destinations 🌍</h2>
 
-      <SimpleGrid columns={{ base: 1, md: 3 }} gap={6}>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {loading
-          ? [...Array(3)].map((_, i) => <Skeleton key={i} height="376px" />)
+          ? [...Array(3)].map((_, i) => (
+              <div
+                key={i}
+                className="h-[376px] bg-gray-200 animate-pulse rounded-md"
+              ></div>
+            ))
           : destinations.map((dest) => (
-              <Box key={dest.id} p={4} borderWidth={1} borderRadius="md" shadow="md">
+              <div
+                key={dest.id}
+                className="p-4 border border-gray-300 rounded-md shadow-md">
                 <Image
-                  src={`https://placehold.co/200x150?text=No+Image`}
+                  src={`https://picsum.photos/600?random=${dest.id}`}
                   alt={dest.title}
-                  borderRadius="md"
-                  mb={3}
-                  height={150}
-                  width={200}
-                  style={{ width: "100%", height: "auto" }}
-                  sizes="(max-width: 600px) 100px, (max-width: 1200px) 300px, 200px"
-                  objectFit="cover"
+                  width={500}
+                  height={500}
+                  loading="lazy"
+                  className="mt-8 rounded-md mx-auto mb-3 h-auto object-cover"
                 />
-                <Text fontWeight="bold">{dest.title}</Text>
-                <Text fontSize="sm" color="gray.600" lineClamp={4}>
-                  {dest.body}
-                </Text>
-              </Box>
+                <p className="mt-8 font-bold">{dest.title}</p>
+                <p className="mt-4 text-sm text-gray-600 line-clamp-4">{dest.body}</p>
+              </div>
             ))}
-      </SimpleGrid>
-    </Box>
+      </div>
+    </div>
   );
 }

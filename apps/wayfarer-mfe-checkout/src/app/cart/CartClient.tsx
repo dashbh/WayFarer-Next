@@ -1,46 +1,50 @@
 "use client";
 
-import { useSearchParams } from "next/navigation";
-import { useEffect, useMemo, useState } from "react";
-// import { Box, Button, Flex, Link, Spinner, Text } from "@chakra-ui/react";
+import { useEffect, useState } from "react";
 import NextLink from "next/link";
-// import CartContent from "./CartContent";
+import Image from "next/image";
+
+const API_URL = `${process.env.NEXT_PUBLIC_WAYFARER_API_URL}/cart`;
+
+interface CartItem {
+  productId: string;
+  title: string;
+  imageUrl: string;
+  price: string;
+  discountPrice: string;
+  brand: string;
+  quantity: number;
+  currency: string;
+}
 
 const CartClient = () => {
-  const searchParams = useSearchParams();
-  const [products, setProducts] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 
-  const productIds = useMemo(() => {
-    const ids = searchParams.get("ids");
-    return ids ? ids.split(",") : [];
-  }, [searchParams]);
+  const [cartItems, setCartItems] = useState<CartItem[]>([]);
 
   useEffect(() => {
-    if (productIds.length === 0) {
-      setLoading(false);
-      return;
-    }
-
-    const fetchProducts = async () => {
+    const fetchCartData = async () => {
       try {
-        const responses = await Promise.all(
-          productIds.map((id) =>
-            fetch(`https://fakestoreapi.com/products/${id}`).then((res) =>
-              res.json()
-            )
-          )
-        );
-        setProducts(responses);
+        const response = await fetch(API_URL, {
+          method: "GET",
+          credentials: "include",
+        });
+
+        if (!response.ok) {
+          throw new Error("Failed to fetch cart data");
+        }
+
+        const data = await response.json();
+        setCartItems(data.items);
       } catch (error) {
-        console.error("Error fetching products:", error);
+        console.error("Error fetching cart data:", error);
       } finally {
         setLoading(false);
       }
     };
 
-    fetchProducts();
-  }, [productIds]);
+    fetchCartData();
+  }, []);
 
   if (loading) return "<Spinner />";
 
@@ -54,12 +58,14 @@ const CartClient = () => {
         <div className="mt-8">
           <div className="flow-root">
             <ul role="list" className="-my-6 divide-y divide-gray-200">
-              {products.map((product) => (
-                <li key={product.id} className="flex py-6">
+              {cartItems && cartItems.map((product) => (
+                <li key={product.productId} className="flex py-6">
                   <div className="size-24 shrink-0 overflow-hidden rounded-md border border-gray-200">
-                    <img
-                      alt={product.imageAlt}
-                      src={product.imageSrc}
+                    <Image
+                      alt={product.title}
+                      src={`${product.imageUrl || ""}?id=${Math.random().toString(36).substr(2, 9)}`}
+                      width={96}
+                      height={96}
                       className="size-full object-cover"
                     />
                   </div>
@@ -68,12 +74,15 @@ const CartClient = () => {
                     <div>
                       <div className="flex justify-between text-base font-medium text-gray-900">
                         <h3>
-                          <a href={product.href}>{product.name}</a>
+                          <a href={`/explore/products/${product.productId}`}>{product.title}</a>
                         </h3>
-                        <p className="ml-4">{product.price}</p>
+                        <div className="flex flex-col">
+                          <p className="ml-4 line-through text-gray-500">{product.currency}{product.price}</p>
+                          <p className="ml-4 text-green-500">{product.currency}{product.discountPrice}</p>
+                        </div>
                       </div>
                       <p className="mt-1 text-sm text-gray-500">
-                        {product.color}
+                        {product.brand}
                       </p>
                     </div>
                     <div className="flex flex-1 items-end justify-between text-sm">
@@ -107,7 +116,7 @@ const CartClient = () => {
         <div className="mt-6">
           <NextLink
             className="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-xs hover:bg-indigo-700"
-            href={`order-summary?ids=${productIds}`}
+            href={`order-summary`}
           >
             Checkout
           </NextLink>
@@ -117,7 +126,7 @@ const CartClient = () => {
             or{" "}
             <NextLink
               className="font-medium text-indigo-600 hover:text-indigo-500"
-              href={`order-summary?ids=${productIds}`}
+              href={`/explore`}
             >
               Continue Shopping
             </NextLink>

@@ -1,4 +1,3 @@
-import "./globals.css";
 export * from "react-icons/md";
 export * from "./components/Navbar";
 // export * from "./components/Select";
