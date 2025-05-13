@@ -1,61 +1,84 @@
-import {
-  Button,
-  Field,
-  Fieldset,
-  For,
-  Input,
-  NativeSelect,
-  Stack,
-  Textarea,
-} from "@chakra-ui/react";
-
 const ContactForm = () => {
   return (
-    <Fieldset.Root size="lg" maxW="md">
-      <Stack>
-        <Fieldset.Legend>Contact details</Fieldset.Legend>
-        <Fieldset.HelperText>
+    <div className="max-w-md mx-auto p-6 bg-white shadow-md rounded-md">
+      {/* Form Header */}
+      <div className="mb-6">
+        <h2 className="text-lg font-bold">Contact details</h2>
+        <p className="text-sm text-gray-600">
           Please provide your contact details below.
-        </Fieldset.HelperText>
-      </Stack>
+        </p>
+      </div>
 
-      <Fieldset.Content>
-        <Field.Root>
-          <Field.Label>Name</Field.Label>
-          <Input name="name" />
-        </Field.Root>
+      {/* Form Fields */}
+      <form className="space-y-4">
+        {/* Name Field */}
+        <div>
+          <label htmlFor="name" className="block text-sm font-medium text-gray-700">
+            Name
+          </label>
+          <input
+            type="text"
+            name="name"
+            id="name"
+            className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+          />
+        </div>
 
-        <Field.Root>
-          <Field.Label>Email address</Field.Label>
-          <Input name="email" type="email" />
-        </Field.Root>
+        {/* Email Field */}
+        <div>
+          <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+            Email address
+          </label>
+          <input
+            type="email"
+            name="email"
+            id="email"
+            className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+          />
+        </div>
 
-        <Field.Root>
-          <Field.Label>Country (Optional)</Field.Label>
-          <NativeSelect.Root>
-            <NativeSelect.Field name="country">
-              <For each={["India", "United Kingdom", "Canada", "United States"]}>
-                {(item) => (
-                  <option key={item} value={item}>
-                    {item}
-                  </option>
-                )}
-              </For>
-            </NativeSelect.Field>
-            <NativeSelect.Indicator />
-          </NativeSelect.Root>
-        </Field.Root>
-      </Fieldset.Content>
+        {/* Country Field */}
+        <div>
+          <label htmlFor="country" className="block text-sm font-medium text-gray-700">
+            Country (Optional)
+          </label>
+          <select
+            name="country"
+            id="country"
+            className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+          >
+            {["India", "United Kingdom", "Canada", "United States"].map((item) => (
+              <option key={item} value={item}>
+                {item}
+              </option>
+            ))}
+          </select>
+        </div>
 
-      <Field.Root>
-        <Field.Label>Message</Field.Label>
-        <Textarea />
-    </Field.Root>
+        {/* Message Field */}
+        <div>
+          <label htmlFor="message" className="block text-sm font-medium text-gray-700">
+            Message
+          </label>
+          <textarea
+            name="message"
+            id="message"
+            rows={4}
+            className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+          ></textarea>
+        </div>
 
-      <Button type="submit" alignSelf="flex-start">
-        Submit
-      </Button>
-    </Fieldset.Root>
+        {/* Submit Button */}
+        <div>
+          <button
+            type="submit"
+            className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+          >
+            Submit
+          </button>
+        </div>
+      </form>
+    </div>
   );
 };
 

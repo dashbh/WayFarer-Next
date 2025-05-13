@@ -16,6 +16,7 @@ import {
 } from "@headlessui/react";
 import { NAV_LINKS } from "../../config/navigation";
 import { NavLink } from "./NavLink";
+import { SearchBar } from "../Search";
 
 interface NavbarProps {
   internalRoutes?: string[]; // Internal routes for soft navigation
@@ -49,7 +50,7 @@ export const Navbar = ({ internalRoutes = [], user }: NavbarProps) => {
   return (
     <Disclosure as="nav" className="bg-white">
       <div className="w-full px-2 sm:px-6 lg:px-8 shadow">
-        <div className="relative flex h-16 items-center justify-between">
+        <div className="relative flex h-24 items-center justify-between">
           <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
             {/* Mobile menu button*/}
             <DisclosureButton className="group relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:ring-2 focus:ring-white focus:outline-hidden focus:ring-inset">
@@ -65,14 +66,22 @@ export const Navbar = ({ internalRoutes = [], user }: NavbarProps) => {
               />
             </DisclosureButton>
           </div>
-          <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
-            <div className="flex shrink-0 items-center">Wayfarer</div>
-            <div className="hidden sm:ml-6 sm:block">
-              <div className="flex space-x-4">{renderMainNavLinks()}</div>
+
+          {/* Main Menu Items */}
+          <div className="flex items-center justify-start sm:ml-6">
+            <div className="flex shrink-0 items-center text-3xl pr-8">Wayfarer</div>
+            <div className="hidden sm:block">
+              <div className="flex space-x-1">{renderMainNavLinks()}</div>
             </div>
           </div>
-          <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-            {/* Profile Menu Items */}
+
+          {/* Search Bar */}
+          <div className="flex flex-1 items-center justify-center px-16">
+            <SearchBar />
+          </div>
+
+          {/* Profile Menu Items */}
+          <div className="flex items-center space-x-4">
             {user ? (
               <>
                 <a
@@ -140,7 +149,7 @@ export const Navbar = ({ internalRoutes = [], user }: NavbarProps) => {
               </>
             ) : (
               <div className="flex space-x-4">
-                 <a
+                <a
                   href="/checkout/cart"
                   className="px-4 py-2 text-sm font-medium text-gray-700 hover:text-white hover:bg-gray-700 rounded-md"
                 >

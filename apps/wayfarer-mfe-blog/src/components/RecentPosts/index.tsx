@@ -1,44 +1,49 @@
-import { Box, Heading, Text, VStack, Image, Grid, GridItem, HStack, Button } from "@chakra-ui/react";
 import { Post } from "@/types/blog";
+import Image from "next/image";
 
 interface RecentPostsProps {
   posts: Post[];
 }
 
-const RecentPosts: React.FC<RecentPostsProps> = ({ posts }) => {
+const RecentPosts = ({ posts }: RecentPostsProps) => {
   return (
-    <Box w="100%" py={10} px={5}>
-      <Heading size="lg" textAlign="center" mb={6}>
-      Recent Posts
-      </Heading>
+    <div className="w-full py-10 px-5">
+      <h2 className="text-2xl font-bold text-center mb-6">Recent Posts</h2>
 
-      <Grid templateColumns={{ base: "1fr", md: "repeat(2, 1fr)" }} gap={6} maxW="1000px" mx="auto">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
         {posts.map((post) => (
-              <GridItem key={post.id} bg="gray.100" p={4} borderRadius="md">
-                <Image
-                  src={post.image || "https://source.unsplash.com/500x300/?technology,blog"}
-                  alt={post.title}
-                  borderRadius="md"
-                  mb={4}
-                />
-                <VStack align="start" gap={3}>
-                  <Heading size="md">{post.title}</Heading>
-                  <Text fontSize="sm" color="gray.600">
-                    {post.description}
-                  </Text>
-                  <HStack fontSize="sm" color="gray.500">
-                    <Text>By {post.author}</Text>
-                    <Text>•</Text>
-                    <Text>{new Date(post.date).toDateString()}</Text>
-                  </HStack>
-                  <Button colorScheme="blue" as="a" /*href={post.url} target="_blank"*/ >
-                    Read More
-                  </Button>
-                </VStack>
-              </GridItem>
-            ))}
-      </Grid>
-    </Box>
+          <div key={post.id} className="bg-gray-100 p-4 rounded-md shadow-md">
+            <Image
+              src={
+                post.image ||
+                "https://source.unsplash.com/500x300/?technology,blog"
+              }
+              alt={post.title}
+              width={500}
+              height={300}
+              className="w-full h-48 object-cover rounded-md mb-4"
+            />
+            <div className="flex flex-col gap-3">
+              <h3 className="text-lg font-bold">{post.title}</h3>
+              <p className="text-sm text-gray-600">{post.description}</p>
+              <div className="flex items-center text-sm text-gray-500">
+                <span>By {post.author}</span>
+                <span className="mx-2">•</span>
+                <span>{new Date(post.date).toDateString()}</span>
+              </div>
+              <a
+                href={post.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block px-4 py-2 bg-blue-500 text-white text-sm font-medium rounded-md hover:bg-blue-600 transition"
+              >
+                Read More
+              </a>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
   );
 };
 

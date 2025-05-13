@@ -57,7 +57,7 @@ type User = {
 };
 
 // Step 2: Define resolvers
-export const resolvers = {
+const resolvers = {
   Query: {
     users: async () => {
       const result = await pool.query('SELECT * FROM users');
@@ -158,7 +158,17 @@ const server = new ApolloServer({
   introspection: true,
 });
 
-// Step 4: Export handler using the Apollo Next integration
-const handler = startServerAndCreateNextHandler<NextRequest>(server);
+// req has the type NextRequest
+const handler = startServerAndCreateNextHandler<NextRequest>(server, {
+  context: async req => ({ req }),
+});
 
-export { handler as GET, handler as POST };
+// required to open apollo server
+export async function GET(request: Request): Promise<Response> {
+  return handler(request);
+}
+
+// where queries will be sent
+export async function POST(request: Request): Promise<Response> {
+  return handler(request);
+}

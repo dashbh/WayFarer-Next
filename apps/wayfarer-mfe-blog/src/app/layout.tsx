@@ -1,7 +1,9 @@
-
 import type { Metadata } from "next";
-import {ClientLayout} from "./client-layout";
+import { ClientLayout } from "./client-layout";
 import { generateBlogListMetadata, reportWebVitals } from "@wayfarer/utils";
+
+import "@wayfarer/ui/globals.css";
+import "./globals.css";
 
 export const metadata: Metadata = generateBlogListMetadata();
 

@@ -1,11 +1,14 @@
-import { Skeleton, Box } from "@chakra-ui/react";
-
 export default function ProductSkeleton() {
   return (
-    <Box p={5}>
-      <Skeleton height="300px" />
-      <Skeleton mt={4} height="20px" width="80%" />
-      <Skeleton mt={2} height="20px" width="60%" />
-    </Box>
+    <div className="p-5 space-y-4">
+      {/* Skeleton for Image */}
+      <div className="h-72 bg-gray-200 animate-pulse rounded-md"></div>
+
+      {/* Skeleton for Title */}
+      <div className="h-5 bg-gray-200 animate-pulse rounded-md w-4/5"></div>
+
+      {/* Skeleton for Subtitle */}
+      <div className="h-5 bg-gray-200 animate-pulse rounded-md w-3/5"></div>
+    </div>
   );
 }

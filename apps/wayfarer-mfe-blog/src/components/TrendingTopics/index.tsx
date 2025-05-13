@@ -1,4 +1,3 @@
-import { Box, Wrap, WrapItem, Tag, Badge} from "@chakra-ui/react";
 import Link from "next/link";
 import { Topic } from "@/types/blog";
 
@@ -8,28 +7,19 @@ interface TrendingTopicsProps {
 
 const TrendingTopics: React.FC<TrendingTopicsProps> = ({ topics }) => {
   return (
-    <Box w="100%" py={6} px={5}>
-      <Wrap gap={3}>
+    <div className="w-full py-6 px-5">
+      <div className="flex flex-wrap gap-3">
         {topics.map((topic) => (
-          <WrapItem key={topic.slug}>
+          <div key={topic.slug}>
             <Link href={`/tag/${topic.slug}`} passHref>
-            <Badge
-                  colorScheme="blue"
-                  px={3}
-                  py={1}
-                  borderRadius="md"
-                  fontSize="sm"
-                  cursor="pointer"
-                  _hover={{ bg: "blue.500", color: "white" }}
-                  // onClick={() => onTagClick(topic.name)}
-                >
-                  #{topic.name}
-                </Badge>
+              <span className="px-3 py-1 bg-blue-100 text-blue-800 text-sm font-medium rounded-md cursor-pointer hover:bg-blue-500 hover:text-white">
+                #{topic.name}
+              </span>
             </Link>
-          </WrapItem>
+          </div>
         ))}
-      </Wrap>
-    </Box>
+      </div>
+    </div>
   );
 };
 

@@ -1,44 +1,45 @@
-import {
-  Box,
-  Heading,
-  Text,
-  Button,
-  Image,
-  VStack,
-  HStack,
-  Link,
-} from "@chakra-ui/react";
+import Image from "next/image";
 import { FeaturedPost } from "@/types/blog";
 
 interface HeroSectionProps {
   featuredPost: FeaturedPost;
 }
 
-const HeroSection: React.FC<HeroSectionProps> = ({ featuredPost }) => {
+const HeroSection = ({ featuredPost }: HeroSectionProps) => {
   return (
-    <Box w="100%" bg="gray.100" py={3} px={3} borderRadius="lg">
-      <VStack gap={5} textAlign="center" mx="auto">
-        <Image
-          src={featuredPost.image}
-          alt={featuredPost.title}
-          borderRadius="lg"
-        />
-        <VStack gap={3}>
-          <Heading size="lg">{featuredPost.title}</Heading>
-          <Text fontSize="md" color="gray.600">
-            {featuredPost.description}
-          </Text>
-          <Button colorScheme="blue" asChild>
-            <Link href={`/blog/post/${featuredPost.id}`}>Read More</Link>
-          </Button>
-        </VStack>
-        <HStack fontSize="sm" color="gray.500">
-          <Text>By {featuredPost.author}</Text>
-          <Text>•</Text>
-          <Text>{featuredPost.date}</Text>
-        </HStack>
-      </VStack>
-    </Box>
+    <div className="w-full bg-gray-100 py-6 px-6 rounded-lg">
+      <div className="flex flex-col gap-5 text-center mx-auto">
+        {/* Featured Image */}
+        <div className="relative w-full h-64 mx-auto">
+          <Image
+            src={featuredPost.image}
+            alt={featuredPost.title}
+            layout="fill"
+            objectFit="cover"
+            className="rounded-lg"
+          />
+        </div>
+
+        {/* Content Section */}
+        <div className="flex flex-col gap-3">
+          <h1 className="text-2xl font-bold">{featuredPost.title}</h1>
+          <p className="text-gray-600 text-md">{featuredPost.description}</p>
+          <a
+            href={`/blog/post/${featuredPost.id}`}
+            className="inline-block px-4 py-2 bg-blue-500 text-white text-sm font-medium rounded-md hover:bg-blue-600 transition"
+          >
+            Read More
+          </a>
+        </div>
+
+        {/* Author and Date */}
+        <div className="flex items-center justify-center gap-2 text-sm text-gray-500">
+          <span>By {featuredPost.author}</span>
+          <span>•</span>
+          <span>{featuredPost.date}</span>
+        </div>
+      </div>
+    </div>
   );
 };
 

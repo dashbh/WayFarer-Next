@@ -18,12 +18,15 @@
     "react-dom": "^19.0.0"
   },
   "devDependencies": {
+    "@tailwindcss/postcss": "^4.1.6",
     "@wayfarer/eslint-config": "*",
     "@wayfarer/typescript-config": "*",
     "@types/node": "^22.13.9",
     "@types/react": "19.0.10",
     "@types/react-dom": "19.0.4",
     "eslint": "^9.21.0",
-    "typescript": "5.8.2"
+    "typescript": "5.8.2",
+    "postcss": "^8.5.3",
+    "tailwindcss": "^4.1.6"
   }
 }

@@ -1,6 +1,11 @@
 import type { Metadata } from "next";
-import { Box, Heading, Text, Image, VStack, HStack, Spacer } from "@chakra-ui/react";
-import { FaPhone, FaEnvelope, FaMapMarkerAlt, FaBuilding } from "react-icons/fa";
+import {
+  FaPhone,
+  FaEnvelope,
+  FaMapMarkerAlt,
+  FaBuilding,
+} from "react-icons/fa";
+import Image from "next/image";
 import ContactForm from "@/components/ContactForm";
 import { generateContactMetadata } from "@wayfarer/utils";
 
@@ -8,84 +13,71 @@ export const metadata: Metadata = generateContactMetadata();
 
 export default function ContactUs() {
   return (
-    <Box maxW="100vw" p={0}>
+    <div className="max-w-full">
       {/* Banner Section */}
-      <Box position="relative" w="100%" h="300px">
+      <div className="relative w-full h-72">
         <Image
           src="/images/contact-banner.jpg"
           alt="Contact Us"
+          layout="fill"
           objectFit="cover"
-          w="100%"
-          h="100%"
-          filter="brightness(70%)"
+          className="brightness-75"
         />
-        <Heading
-          position="absolute"
-          top="50%"
-          left="50%"
-          transform="translate(-50%, -50%)"
-          color="white"
-          fontSize="4xl"
-          fontWeight="bold"
-        >
+        <h1 className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white text-4xl font-bold">
           Contact Us
-        </Heading>
-      </Box>
+        </h1>
+      </div>
 
       {/* Contact Details Section */}
-      <Box p={8} textAlign="center">
-        <Heading size="lg" mb={4}>
-          Get in Touch with Us
-        </Heading>
-        <Text fontSize="lg" color="gray.600">
+      <div className="p-8 text-center">
+        <h2 className="text-2xl font-bold mb-4">Get in Touch with Us</h2>
+        <p className="text-lg text-gray-600">
           Have any questions? Reach out to us, and we’ll be happy to assist you.
-        </Text>
+        </p>
 
-        <VStack gap={6} align="center" mt={6}>
-          <HStack>
-            <FaPhone color="blue.500" />
-            <Text fontSize="md">+1 234 567 890</Text>
-          </HStack>
-          <HStack>
-            <FaEnvelope color="blue.500" />
-            <Text fontSize="md">support@yourcompany.com</Text>
-          </HStack>
-          <HStack>
-            <FaMapMarkerAlt color="blue.500" />
-            <Text fontSize="md">123 Business Street, Tech City, USA</Text>
-          </HStack>
-        </VStack>
+        <div className="flex flex-col gap-6 items-center mt-6">
+          <div className="flex items-center gap-2">
+            <FaPhone className="text-blue-500" />
+            <p className="text-md">+1 234 567 890</p>
+          </div>
+          <div className="flex items-center gap-2">
+            <FaEnvelope className="text-blue-500" />
+            <p className="text-md">support@yourcompany.com</p>
+          </div>
+          <div className="flex items-center gap-2">
+            <FaMapMarkerAlt className="text-blue-500" />
+            <p className="text-md">123 Business Street, Tech City, USA</p>
+          </div>
+        </div>
 
-        <Spacer my={8} />
+        <div className="my-8"></div>
 
-        <Heading size="md" mb={4}>
-          Our Office Locations
-        </Heading>
-        <VStack gap={4} align="center">
-          <HStack>
-            <FaBuilding color="green.500" />
-            <Text fontSize="md">Headquarters: San Francisco, CA</Text>
-          </HStack>
-          <HStack>
-            <FaBuilding color="green.500" />
-            <Text fontSize="md">Branch: New York, NY</Text>
-          </HStack>
-          <HStack>
-            <FaBuilding color="green.500" />
-            <Text fontSize="md">Branch: London, UK</Text>
-          </HStack>
-        </VStack>
-      </Box>
+        <h3 className="text-xl font-bold mb-4">Our Office Locations</h3>
+        <div className="flex flex-col gap-4 items-center">
+          <div className="flex items-center gap-2">
+            <FaBuilding className="text-green-500" />
+            <p className="text-md">Headquarters: San Francisco, CA</p>
+          </div>
+          <div className="flex items-center gap-2">
+            <FaBuilding className="text-green-500" />
+            <p className="text-md">Branch: New York, NY</p>
+          </div>
+          <div className="flex items-center gap-2">
+            <FaBuilding className="text-green-500" />
+            <p className="text-md">Branch: London, UK</p>
+          </div>
+        </div>
+      </div>
 
       {/* Contact Form Section */}
-      <Box p={8} bg="gray.100">
-        <Heading size="lg" textAlign="center" mb={6}>
+      <div className="p-8 bg-gray-100">
+        <h2 className="text-2xl font-bold text-center mb-6">
           Send Us a Message
-        </Heading>
-        <Box maxW="600px" mx="auto" bg="white" p={6} borderRadius="md" boxShadow="md">
+        </h2>
+        <div className="max-w-lg mx-auto bg-white p-6 rounded-md shadow-md">
           <ContactForm />
-        </Box>
-      </Box>
-    </Box>
+        </div>
+      </div>
+    </div>
   );
 }
