@@ -9,7 +9,7 @@ import { Product } from "@/type";
 import ProductReviews from "@/components/Product/ProductReviews";
 import { JsonLdWrapper } from "@wayfarer/utils";
 
-const API_URL = `${process.env.NEXT_PUBLIC_WAYFARER_API_URL}/catalog`;
+const API_URL = `${process.env.NEXT_PUBLIC_WAYFARER_API_URL}/api/catalog`;
 
 interface ProductPageProps {
   params: Promise<{ id: string }>;

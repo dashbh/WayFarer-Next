@@ -8,11 +8,6 @@ export interface UpdateControlProps {
   value: string | number;
 };
 
-export interface Rating {
-  rate: number;
-  count: number;
-};
-
 export interface Product {
   sku: string;
   brand: string;
@@ -31,7 +26,8 @@ export interface Product {
   imageUrl: string;
   imageUrls: string[];
   tags: string[];
-  rating: Rating;
+  rating: number;
+  totalRatings: number;
 };
 
 export interface FilterControlsProps {

@@ -16,7 +16,7 @@ const ProductPreview = ({ product }: { product: Product }) => {
               alt={product.title}
               width={180}
               height={180}
-              className="object-cover w-full h-full rounded-md"
+              className="rounded-md w-[180px] h-[180px] object-cover"
               unoptimized
             />
           </Link>
@@ -29,7 +29,7 @@ const ProductPreview = ({ product }: { product: Product }) => {
           <p className="text-xl text-green-500 font-bold">${product.price}</p>
 
           {/* Ratings */}
-          <WayFarerRatings rating={product.rating} />
+          <WayFarerRatings rating={product.rating} totalRatings={product.totalRatings}/>
 
           <div>
             <Link href={`/explore/products/${product.id}`}>

@@ -1,7 +1,7 @@
 import { cookies } from "next/headers";
 import ProductList from ".";
 
-const API_URL = `${process.env.NEXT_PUBLIC_WAYFARER_API_URL}/catalog`;
+const API_URL = `${process.env.NEXT_PUBLIC_WAYFARER_API_URL}/api/catalog/list?type=accessory`;
 
 const getProducts = async () => {
   try {
@@ -22,7 +22,6 @@ const getProducts = async () => {
     }
 
     const response = await res.json();
-    console.log(response);
     return response.data;
 
   } catch (error: any) {
