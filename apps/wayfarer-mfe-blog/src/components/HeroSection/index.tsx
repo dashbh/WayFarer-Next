@@ -24,12 +24,14 @@ const HeroSection = ({ featuredPost }: HeroSectionProps) => {
         <div className="flex flex-col gap-3">
           <h1 className="text-2xl font-bold">{featuredPost.title}</h1>
           <p className="text-gray-600 text-md">{featuredPost.description}</p>
-          <a
-            href={`/blog/post/${featuredPost.id}`}
-            className="inline-block px-4 py-2 bg-blue-500 text-white text-sm font-medium rounded-md hover:bg-blue-600 transition"
-          >
-            Read More
-          </a>
+          <div className="flex justify-center">
+            <a
+              href={`/blog/post/${featuredPost.id}`}
+              className="inline-block px-4 py-2 bg-blue-500 text-white text-sm font-medium rounded-md hover:bg-blue-600 transition"
+            >
+              Read More
+            </a>
+          </div>
         </div>
 
         {/* Author and Date */}

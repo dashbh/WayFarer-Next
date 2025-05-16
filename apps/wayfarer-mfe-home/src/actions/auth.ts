@@ -19,7 +19,7 @@ export async function loginAction(
 
   const { usename, password } = parsed.data;
 
-  const apiUrl = `${process.env.NEXT_PUBLIC_WAYFARER_API_URL}/auth/login`;
+  const apiUrl = `${process.env.NEXT_PUBLIC_WAYFARER_API_URL}/api/auth/login`;
   console.log("API URL:", apiUrl);
 
   try {

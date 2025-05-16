@@ -31,14 +31,16 @@ const RecentPosts = ({ posts }: RecentPostsProps) => {
                 <span className="mx-2">•</span>
                 <span>{new Date(post.date).toDateString()}</span>
               </div>
-              <a
-                href={post.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-block px-4 py-2 bg-blue-500 text-white text-sm font-medium rounded-md hover:bg-blue-600 transition"
-              >
-                Read More
-              </a>
+                <div className="self-start">
+                <a
+                  href={post.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-block px-4 py-2 bg-blue-500 text-white text-sm font-medium rounded-md hover:bg-blue-600 transition"
+                >
+                  Read More
+                </a>
+                </div>
             </div>
           </div>
         ))}

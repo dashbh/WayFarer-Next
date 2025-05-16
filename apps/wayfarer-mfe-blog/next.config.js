@@ -6,6 +6,12 @@ const { NEXT_MFE_BLOG } = process.env;
 const nextConfig = {
   output: "standalone",
   assetPrefix: NEXT_MFE_BLOG,
+  // images: {
+  //   domains: ["picsum.photos", "placehold.co"],
+  // },
+  images: {
+    unoptimized: true,
+  },
 };
 
 // Injected content via Sentry wizard below

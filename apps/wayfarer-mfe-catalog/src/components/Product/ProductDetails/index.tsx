@@ -5,7 +5,7 @@ import Image from "next/image";
 import { Product } from "../../../type";
 import { useState } from "react";
 
-const API_URL = `${process.env.NEXT_PUBLIC_WAYFARER_API_URL}/cart`;
+const API_URL = `${process.env.NEXT_PUBLIC_WAYFARER_API_URL}/api/cart`;
 
 const ProductDetails = ({ product }: { product: Product }) => {
   const [isAdding, setIsAdding] = useState(false); // State to track API call progress
@@ -97,12 +97,12 @@ const ProductDetails = ({ product }: { product: Product }) => {
         {/* Options */}
         <div className="mt-4 lg:mt-0">
           <h2 className="sr-only">Product information</h2>
-          <p className="text-3xl tracking-tight text-gray-900">
-            {product.currency} {product.price}
+          <p className="mt-2 text-3xl text-teal-700">
+            {product.currency} {product.discountPrice?.toFixed(2)}
           </p>
           {product.discountPrice && (
-            <p className="text-lg text-green-500 font-bold">
-              Discounted Price: {product.currency} {product.discountPrice}
+            <p className="text-lg text-gray-500 font-bold line-through">
+              MRP: {product.currency} {product.price}
             </p>
           )}
 

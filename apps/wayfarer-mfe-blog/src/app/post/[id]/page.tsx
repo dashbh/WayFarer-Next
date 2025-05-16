@@ -28,13 +28,11 @@ interface BlogPost {
 const fetchBlogDetails = async (id: string) => {
   const res = await fetch(`${API_URL}/${id}`, { cache: "no-store" });
 
-  console.log(`${API_URL}/${id}`, res, );
-
   if (!res.ok) {
     throw new Error("Blog Post not found");
   }
 
-  return res.json();
+  return res;
 };
 
 // Fetch mock recent posts (Streaming)

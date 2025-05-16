@@ -8,5 +8,5 @@ export const generateBlogPostJsonLD = (blog: any) => ({
     "@type": "Person",
     name: blog.author,
   },
-  articleBody: blog.content.substring(0, 500), // Truncate for readability
+  articleBody: blog?.description?.substring(0, 500), // Truncate for readability
 });

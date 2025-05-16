@@ -8,14 +8,15 @@ import "./globals.css";
 
 interface ClientLayoutProps {
   children: ReactNode;
+  user: any;
 }
 
-export function ClientLayout({ children }: ClientLayoutProps) {
+export function ClientLayout({ children, user }: ClientLayoutProps) {
   return (
     <div className="flex flex-col min-h-screen">
       {/* Navbar */}
       <header className="z-50">
-        <Navbar />
+        <Navbar user={user}/>
       </header>
 
       {/* Main Content */}
@@ -30,4 +31,3 @@ export function ClientLayout({ children }: ClientLayoutProps) {
     </div>
   );
 }
-

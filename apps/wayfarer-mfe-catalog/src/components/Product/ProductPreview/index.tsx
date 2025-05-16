@@ -26,10 +26,20 @@ const ProductPreview = ({ product }: { product: Product }) => {
           <span className="inline-block w-fit bg-blue-100 text-blue-800 text-xs font-medium px-2 py-1 rounded">
             {product.category}
           </span>
-          <p className="text-xl text-green-500 font-bold">${product.price}</p>
+          <p className="text-xl text-green-500 font-bold">
+            {product.currency}
+            {product.discountPrice.toFixed(2)}
+          </p>
+          <p className="ml-4 line-through text-gray-500">
+            {product.currency}
+            {product.price}
+          </p>
 
           {/* Ratings */}
-          <WayFarerRatings rating={product.rating} totalRatings={product.totalRatings}/>
+          <WayFarerRatings
+            rating={product.rating}
+            totalRatings={product.totalRatings}
+          />
 
           <div>
             <Link href={`/explore/products/${product.id}`}>

@@ -1,11 +1,12 @@
-import { useState } from "react";
+import { useState, Fragment } from "react";
 import {
   Dialog,
   DialogPanel,
   Transition,
   TransitionChild,
 } from "@headlessui/react";
-import { Fragment } from "react";
+import ReactMarkdown from "react-markdown";
+
 import { BsStars, BsSearch } from "react-icons/bs";
 import { RiRobot3Fill } from "react-icons/ri";
 import OpenAI from "openai";
@@ -39,7 +40,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
     try {
       const openai = new OpenAI({
         apiKey: process.env.NEXT_PUBLIC_OPENAI_API_KEY,
-        dangerouslyAllowBrowser: true
+        dangerouslyAllowBrowser: true,
       });
 
       const completion = await openai.responses.create({
@@ -73,7 +74,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
   return (
     <>
       {/* Trigger Button */}
-      <div className="hidden sm:block">
+      <div className="hidden lg:block">
         <input
           type="text"
           onClick={openModal}
@@ -84,10 +85,10 @@ const SearchBar: React.FC<SearchBarProps> = ({
       </div>
 
       {/* Icon Button for Mobile & Tablet */}
-      <div className="block sm:hidden">
+      <div className="block lg:hidden">
         <button
           onClick={openModal}
-          className="p-2 text-gray-500 hover:text-gray-700 focus:outline-none"
+          className="p-2 rounded-full text-gray-500 hover:bg-gray-100 focus:outline-none cursor-pointer"
         >
           <BsSearch />
         </button>
@@ -136,12 +137,6 @@ const SearchBar: React.FC<SearchBarProps> = ({
                     </button>
                   </div>
 
-                  {/* Search Bar */}
-
-                  {isLoading && (
-                    <p className="text-gray-500">Fetching AI response...</p>
-                  )}
-
                   {/* Chat History */}
                   <div className="mt-8 space-y-4 max-h-96 overflow-y-auto">
                     {chatHistory.map((chat, index) => (
@@ -156,7 +151,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
                         {/* AI Response */}
                         <div className="flex justify-end items-end space-x-2">
                           <div className="bg-gray-100 text-gray-800 px-4 py-2 rounded-lg">
-                            {chat.response}
+                            <ReactMarkdown>{chat.response}</ReactMarkdown>
                           </div>
                           <RiRobot3Fill className="text-green-400 mt-1" />
                         </div>
@@ -164,6 +159,10 @@ const SearchBar: React.FC<SearchBarProps> = ({
                       </div>
                     ))}
 
+                    {/* Search Bar */}
+                    {isLoading && (
+                      <p className="text-gray-500">Fetching AI response...</p>
+                    )}
                     <div className="mb-4">
                       <input
                         type="text"

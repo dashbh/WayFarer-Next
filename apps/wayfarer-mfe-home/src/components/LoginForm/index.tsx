@@ -1,6 +1,7 @@
 "use client";
 
 import { loginAction } from "@/actions/auth";
+import Image from "next/image";
 import { useActionState, useEffect } from "react";
 // import { useRouter } from "next/navigation";
 
@@ -25,10 +26,13 @@ export default function LoginForm({ searchParams }: LoginFormProps) {
     <div className="min-h-screen items-center bg-gray-100 flex flex-col justify-center sm:py-12">
       <div className="max-w-sm rounded overflow-hidden md:shadow-lg px-20 py-20">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-          <img
+          <Image
             alt="WayFarer"
             src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=600"
+            width={40}
+            height={40}
             className="mx-auto h-10 w-auto"
+            priority
           />
           <h2 className="mt-10 text-center text-2xl/9 font-bold tracking-tight text-gray-900">
             Sign in to your account

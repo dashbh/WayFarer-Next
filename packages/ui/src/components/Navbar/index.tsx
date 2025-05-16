@@ -2,6 +2,9 @@ import {
   AiOutlineMenu as HamburgerIcon,
   AiOutlineClose as CloseIcon,
   AiFillBell,
+  AiOutlineShoppingCart,
+  AiOutlineUser,
+  AiOutlineSearch,
 } from "react-icons/ai";
 import { usePathname } from "next/navigation";
 import { UserType } from "@wayfarer/types";
@@ -68,41 +71,125 @@ export const Navbar = ({ internalRoutes = [], user }: NavbarProps) => {
           </div>
 
           {/* Main Menu Items */}
-          <div className="flex items-center justify-start sm:ml-6">
-            <div className="flex shrink-0 items-center text-3xl pr-8">Wayfarer</div>
+          <div className="flex items-center justify-start ml-10">
+            <div className="flex shrink-0 items-center text-3xl pr-8">
+              Wayfarer
+            </div>
             <div className="hidden sm:block">
               <div className="flex space-x-1">{renderMainNavLinks()}</div>
             </div>
           </div>
 
-          {/* Search Bar */}
-          <div className="flex flex-1 items-center justify-center px-16">
+          {/* Search Bar - show only on lg+ */}
+          <div className="flex flex-1 items-center justify-center lg:px-16">
             <SearchBar />
           </div>
 
           {/* Profile Menu Items */}
           <div className="flex items-center space-x-4">
-            {user ? (
-              <>
-                <a
-                  href="/checkout/cart"
-                  className="px-4 py-2 text-sm font-medium text-gray-700 hover:text-white hover:bg-gray-700 rounded-md"
-                >
-                  Cart
-                </a>
-
-                <button
-                  type="button"
-                  className="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 focus:outline-hidden"
-                >
-                  <span className="absolute -inset-1.5" />
-                  <span className="sr-only">View notifications</span>
-                  <AiFillBell aria-hidden="true" className="size-6" />
-                </button>
-                <Menu as="div" className="relative ml-3">
+            {/* Desktop (lg+) */}
+            <div className="hidden lg:flex items-center space-x-4">
+              {user ? (
+                <>
+                  <a
+                    href="/checkout/cart"
+                    className="p-2 rounded-full text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-pink-500"
+                    aria-label="Cart"
+                  >
+                    <AiOutlineShoppingCart className="size-6" />
+                  </a>
+                  <button
+                    type="button"
+                    className="p-2 rounded-full text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-pink-500"
+                    aria-label="Notifications"
+                  >
+                    <AiFillBell aria-hidden="true" className="size-6" />
+                  </button>
+                  <Menu as="div" className="relative ml-3">
+                    <div>
+                      <MenuButton className="relative flex rounded-full bg-gray-800 text-sm focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 focus:outline-hidden">
+                        <span className="absolute -inset-1.5" />
+                        <span className="sr-only">Open user menu</span>
+                        <img
+                          className="h-8 w-8 rounded-full"
+                          src={user.avatar}
+                          alt={user.name}
+                        />
+                      </MenuButton>
+                    </div>
+                    <MenuItems
+                      className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black/5 transition focus:outline-hidden data-closed:scale-95 data-closed:transform data-closed:opacity-0 data-enter:duration-100 data-enter:ease-out data-leave:duration-75 data-leave:ease-in"
+                      aria-role="menu"
+                      aria-orientation="vertical"
+                      aria-labelledby="user-menu-button"
+                    >
+                      <MenuItem>
+                        <a
+                          href="/user/profile"
+                          className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                          role="menuitem"
+                        >
+                          Profile
+                        </a>
+                      </MenuItem>
+                      <MenuItem>
+                        <a
+                          href="/user/settings"
+                          className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                          role="menuitem"
+                        >
+                          Settings
+                        </a>
+                      </MenuItem>
+                      <MenuItem>
+                        <a
+                          href="/user/logout"
+                          className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                          role="menuitem"
+                        >
+                          Logout
+                        </a>
+                      </MenuItem>
+                    </MenuItems>
+                  </Menu>
+                </>
+              ) : (
+                <>
+                  <a
+                    href="/checkout/cart"
+                    className="p-2 rounded-full text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-pink-500"
+                    aria-label="Cart"
+                  >
+                    <AiOutlineShoppingCart className="size-6" />
+                  </a>
+                  <a
+                    href="/user/login"
+                    className="px-4 py-2 text-sm font-medium text-gray-700 hover:text-white hover:bg-gray-700 rounded-md"
+                  >
+                    Login
+                  </a>
+                  <a
+                    href="/user/signup"
+                    className="px-4 py-2 text-sm font-medium text-white bg-pink-500 hover:bg-pink-400 rounded-md"
+                  >
+                    Sign Up
+                  </a>
+                </>
+              )}
+            </div>
+            {/* Mobile/Tablet (xs, md) */}
+            <div className="flex lg:hidden items-center space-x-2">
+              <a
+                href="/checkout/cart"
+                className="p-2 rounded-full text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-pink-500"
+                aria-label="Cart"
+              >
+                <AiOutlineShoppingCart className="size-6" />
+              </a>
+              {user ? (
+                <Menu as="div" className="relative">
                   <div>
-                    <MenuButton className="relative flex rounded-full bg-gray-800 text-sm focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 focus:outline-hidden">
-                      <span className="absolute -inset-1.5" />
+                    <MenuButton className="flex rounded-full bg-gray-800 text-sm focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 focus:outline-hidden">
                       <span className="sr-only">Open user menu</span>
                       <img
                         className="h-8 w-8 rounded-full"
@@ -112,7 +199,7 @@ export const Navbar = ({ internalRoutes = [], user }: NavbarProps) => {
                     </MenuButton>
                   </div>
                   <MenuItems
-                    className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black/5 transition focus:outline-hidden data-closed:scale-95 data-closed:transform data-closed:opacity-0 data-enter:duration-100 data-enter:ease-out data-leave:duration-75 data-leave:ease-in"
+                    className="absolute right-0 z-10 mt-2 w-40 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black/5 transition focus:outline-hidden"
                     aria-role="menu"
                     aria-orientation="vertical"
                     aria-labelledby="user-menu-button"
@@ -146,30 +233,16 @@ export const Navbar = ({ internalRoutes = [], user }: NavbarProps) => {
                     </MenuItem>
                   </MenuItems>
                 </Menu>
-              </>
-            ) : (
-              <div className="flex space-x-4">
-                <a
-                  href="/checkout/cart"
-                  className="px-4 py-2 text-sm font-medium text-gray-700 hover:text-white hover:bg-gray-700 rounded-md"
-                >
-                  Cart
-                </a>
-
+              ) : (
                 <a
                   href="/user/login"
-                  className="px-4 py-2 text-sm font-medium text-gray-700 hover:text-white hover:bg-gray-700 rounded-md"
+                  className="p-2 rounded-full text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-pink-500"
+                  aria-label="Login"
                 >
-                  Login
+                  <AiOutlineUser className="size-6" />
                 </a>
-                <a
-                  href="/user/signup"
-                  className="px-4 py-2 text-sm font-medium text-white bg-pink-500 hover:bg-pink-400 rounded-md"
-                >
-                  Sign Up
-                </a>
-              </div>
-            )}
+              )}
+            </div>
           </div>
         </div>
       </div>

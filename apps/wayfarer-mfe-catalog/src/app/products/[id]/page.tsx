@@ -69,9 +69,9 @@ const ProductPage: NextPage<ProductPageProps> = async ({ params }) => {
         <JsonLdWrapper data={generateProductJsonLD(product)} />
 
         <ProductDetails product={product} />
-        {/* <Suspense fallback={<p>Loading reviews...</p>}>
+        <Suspense fallback={<p>Loading reviews...</p>}>
           <ProductReviewsWrapper id={`${Math.floor(Math.random() * 20) + 1}`} />
-        </Suspense> */}
+        </Suspense>
       </>
     );
   } catch {
