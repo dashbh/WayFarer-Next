@@ -1,15 +1,15 @@
 "use client";
-import { AiFillStar, AiOutlineStar } from "react-icons/ai";
 import Image from "next/image";
 
 import { Product } from "../../../type";
 import { useState } from "react";
+import { WayFarerRatings } from "@wayfarer/ui";
+import { toast } from "sonner";
 
 const API_URL = `${process.env.NEXT_PUBLIC_WAYFARER_API_URL}/api/cart`;
 
 const ProductDetails = ({ product }: { product: Product }) => {
-  const [isAdding, setIsAdding] = useState(false); // State to track API call progress
-  const reviews = { href: "#", average: 4, totalCount: 117 };
+  const [isAdding, setIsAdding] = useState(false);
 
   const handleAddToCart = async () => {
     setIsAdding(true); // Show spinner
@@ -30,9 +30,9 @@ const ProductDetails = ({ product }: { product: Product }) => {
         throw new Error("Failed to add to cart");
       }
 
-      console.log("Product added to cart successfully!"); // Show success toast
+      toast.success("Product added to cart successfully!"); // Show success toast
     } catch (error) {
-      console.log("Failed to add product to cart."); // Show error toast
+      toast.error("Failed to add product to cart."); // Show error toast
     } finally {
       setIsAdding(false); // Hide spinner
     }
@@ -110,28 +110,7 @@ const ProductDetails = ({ product }: { product: Product }) => {
           <div className="mt-6">
             <h3 className="sr-only">Reviews</h3>
             <div className="flex items-center">
-              <div className="flex items-center">
-                {[0, 1, 2, 3, 4].map((rating) => (
-                  <span
-                    key={rating}
-                    aria-hidden="true"
-                    className="size-5 shrink-0"
-                  >
-                    {reviews.average > rating ? (
-                      <AiFillStar className="text-gray-900" />
-                    ) : (
-                      <AiOutlineStar className="text-gray-200" />
-                    )}
-                  </span>
-                ))}
-              </div>
-              <p className="sr-only">{reviews.average} out of 5 stars</p>
-              <a
-                href={reviews.href}
-                className="ml-3 text-sm font-medium text-indigo-600 hover:text-indigo-500"
-              >
-                {reviews.totalCount} reviews
-              </a>
+              <WayFarerRatings color="green" rating={product.rating} totalRatings={product.totalRatings} />
             </div>
           </div>
 

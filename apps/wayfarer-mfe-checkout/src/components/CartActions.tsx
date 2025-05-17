@@ -1,16 +1,15 @@
 import React, { useState } from "react";
 import NextLink from "next/link";
+import { toast } from "sonner";
 
 const API_URL = `${process.env.NEXT_PUBLIC_WAYFARER_API_URL}/api/cart`;
 
 const CartActions: React.FC = () => {
   const [loading, setLoading] = useState(false);
-  const [clearMsg, setClearMsg] = useState<string | null>(null);
 
   // Example: Replace with your actual API endpoint and auth logic
   const handleCheckout = async () => {
     setLoading(true);
-    setClearMsg(null);
     try {
       const res = await fetch(`${API_URL}/checkout`, {
         method: "POST",
@@ -18,9 +17,13 @@ const CartActions: React.FC = () => {
       });
       if (!res.ok) throw new Error("Checkout failed");
       // Redirect or show success
-      window.location.href = "/order-summary";
+      toast.success("Order Placed !!");
+      setTimeout(() => {
+        window.location.href = "/order-summary";
+      }, 500);
+      
     } catch (err) {
-      setClearMsg("Checkout failed. Please try again.");
+      toast.error("Checkout failed. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -28,17 +31,18 @@ const CartActions: React.FC = () => {
 
   const handleClearCart = async () => {
     setLoading(true);
-    setClearMsg(null);
     try {
       const res = await fetch(API_URL, {
         method: "DELETE",
         credentials: "include",
       });
       if (!res.ok) throw new Error("Clear cart failed");
-      setClearMsg("Cart cleared!");
-      window.location.reload();
+      toast.success("Cart cleared !");
+      setTimeout(() => {
+        window.location.reload();
+      }, 500);
     } catch (err) {
-      setClearMsg("Failed to clear cart.");
+      toast.error("Failed to clear cart.");
     } finally {
       setLoading(false);
     }
@@ -64,9 +68,6 @@ const CartActions: React.FC = () => {
           </button>
         </div>
       </div>
-      {clearMsg && (
-        <div className="mt-2 text-center text-sm text-red-500">{clearMsg}</div>
-      )}
       <div className="mt-6 flex justify-center text-center text-sm text-gray-500">
         <p>
           or{" "}

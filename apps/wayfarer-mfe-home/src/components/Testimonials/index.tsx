@@ -14,7 +14,7 @@ export default function TestimonialsSection() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("https://jsonplaceholder.typicode.com/comments?_limit=3")
+    fetch("https://jsonplaceholder.typicode.com/comments?_limit=4")
       .then((res) => res.json())
       .then((data) => {
         setTestimonials(data);

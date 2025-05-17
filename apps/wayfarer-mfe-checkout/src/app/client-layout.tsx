@@ -2,7 +2,7 @@
 
 import { Navbar, WayFarerFooter } from "@wayfarer/ui";
 import { ReactNode } from "react";
-
+import { Toaster } from "sonner";
 import "@wayfarer/ui/globals.css";
 import "./globals.css";
 
@@ -23,6 +23,8 @@ export function ClientLayout({ children, user }: ClientLayoutProps) {
       <main className="flex-1 overflow-auto px-8 sm:px-6 lg:px-8 mt-8">
         {children}
       </main>
+
+      <Toaster richColors position="top-right"/>
 
       {/* Footer */}
       <footer className="mt-auto z-50 pt-8">

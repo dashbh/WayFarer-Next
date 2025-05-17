@@ -1,9 +1,17 @@
+import { getSession } from "@wayfarer/utils";
 import { NextRequest, NextResponse } from "next/server";
 
-export function middleware(req: NextRequest) {
+export async function middleware(req: NextRequest) {
   const token = req.cookies.get("auth_token")?.value;
   const isAuthPage = req.nextUrl.pathname.includes("/login");
   const isLogoutPage = req.nextUrl.pathname.includes("/logout");
+
+  // Helper to remove cookie and redirect to login
+  const removeCookieAndRedirect = () => {
+    const response = NextResponse.redirect(new URL("/user/login", req.url));
+    response.cookies.set("auth_token", "", { expires: new Date(0), httpOnly: true, path: "/" });
+    return response;
+  };
 
   if (isLogoutPage) {
     const response = NextResponse.redirect(new URL("/", req.url));
@@ -16,6 +24,15 @@ export function middleware(req: NextRequest) {
   if (!token && !isAuthPage) {
     const redirectPath = isLogoutPage ? '' : req.nextUrl.pathname;
     return NextResponse.redirect(new URL(`/user/login?redirect=${redirectPath}`, req.url));
+  }
+
+  // If token exists, check if it's valid
+  if (token) {
+    const session = await getSession();
+    if (!session) {
+      // Invalid token, remove cookie and redirect to login
+      return removeCookieAndRedirect();
+    }
   }
 
   // Redirect authenticated users away from login page

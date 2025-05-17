@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { WayFarerLoader } from "@wayfarer/ui";
+import { toast } from "sonner";
 import CartSummary from "@/components/CartSummary";
 import CartActions from "@/components/CartActions";
 import CartItems from "@/components/CartItemsList";
@@ -31,6 +32,7 @@ const CartClient = () => {
         setCart(data);
       } catch (error) {
         console.error("Error fetching cart data:", error);
+        toast.error('Failed to retrieve cart');
       } finally {
         setLoading(false);
       }

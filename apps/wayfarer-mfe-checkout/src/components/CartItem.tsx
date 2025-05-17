@@ -1,16 +1,15 @@
 import Image from "next/image";
 import React, { useState } from "react";
 import { CartItemType } from "@wayfarer/types";
+import { toast } from "sonner";
 const API_URL = `${process.env.NEXT_PUBLIC_WAYFARER_API_URL}/api/cart`;
 
 const CartItem: React.FC<{ item: CartItemType }> = ({ item }) => {
   const [loading, setLoading] = useState(false);
-  const [clearMsg, setClearMsg] = useState<string | null>(null);
 
   // Example: Replace with your actual API endpoint and auth logic
   const handleRemoveItem = async () => {
     setLoading(true);
-    setClearMsg(null);
     try {
       const res = await fetch(`${API_URL}/remove`, {
         method: "POST",
@@ -24,9 +23,13 @@ const CartItem: React.FC<{ item: CartItemType }> = ({ item }) => {
       });
       if (!res.ok) throw new Error("Removing failed");
       // Redirect or show success
-      window.location.reload();
+
+      toast.success('Item removed from cart');
+      setTimeout(() => {
+        window.location.reload();
+      }, 500);
     } catch (err) {
-      setClearMsg("Removing failed. Please try again.");
+      toast.error('Removing failed. Please try again.');
     } finally {
       setLoading(false);
     }
@@ -77,11 +80,6 @@ const CartItem: React.FC<{ item: CartItemType }> = ({ item }) => {
               </button>
             </div>
           </div>
-          {clearMsg && (
-            <div className="mt-2 text-center text-sm text-red-500">
-              {clearMsg}
-            </div>
-          )}
         </div>
       </li>
     </>

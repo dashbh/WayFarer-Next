@@ -1,7 +1,6 @@
 "use server";
 
 import { cookies } from "next/headers";
-// import { generateToken, setAuthCookie } from "@/lib/session";
 import { LoginFormSchema, LoginFormState } from "@/lib/definitions";
 import { logger } from "@wayfarer/utils";
 

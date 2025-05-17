@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { ClientLayout, Providers } from "./client-layout";
-import { getCurrentUser } from "@/lib/session";
-import { generateGlobalMetadata, reportWebVitals } from "@wayfarer/utils";
+import { getCurrentUser, generateGlobalMetadata, reportWebVitals } from "@wayfarer/utils";
 import { UserType } from "@wayfarer/types";
 
 import "@wayfarer/ui/globals.css";

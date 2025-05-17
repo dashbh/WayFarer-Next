@@ -7,7 +7,7 @@ import RecentPosts from "@/components/RecentPosts";
 import TestimonialsSection from "@/components/Testimonials";
 import Newsletter from "@/components/Newsletter";
 import { generateHomeJsonLD } from "@wayfarer/utils";
-import {JsonLdWrapper} from "@wayfarer/utils";
+import { JsonLdWrapper } from "@wayfarer/utils";
 
 export default function Home() {
   return (
@@ -15,17 +15,16 @@ export default function Home() {
       <JsonLdWrapper data={generateHomeJsonLD()} />
 
       <HeroSection />
-      
 
       <FeaturedDestinations />
-      <TrendingTravelGuides />
-      <UpcomingEvents />
 
+      <UpcomingEvents />
+      <TrendingTravelGuides />
       <TrendingTopics />
       <RecentPosts />
 
       <TestimonialsSection />
-      <Newsletter /> 
+      <Newsletter />
     </main>
   );
 }

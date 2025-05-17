@@ -37,6 +37,7 @@
     "pg": "^8.14.1",
     "prom-client": "^15.1.3",
     "react-markdown": "^10.1.0",
+    "sonner": "^2.0.3",
     "web-vitals": "^4.2.4"
   }
 }

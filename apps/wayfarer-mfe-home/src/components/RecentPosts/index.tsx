@@ -48,7 +48,7 @@ const RecentPosts = ({
 
   return (
     <div className="w-full py-10 px-5 bg-white">
-      <h2 className="text-3xl font-bold text-green-400 text-center mb-6">
+      <h2 className="text-3xl font-bold text-center mb-6">
         {selectedTag ? `Posts About #${selectedTag}` : "Recent Posts"}
       </h2>
 

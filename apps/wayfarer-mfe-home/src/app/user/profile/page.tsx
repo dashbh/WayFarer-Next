@@ -1,4 +1,4 @@
-import { getCurrentUser } from "@/lib/session";
+import { getCurrentUser } from "@wayfarer/utils";
 // import LogoutButton from "@/components/LogoutButton";
 
 export default async function ProfilePage() {
