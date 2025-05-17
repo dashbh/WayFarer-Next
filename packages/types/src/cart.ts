@@ -16,7 +16,16 @@ export interface CartResponseType {
   taxes?: number;
   currency?: string;
   totalDiscount?: number;
-  createdAt?: Date;
-  updatedAt?: Date;
+  createdAt?: string;
+  updatedAt?: string;
   itemCount?: number;
+}
+
+export interface OrderResponseType extends CartResponseType {
+  orderId?: string;
+  orderStatus: string;
+  shippingAddress: string;
+  shippingType: string;
+  paymentStatus: string;
+  paymentType: string;
 }

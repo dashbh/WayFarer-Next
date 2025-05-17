@@ -2,12 +2,13 @@
 
 import { useEffect, useState } from "react";
 import { WayFarerLoader } from "@wayfarer/ui";
-import { toast } from "sonner";
-import CartSummary from "@/components/CartSummary";
-import CartActions from "@/components/CartActions";
-import CartItems from "@/components/CartItemsList";
 import { CartResponseType } from "@wayfarer/types";
-import EmptyCart from "@/components/EmptyCart";
+import { toast } from "sonner";
+import CartSummary from "@/components/cart/CartSummary";
+import CartActions from "@/components/cart/CartActions";
+import CartItems from "@/components/cart/CartItemsList";
+
+import EmptyCart from "@/components/cart/EmptyCart";
 
 const API_URL = `${process.env.NEXT_PUBLIC_WAYFARER_API_URL}/api/cart`;
 
@@ -32,7 +33,7 @@ const CartClient = () => {
         setCart(data);
       } catch (error) {
         console.error("Error fetching cart data:", error);
-        toast.error('Failed to retrieve cart');
+        toast.error("Failed to retrieve cart");
       } finally {
         setLoading(false);
       }
@@ -43,7 +44,7 @@ const CartClient = () => {
 
   if (loading) return <WayFarerLoader />;
 
-  if (!cart || !cart.items || cart.items.length === 0) return <EmptyCart />
+  if (!cart || !cart.items || cart.items.length === 0) return <EmptyCart />;
 
   return (
     <div className="flex h-full flex-col overflow-y-scroll bg-white shadow-xl">
@@ -56,7 +57,7 @@ const CartClient = () => {
       </div>
 
       <div className="border-t border-gray-200 px-4 py-6 sm:px-6">
-        <CartSummary cart={cart}/>
+        <CartSummary cart={cart} />
         <CartActions />
       </div>
     </div>

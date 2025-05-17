@@ -134,11 +134,11 @@ export const Navbar = ({ internalRoutes = [], user }: NavbarProps) => {
                       </MenuItem>
                       <MenuItem>
                         <a
-                          href="/user/settings"
+                          href="/checkout/order"
                           className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                           role="menuitem"
                         >
-                          Settings
+                          My Orders
                         </a>
                       </MenuItem>
                       <MenuItem>

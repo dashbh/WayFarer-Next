@@ -1,10 +1,10 @@
 import { Suspense } from "react";
-import OrderSummary from "./OrderSummary";
+import OrderStatus from "./OrderStatus";
 
 export default function OrderSummaryPage() {
   return (
     <Suspense fallback={<div>Loading...</div>}>
-      <OrderSummary />
+      <OrderStatus orderId={`1234`}/>
     </Suspense>
   );
 }
