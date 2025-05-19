@@ -5,70 +5,22 @@ import {
   Transition,
   TransitionChild,
 } from "@headlessui/react";
-import ReactMarkdown from "react-markdown";
 
 import { BsStars, BsSearch } from "react-icons/bs";
-import { RiRobot3Fill } from "react-icons/ri";
-import OpenAI from "openai";
+import { AIChatComponent } from "./AIChat";
 
 interface SearchBarProps {
   placeholder?: string;
-}
-
-interface ChatMessage {
-  query: string;
-  response: string;
 }
 
 const SearchBar: React.FC<SearchBarProps> = ({
   placeholder = "Ask me anything...",
 }: SearchBarProps) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [searchQuery, setSearchQuery] = useState("");
-  const [chatHistory, setChatHistory] = useState<ChatMessage[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
 
   const openModal = () => setIsOpen(true);
   const closeModal = () => {
     setIsOpen(false);
-    setSearchQuery("");
-    setChatHistory([]);
-  };
-
-  const fetchAIResponse = async (query: string) => {
-    setIsLoading(true);
-    try {
-      const openai = new OpenAI({
-        apiKey: process.env.NEXT_PUBLIC_OPENAI_API_KEY,
-        dangerouslyAllowBrowser: true,
-      });
-
-      const completion = await openai.responses.create({
-        model: "gpt-4.1",
-        input: `${query}`,
-      });
-
-      const response =
-        completion.output_text || "Unable to answer. Please try again.";
-
-      // Update chat history
-      setChatHistory((prev) => [...prev, { query, response }]);
-    } catch (error) {
-      console.error("Error fetching AI response:", error);
-      setChatHistory((prev) => [
-        ...prev,
-        { query, response: "Unable to answer. Please try again." },
-      ]);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter" && searchQuery.trim()) {
-      fetchAIResponse(searchQuery);
-      setSearchQuery(""); // Clear the input field after submitting
-    }
   };
 
   return (
@@ -126,8 +78,8 @@ const SearchBar: React.FC<SearchBarProps> = ({
                   {/* Modal Header */}
                   <div className="flex justify-between items-center mb-8">
                     <h3 className="text-lg font-medium text-gray-900 flex items-center space-x-2">
-                      <BsStars className="text-green-400" />
-                      <span>Chatbot</span>
+                      <BsStars className="text-teal-800" style={{ fontSize: "25px" }}/>
+                      <span>AI Assistance</span>
                     </h3>
                     <button
                       onClick={closeModal}
@@ -137,43 +89,8 @@ const SearchBar: React.FC<SearchBarProps> = ({
                     </button>
                   </div>
 
-                  {/* Chat History */}
-                  <div className="mt-8 space-y-4 max-h-96 overflow-y-auto">
-                    {chatHistory.map((chat, index) => (
-                      <div key={index} className="space-y-2">
-                        {/* User Query */}
-                        <div className="flex items-start space-x-2">
-                          <div className="bg-blue-100 text-blue-800 px-4 py-2 rounded-lg">
-                            {chat.query}
-                          </div>
-                        </div>
+                  <AIChatComponent />
 
-                        {/* AI Response */}
-                        <div className="flex justify-end items-end space-x-2">
-                          <div className="bg-gray-100 text-gray-800 px-4 py-2 rounded-lg">
-                            <ReactMarkdown>{chat.response}</ReactMarkdown>
-                          </div>
-                          <RiRobot3Fill className="text-green-400 mt-1" />
-                        </div>
-                        {/* <hr /> */}
-                      </div>
-                    ))}
-
-                    {/* Search Bar */}
-                    {isLoading && (
-                      <p className="text-gray-500">Fetching AI response...</p>
-                    )}
-                    <div className="mb-4">
-                      <input
-                        type="text"
-                        value={searchQuery}
-                        onChange={(e) => setSearchQuery(e.target.value)}
-                        onKeyDown={handleKeyDown}
-                        placeholder={`🔍 ${placeholder}`}
-                        className="w-full px-4 py-2 border border-gray-300 rounded-xl focus:outline-none"
-                      />
-                    </div>
-                  </div>
                 </DialogPanel>
               </TransitionChild>
             </div>

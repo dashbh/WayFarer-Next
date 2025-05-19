@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { generateCheckoutMetadata, getCurrentUser, reportWebVitals } from "@wayfarer/utils";
+import { generateCatalogMetadata, getCurrentUser, reportWebVitals } from "@wayfarer/utils";
 
 import { ClientLayout } from "./client-layout";
 
@@ -7,7 +7,7 @@ import "@wayfarer/ui/globals.css";
 import "./globals.css";
 import { UserType } from "@wayfarer/types";
 
-export const metadata: Metadata = generateCheckoutMetadata();
+export const metadata: Metadata = generateCatalogMetadata();
 
 export function reportWebVitalsHandler(metric: any) {
   reportWebVitals(metric);

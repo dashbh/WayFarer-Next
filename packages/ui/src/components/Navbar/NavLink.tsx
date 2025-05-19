@@ -16,6 +16,7 @@ export const NavLink = (props: NavLinkProps) => {
   const [isActive, setIsActive] = useState(false);
 
   useEffect(() => {
+    // Check if exact match
     setIsActive(
       pathname === href || (pathname?.startsWith(href) && href !== "/")
     );

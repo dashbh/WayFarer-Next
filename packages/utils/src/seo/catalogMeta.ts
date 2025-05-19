@@ -1,11 +1,11 @@
 import { Metadata } from "next";
 
 export const generateCatalogMetadata = (): Metadata => ({
-  title: "Shop All Categories - Best Deals | WayFarer",
+  title: "WayFarer| Plan your next trip",
   description: "Explore a wide range of products across multiple categories at the best prices.",
   keywords: ["shop online", "best deals", "discounts", "categories", "WayFarer"].join(", "),
   openGraph: {
-    title: "Shop All Categories - Best Deals | WayFarer",
+    title: "Explore - Best Deals | WayFarer",
     description: "Explore a wide range of products across multiple categories at the best prices.",
     url: `${process.env.NEXT_PUBLIC_HOME_URL}/explore`,
     images: [

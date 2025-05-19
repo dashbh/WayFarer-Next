@@ -29,6 +29,10 @@ const nextConfig = {
         destination: `${NEXT_PUBLIC_CATALOG_URL}/:path*`,
       },
       {
+        source: "/destinations/:path*",
+        destination: `${NEXT_PUBLIC_CATALOG_URL}/destinations/:path*`,
+      },
+      {
         source: `${NEXT_MFE_CATALOG}/_next/:path+`,
         destination: `${NEXT_PUBLIC_CATALOG_URL}${NEXT_MFE_CATALOG}/_next/:path+`,
       },

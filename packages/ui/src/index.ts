@@ -6,3 +6,5 @@ export * from "./components/Ratings";
 export * from "./components/Footer";
 export * from "./components/Search";
 export * from "./components/Loader";
+
+export * from "./components/LoadingSpinner";
