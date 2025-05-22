@@ -22,7 +22,7 @@ export default function DestinationsPage() {
   const [selectedCountry, setSelectedCountry] = useState("");
   const [selectedTag, setSelectedTag] = useState("");
 
-  const itemsPerPage = 9;
+  const itemsPerPage = 8;
 
   useEffect(() => {
     const fetchDestinations = async () => {
@@ -33,9 +33,9 @@ export default function DestinationsPage() {
           throw new Error(`Error: ${response.status}`);
         }
         const data = await response.json();
-        setDestinations(data.destinations);
-        setFilteredDestinations(data.destinations);
-        setTotalPages(Math.ceil(data.destinations.length / itemsPerPage));
+        setDestinations(data.items);
+        setFilteredDestinations(data.items);
+        setTotalPages(Math.ceil(data.total / itemsPerPage));
       } catch (err) {
         setError(
           err instanceof Error ? err.message : "An unknown error occurred"
