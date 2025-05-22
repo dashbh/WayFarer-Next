@@ -16,12 +16,12 @@ export default function FeaturedDestinations() {
     const fetchDestinations = async () => {
       setIsLoading(true);
       try {
-        const response = await fetch(`${API_BASE_URL}/destinations`);
+        const response = await fetch(`${API_BASE_URL}/destinations?page=1&limit=3&sort%5B0%5D%5Bfield%5D=updatedAt&sort%5B0%5D%5Border%5D=desc`);
         if (!response.ok) {
           throw new Error(`Error: ${response.status}`);
         }
         const data = await response.json();
-        setDestinations(data.destinations);
+        setDestinations(data.items);
       } catch (err) {
         setError(
           err instanceof Error ? err.message : "An unknown error occurred"
